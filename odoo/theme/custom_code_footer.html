@@ -1,0 +1,184 @@
+<style>
+#ri-demo-bar{background:#16142D;color:#D9D6EE;font:500 .78rem/1.4 'Montserrat',system-ui,sans-serif;padding:7px 16px;text-align:center}
+#ri-demo-bar b{color:#fff;font-weight:700}
+#ri-wa-fab{position:fixed;right:18px;bottom:18px;z-index:1040;display:inline-flex;align-items:center;gap:10px;height:56px;padding:0 20px 0 16px;border:0;border-radius:999px;background:#1FAE53;color:#fff;font:700 .95rem 'Montserrat',system-ui,sans-serif;box-shadow:0 10px 30px rgba(20,120,60,.35);cursor:pointer}
+#ri-wa-fab:hover{background:#17924A}
+#ri-wa-fab.ri-away{opacity:0;visibility:hidden;pointer-events:none}
+#ri-wa-fab{transition:opacity .2s,visibility .2s}
+#ri-wa-fab:focus-visible{outline:3px solid #DDD7FF;outline-offset:3px}
+#ri-wa-fab svg{width:26px;height:26px;flex-shrink:0}
+#ri-wa-modal{position:fixed;top:0;right:0;bottom:0;left:0;z-index:1060;display:flex;align-items:center;justify-content:center;padding:16px}
+#ri-wa-modal[hidden]{display:none}
+#ri-wa-modal .ri-scrim{position:absolute;top:0;right:0;bottom:0;left:0;background:rgba(22,20,45,.55)}
+#ri-wa-modal .ri-box{position:relative;width:min(480px,100%);max-height:calc(100vh - 32px);overflow:auto;background:#fff;color:#16142D;border-radius:20px;padding:24px;box-shadow:0 24px 60px rgba(22,20,45,.25);font-family:'Montserrat',system-ui,sans-serif}
+#ri-wa-modal h2{font:700 1.2rem/1.3 'Montserrat',system-ui,sans-serif;margin:0 40px 6px 0;color:#16142D;letter-spacing:0}
+#ri-wa-modal .ri-x{position:absolute;top:14px;right:14px;width:40px;height:40px;border:1px solid #E7E1D8;border-radius:999px;background:#fff;font-size:1.3rem;line-height:1;cursor:pointer;color:#16142D}
+#ri-wa-modal .ri-chat{background:#E9FBE9;border-radius:14px;padding:14px;margin:14px 0}
+#ri-wa-modal .ri-to{font-size:.76rem;font-weight:700;color:#3D6B45;margin-bottom:8px}
+#ri-wa-modal .ri-bubble{background:#D9FDD3;border-radius:12px 12px 4px 12px;padding:10px 12px;margin-left:12%;font-size:.88rem;white-space:pre-wrap;word-break:break-word;box-shadow:0 1px 1px rgba(0,0,0,.08)}
+#ri-wa-modal .ri-info{background:#F0EDFF;color:#2B17A8;border-radius:12px;padding:12px 14px;font-size:.86rem;margin:0 0 16px}
+#ri-wa-modal .ri-acts{display:flex;gap:8px;flex-wrap:wrap}
+#ri-wa-modal .ri-acts button{flex:1;min-height:46px;border-radius:999px;font:700 .9rem 'Montserrat',system-ui,sans-serif;cursor:pointer;border:1.5px solid #E7E1D8;background:#fff;color:#16142D;padding:0 12px;white-space:nowrap}
+#ri-wa-modal .ri-acts button.ri-main{background:#4325EB;border-color:#4325EB;color:#fff}
+#ri-wa-modal button:focus-visible{outline:3px solid #DDD7FF;outline-offset:2px}
+@media (max-width:767.98px){#ri-wa-fab{height:52px;padding:0 14px;right:14px;bottom:14px}#ri-wa-fab .ri-lbl{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}}
+</style>
+<script>
+(function () {
+  'use strict';
+  var NUMBER = '246 234 8230';
+  var DEFAULT_MSG = "Hi Rent It.BB, I'm planning an event and would like a quote.";
+  var lastFocus = null, modal = null, bubble = null;
+
+  function editing() {
+    var b = document.body;
+    return !b || b.classList.contains('editor_enable') || b.classList.contains('o_edit_mode');
+  }
+
+  function addBar() {
+    if (document.getElementById('ri-demo-bar')) return;
+    var bar = document.createElement('div');
+    bar.id = 'ri-demo-bar';
+    bar.setAttribute('role', 'note');
+    bar.innerHTML = '<b>Tech Nova demo for Rent It.BB.</b> Real items and prices. Bookings and stock are samples.';
+    var header = document.querySelector('header#top');
+    var wrap = document.getElementById('wrapwrap');
+    if (header && header.parentNode) header.parentNode.insertBefore(bar, header);
+    else if (wrap) wrap.insertBefore(bar, wrap.firstChild);
+    else document.body.insertBefore(bar, document.body.firstChild);
+  }
+
+  function pageMessage() {
+    var h = document.querySelector('#product_details h1, #product_detail h1, h1[itemprop="name"]');
+    if (h && h.textContent.trim()) return "Hi Rent It.BB, I'd like to ask about the " + h.textContent.trim().replace(/\s+/g, ' ') + '.';
+    return DEFAULT_MSG;
+  }
+
+  function buildModal() {
+    modal = document.createElement('div');
+    modal.id = 'ri-wa-modal';
+    modal.hidden = true;
+    modal.innerHTML =
+      '<div class="ri-scrim" data-ri-close=""></div>' +
+      '<div class="ri-box" role="dialog" aria-modal="true" aria-labelledby="ri-wa-title" aria-describedby="ri-wa-info">' +
+      '<button type="button" class="ri-x" data-ri-close="" aria-label="Close">&#215;</button>' +
+      '<h2 id="ri-wa-title">WhatsApp preview</h2>' +
+      '<div class="ri-chat"><div class="ri-to">To: Rent It.BB, ' + NUMBER + '</div><div class="ri-bubble"></div></div>' +
+      '<p class="ri-info" id="ri-wa-info">On the live site this opens WhatsApp to ' + NUMBER + ' with this message typed. This demo does not send anything.</p>' +
+      '<div class="ri-acts"><button type="button" class="ri-copy">Copy message</button><button type="button" class="ri-main" data-ri-close="">Close</button></div>' +
+      '</div>';
+    document.body.appendChild(modal);
+    bubble = modal.querySelector('.ri-bubble');
+    modal.addEventListener('click', function (e) {
+      if (e.target.closest('[data-ri-close]')) close();
+      var c = e.target.closest('.ri-copy');
+      if (c) {
+        var text = bubble.textContent;
+        var say = function (t) { c.textContent = t; setTimeout(function () { c.textContent = 'Copy message'; }, 1800); };
+        var pick = function () {
+          try { var rg = document.createRange(); rg.selectNodeContents(bubble); var sel = window.getSelection(); sel.removeAllRanges(); sel.addRange(rg); say('Text selected'); } catch (err) {}
+        };
+        if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(text).then(function () { say('Copied'); }, pick);
+        else pick();
+      }
+    });
+    document.addEventListener('keydown', function (e) {
+      if (!modal || modal.hidden) return;
+      if (e.key === 'Escape' || e.key === 'Esc') { e.preventDefault(); close(); return; }
+      if (e.key !== 'Tab') return;
+      var f = modal.querySelectorAll('button:not([disabled])');
+      if (!f.length) return;
+      var first = f[0], last = f[f.length - 1];
+      var inside = modal.contains(document.activeElement);
+      if (e.shiftKey && (document.activeElement === first || !inside)) { e.preventDefault(); last.focus(); }
+      else if (!e.shiftKey && (document.activeElement === last || !inside)) { e.preventDefault(); first.focus(); }
+    });
+  }
+
+  function setInert(on) {
+    ['wrapwrap', 'ri-wa-fab'].forEach(function (id) {
+      var el = document.getElementById(id);
+      if (!el) return;
+      if (on) { el.setAttribute('inert', ''); el.setAttribute('aria-hidden', 'true'); }
+      else { el.removeAttribute('inert'); el.removeAttribute('aria-hidden'); }
+    });
+  }
+
+  function open(msg) {
+    if (!modal) buildModal();
+    if (!modal.hidden) { bubble.textContent = msg || pageMessage(); return; }
+    lastFocus = document.activeElement;
+    bubble.textContent = msg || pageMessage();
+    modal.hidden = false;
+    document.documentElement.style.overflow = 'hidden';
+    setInert(true);
+    var main = modal.querySelector('.ri-main');
+    if (main) main.focus();
+  }
+
+  function close() {
+    if (!modal || modal.hidden) return;
+    modal.hidden = true;
+    document.documentElement.style.overflow = '';
+    setInert(false);
+    if (lastFocus && lastFocus.focus && document.contains(lastFocus)) lastFocus.focus();
+    lastFocus = null;
+  }
+
+  function onCheckout() {
+    var p = location.pathname;
+    return ['cart', 'checkout', 'address', 'payment', 'confirmation', 'confirm_order', 'extra_info'].some(function (s) {
+      return p.indexOf('/shop/' + s) === 0;
+    });
+  }
+
+  function watchAddToCart(fab) {
+    if (!('IntersectionObserver' in window) || !window.matchMedia) return;
+    var btn = document.querySelector('#o_wsale_cta_wrapper, #add_to_cart, button[name="add_to_cart"]');
+    if (!btn) return;
+    var phone = window.matchMedia('(max-width: 767.98px)');
+    var seen = false;
+    var apply = function () { fab.classList.toggle('ri-away', phone.matches && seen); };
+    new IntersectionObserver(function (es) { seen = es[0].isIntersecting; apply(); }).observe(btn);
+    if (phone.addEventListener) phone.addEventListener('change', apply);
+  }
+
+  function addFab() {
+    if (document.getElementById('ri-wa-fab') || onCheckout()) return;
+    var b = document.createElement('button');
+    b.id = 'ri-wa-fab';
+    b.type = 'button';
+    b.setAttribute('aria-haspopup', 'dialog');
+    b.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.4 8.4 0 0 1-12.4 7.4L3 20.5l1.6-5.4A8.4 8.4 0 1 1 21 11.5z"/><path d="M8.5 9.5c.4 2.3 2.7 4.6 5 5l1.2-1.2 2 .9c-.3 1.2-1.2 1.8-2.4 1.8-3.5 0-7.3-3.8-7.3-7.3 0-1.2.6-2.1 1.8-2.4l.9 2-1.2 1.2z"/></svg><span class="ri-lbl">WhatsApp us</span>';
+    b.setAttribute('aria-label', 'WhatsApp us (preview)');
+    b.addEventListener('click', function () { open(); });
+    document.body.appendChild(b);
+    watchAddToCart(b);
+  }
+
+  // Any WhatsApp link on the site opens the preview instead, so the demo never messages the real business.
+  var WA = '[data-ri-wa], a[href="#whatsapp"], a[href^="https://wa.me"], a[href^="http://wa.me"], a[href*="whatsapp.com/send"], a[href^="whatsapp:"]';
+  document.addEventListener('auxclick', function (e) {
+    if (editing()) return;
+    if (e.target.closest && e.target.closest(WA)) e.preventDefault();
+  }, true);
+  document.addEventListener('click', function (e) {
+    if (editing()) return;
+    var a = e.target.closest && e.target.closest(WA);
+    if (!a) return;
+    e.preventDefault();
+    e.stopPropagation();
+    var msg = a.getAttribute('data-ri-wa');
+    if (!msg && a.href) { try { msg = new URL(a.href).searchParams.get('text'); } catch (err) { msg = null; } }
+    open(msg || null);
+  }, true);
+
+  function init() {
+    if (editing()) return;
+    addBar();
+    addFab();
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
+  else init();
+})();
+</script>

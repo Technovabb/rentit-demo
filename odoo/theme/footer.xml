@@ -1,0 +1,41 @@
+<section class="s_text_block o_colored_level ri-footer pt56 pb32" data-snippet="s_text_block" data-name="Footer">
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-12 col-lg-4">
+        <img class="ri-flogo" src="__LOGO_WHITE__" alt="Rent It.BB" loading="lazy"/>
+        <p>Founded in 2019 by Dominic Hutson, Rent It.BB is a family-owned event rental business in Barbados. Tents, tables, chairs, linens and d&#233;cor, all in one place.</p>
+      </div>
+      <div class="col-6 col-lg-2">
+        <h6>Shop</h6>
+        <ul>
+          <li><a href="__SHOP__">All rentals</a></li>
+          <li><a href="__CAT:packages__">Packages</a></li>
+          <li><a href="__CAT:tents__">Tents</a></li>
+          <li><a href="__CAT:chairs__">Chairs</a></li>
+          <li><a href="__CAT:tables__">Tables</a></li>
+          <li><a href="__CAT:linens__">Linens</a></li>
+        </ul>
+      </div>
+      <div class="col-6 col-lg-2">
+        <h6>Quick links</h6>
+        <ul>
+          <li><a href="__PAGE:how-it-works__">How it works</a></li>
+          <li><a href="__PAGE:about__">About us</a></li>
+          <li><a href="__PAGE:faq__">FAQs</a></li>
+          <li><a href="__PAGE:contactus__">Contact</a></li>
+        </ul>
+      </div>
+      <div class="col-12 col-lg-4">
+        <h6>Get in touch</h6>
+        <ul>
+          <li>WhatsApp: <a href="#whatsapp" data-ri-wa="Hi Rent It.BB, I'm planning an event and would like a quote.">234-8230</a></li>
+          <li>Phone: +1 246 234 8230</li>
+          <li>Email: contact@rentit.bb</li>
+          <li>Lower Estate, St George, Barbados</li>
+          <li>Instagram: <a href="https://www.instagram.com/rentit.bb/" target="_blank" rel="noopener">@rentit.bb</a></li>
+        </ul>
+      </div>
+    </div>
+    <p class="ri-small mt-4 mb-0">Demo website by Tech Nova. Real items and prices from rentit.bb. Bookings, customers and stock counts shown are samples.</p>
+  </div>
+</section>

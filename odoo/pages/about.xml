@@ -1,0 +1,86 @@
+<section class="s_cover o_colored_level oe_img_bg o_bg_img_center ri-hero ri-page-head pt80 pb80" data-snippet="s_cover" data-name="Page header" style="background-image: url('__IMG:pf-13__');">
+  <div class="o_we_bg_filter" style="background-image: linear-gradient(100deg, rgba(25, 12, 92, 0.92) 0%, rgba(55, 25, 170, 0.74) 50%, rgba(30, 14, 90, 0.3) 100%);"></div>
+  <div class="container s_allow_columns">
+    <span class="ri-eyebrow">About us</span>
+    <h1>A family business, here for your event</h1>
+    <p class="ri-lead">Rent It.BB has been helping people in Barbados celebrate since 2019.</p>
+  </div>
+</section>
+
+<section class="s_text_image o_colored_level ri-section" data-snippet="s_text_image" data-name="Our story">
+  <div class="container">
+    <div class="row g-4 g-lg-5 align-items-center">
+      <div class="col-lg-6">
+        <span class="ri-eyebrow">Our story</span>
+        <h2>Started in 2019 by Dominic Hutson</h2>
+        <p>Rent It.BB is a local event rental business, owned and run by a family. Dominic Hutson started it in 2019.</p>
+        <p>Over the years our range has grown step by step. Today we offer a very wide range of rental items in Barbados, from tents, tables and chairs to linens, lounge furniture and d&#233;cor.</p>
+        <p>We&#8217;re committed to on-time, reliable service and good quality items at fair prices. Our aim is to be your one-stop shop, so you can get everything from one place and save on transport and running around.</p>
+        <p class="mb-0">Whatever you&#8217;re planning, we carry something for you:</p>
+        <div class="ri-chips"><span>Weddings</span><span>Parties</span><span>Dinners</span><span>Baby showers</span><span>Company functions</span><span>Graduations</span></div>
+      </div>
+      <div class="col-lg-6">
+        <div class="ri-photo"><img src="__IMG:pf-75__" alt="Farm table dinner set by Rent It.BB with heliconia flowers and orange napkins" loading="lazy"/></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="s_numbers o_colored_level ri-section ri-bg-white" data-snippet="s_numbers" data-name="Numbers">
+  <div class="container">
+    <div class="row g-3 text-center">
+      <div class="col-6 col-lg-3"><div class="ri-big"><b>250</b><span>Events</span></div></div>
+      <div class="col-6 col-lg-3"><div class="ri-big"><b>163</b><span>Clients</span></div></div>
+      <div class="col-6 col-lg-3"><div class="ri-big"><b>330+</b><span>Items to rent</span></div></div>
+      <div class="col-6 col-lg-3"><div class="ri-big"><b>5.0</b><span>Google rating (3 reviews)</span></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="s_three_columns o_colored_level ri-section" data-snippet="s_three_columns" data-name="Testimonials">
+  <div class="container">
+    <div class="ri-head">
+      <div><span class="ri-eyebrow">Kind words</span><h2>What clients say</h2></div>
+    </div>
+    <div class="row g-3">
+      <div class="col-12 col-lg-4"><figure class="ri-quote"><blockquote>&#8220;As we were looking to do a few events, I told my work mates about this page that I stumbled across that had some rental items called &#8216;Rent It BB&#8217;&#8230; Then that was where I met this wonderful team!&#8221;</blockquote><figcaption>Shaunice</figcaption></figure></div>
+      <div class="col-12 col-lg-4"><figure class="ri-quote"><blockquote>&#8220;The service and communication were way above anything that we had expected.&#8221;</blockquote><figcaption>Ana Marie</figcaption></figure></div>
+      <div class="col-12 col-lg-4"><figure class="ri-quote"><blockquote>&#8220;It was a bank holiday and everyone knows how hard it is to move from your bed on a day off, but that was no problem. Dominic said that he would still come and set the tents up for our staff party.&#8221;</blockquote><figcaption>A client, staff party</figcaption></figure></div>
+    </div>
+  </div>
+</section>
+
+<section class="s_text_block o_colored_level ri-section ri-bg-sand" data-snippet="s_text_block" data-name="Gallery">
+  <div class="container">
+    <div class="ri-head">
+      <div><span class="ri-eyebrow">Our work</span><h2>Some of our set-ups</h2></div>
+      <a class="ri-link" href="https://www.instagram.com/rentit.bb/" target="_blank" rel="noopener">More on Instagram</a>
+    </div>
+    <div class="ri-gallery">
+      <figure class="ri-wide"><img src="__IMG:pf-14__" alt="Long banquet table under purple light with pink flowers" loading="lazy"/></figure>
+      <figure><img src="__IMG:pf-12-sm__" alt="Red and gold birthday table with a candelabra" loading="lazy"/></figure>
+      <figure><img src="__IMG:pf-61-sm__" alt="Oh Baby balloon backdrop" loading="lazy"/></figure>
+      <figure><img src="__IMG:pf-35-sm__" alt="BABY balloon letters" loading="lazy"/></figure>
+      <figure><img src="__IMG:pf-39-sm__" alt="Lounge cushions with white roses" loading="lazy"/></figure>
+    </div>
+  </div>
+</section>
+
+<section class="s_call_to_action o_colored_level ri-section" data-snippet="s_call_to_action" data-name="Call to action">
+  <div class="container">
+    <div class="ri-cta">
+      <div class="row g-4 align-items-center">
+        <div class="col-lg-7">
+          <h2>Let&#8217;s plan your event</h2>
+          <p>Browse over 330 items with prices, or tell us what you have in mind.</p>
+        </div>
+        <div class="col-lg-5">
+          <div class="ri-btns justify-content-lg-end">
+            <a class="btn btn-light btn-lg" href="__SHOP__">Shop rentals</a>
+            <a class="btn btn-outline-light btn-lg" href="__PAGE:contactus__">Contact us</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

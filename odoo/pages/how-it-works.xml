@@ -1,0 +1,82 @@
+<section class="s_cover o_colored_level oe_img_bg o_bg_img_center ri-hero ri-page-head pt80 pb80" data-snippet="s_cover" data-name="Page header" style="background-image: url('__IMG:pf-56__');">
+  <div class="o_we_bg_filter" style="background-image: linear-gradient(100deg, rgba(25, 12, 92, 0.92) 0%, rgba(55, 25, 170, 0.74) 50%, rgba(30, 14, 90, 0.3) 100%);"></div>
+  <div class="container s_allow_columns">
+    <span class="ri-eyebrow">How it works</span>
+    <h1>Booking your rentals, step by step</h1>
+    <p class="ri-lead">Pick your items and your date. We check stock, send your quote and take care of delivery.</p>
+    <div class="ri-btns">
+      <a class="btn btn-light btn-lg" href="__SHOP__">Start your list</a>
+      <a class="btn btn-outline-light btn-lg" href="#whatsapp" data-ri-wa="Hi Rent It.BB, I'd like to book some rentals. My event date is: ...">WhatsApp us instead</a>
+    </div>
+  </div>
+</section>
+
+<section class="s_three_columns o_colored_level ri-section" data-snippet="s_three_columns" data-name="Booking steps">
+  <div class="container">
+    <div class="ri-head">
+      <div><span class="ri-eyebrow">Four steps</span><h2>From your list to your event</h2></div>
+    </div>
+    <div class="row g-3">
+      <div class="col-12 col-md-6 col-lg-3"><div class="ri-card"><span class="ri-num">1</span><h3>Pick your date and items</h3><p>Choose your event date in the shop and add the items you need. Most items show their price for a 24-hour rental.</p><p>Prefer to chat? WhatsApp us on 234-8230 with your list and event details.</p></div></div>
+      <div class="col-12 col-md-6 col-lg-3"><div class="ri-card"><span class="ri-num">2</span><h3>We confirm</h3><p>We check that everything is free on your date, then send your quote for you to look over and approve. The delivery fee is added to the quote.</p></div></div>
+      <div class="col-12 col-md-6 col-lg-3"><div class="ri-card"><span class="ri-num">3</span><h3>Pay 50% to hold your items</h3><p>Once you approve the quote, a 50% deposit holds your items for your date. The deposit is non-refundable.</p></div></div>
+      <div class="col-12 col-md-6 col-lg-3"><div class="ri-card"><span class="ri-num">4</span><h3>We deliver and collect</h3><p>Pay the balance 5 days before your event. We bring everything to your venue and pick it up when your rental time is over.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="s_text_block o_colored_level ri-section ri-bg-white" data-snippet="s_text_block" data-name="Payment timeline">
+  <div class="container">
+    <div class="row g-4 align-items-center">
+      <div class="col-lg-6">
+        <span class="ri-eyebrow">When you pay</span>
+        <h2>Two payments</h2>
+        <p class="ri-muted">Most items in the shop show their price, so you can plan before you ask. Your quote adds the delivery fee.</p>
+        <ol class="ri-timeline mt-4">
+          <li><b>When you approve your quote</b><span>Pay a 50% deposit to hold your items. It is non-refundable.</span></li>
+          <li><b>5 days before your event</b><span>Pay the rest of your order.</span></li>
+          <li><b>Delivery and pick-up</b><span>We bring your items to your venue. Your rental runs for up to 24 hours, from delivery to pick-up.</span></li>
+        </ol>
+      </div>
+      <div class="col-lg-6">
+        <div class="ri-photo"><img src="__IMG:pf-73-sm__" alt="Farm table dinner set by Rent It.BB with heliconia flowers" loading="lazy"/></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="s_three_columns o_colored_level ri-section" data-snippet="s_three_columns" data-name="Good to know">
+  <div class="container">
+    <div class="ri-head">
+      <div><span class="ri-eyebrow">Good to know</span><h2>Rental times, delivery and weather</h2></div>
+      <a class="ri-link" href="__PAGE:faq__">Read the FAQs</a>
+    </div>
+    <div class="row g-3">
+      <div class="col-12 col-md-6 col-lg-4"><div class="ri-card"><span class="ri-icon">24</span><h3>24-hour rental</h3><p>Our prices cover up to 24 hours, from delivery to pick-up. Need the items longer? Ask us and we&#8217;ll do our best to work something out.</p></div></div>
+      <div class="col-12 col-md-6 col-lg-4"><div class="ri-card"><span class="ri-icon">&#8599;</span><h3>We deliver every order</h3><p>We bring your rentals to you. Items can&#8217;t be collected from us at this time. There is a delivery fee, and it&#8217;s added to your quote.</p></div></div>
+      <div class="col-12 col-md-6 col-lg-4"><div class="ri-card"><span class="ri-icon">&#9730;</span><h3>Weather and changes</h3><p>If bad weather or something unexpected affects your event, talk to us and we&#8217;ll work with you. Deposits are non-refundable, whatever the reason.</p></div></div>
+      <div class="col-12 col-md-6 col-lg-4"><div class="ri-card"><span class="ri-icon">&#10003;</span><h3>Book early</h3><p>Send your request as soon as you have your event details, so we can check that what you need is free on your date.</p></div></div>
+      <div class="col-12 col-md-6 col-lg-4"><div class="ri-card"><span class="ri-icon">$</span><h3>Prices in BBD</h3><p>All prices are in Barbados dollars and cover a 24-hour rental. Ready-made packages are in the shop too.</p></div></div>
+      <div class="col-12 col-md-6 col-lg-4"><div class="ri-card"><span class="ri-icon">?</span><h3>Not sure what you need?</h3><p>Send us your date and guest count on WhatsApp and we&#8217;ll help you put your list together.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="s_call_to_action o_colored_level ri-section" data-snippet="s_call_to_action" data-name="Call to action">
+  <div class="container">
+    <div class="ri-cta">
+      <div class="row g-4 align-items-center">
+        <div class="col-lg-7">
+          <h2>Ready when you are</h2>
+          <p>Start your list in the shop, or send us a message and we&#8217;ll take it from there.</p>
+        </div>
+        <div class="col-lg-5">
+          <div class="ri-btns justify-content-lg-end">
+            <a class="btn btn-light btn-lg" href="__SHOP__">Shop rentals</a>
+            <a class="btn btn-outline-light btn-lg" href="#whatsapp" data-ri-wa="Hi Rent It.BB, I'd like a quote for my event. Date: ... Guests: ... Items: ...">WhatsApp us</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
