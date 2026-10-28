@@ -32,7 +32,7 @@ Every call below goes in its own tool call and returns a small JSON report: `{st
 | 1 | `await RIB.run('introspect')` | Reads the version, modules, website, currency and field names. It picks the code paths (for example the Odoo 20 `rent_periodicity` model or the 17-19 `product.pricing` model) and lists them under `chosen`. Read `warnings`. | 10-20 s |
 | 2 | `await RIB.run('installApps')`, **repeat** until `report.done` is true | Installs one missing module per call: Rental, eCommerce, Inventory, sale_stock, delivery, payment_demo, payment_custom, plus any `*renting*` bridge that exists. It never installs Click & Collect. If it says `still running`, wait a minute and call it again. | 20-90 s each |
 | 3 | `await RIB.run('introspect')` | Run it again now that the apps are in. Check that `chosen.pricingModel` is not `none` and that `startField` is set. | 15 s |
-| 4 | `await RIB.run('company')` | Sets the company name, address (Lower Estate, St. George), phone, email, BBD shown as `$` before the amount, the Barbados timezone and the warehouse name. | 5 s |
+| 4 | `await RIB.run('company')` | Adds the 11 Barbados parishes (Odoo has none), then sets the company name, address (Lower Estate, St. George), phone, email, BBD shown as `$` before the amount, the Barbados timezone and the warehouse name. | 5 s |
 | 5 | `await RIB.run('tax')` | Rent It's site lists prices "+17.5% VAT". This finds or copies a 17.5% sale tax that is added on top of the price. Set `RIB.cfg.vat = false` first to skip it. | 3 s |
 | 6 | `await RIB.run('settings')` | Turns on product variants, needed for the cutlery sets. | 5-15 s |
 | 7 | `await RIB.run('deposit')` | Sets a 50% online prepayment on quotes, with no signature needed. | 2 s |

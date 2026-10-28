@@ -350,6 +350,16 @@
     const bb = (await rpc('res.country', 'search_read', [[['code', '=', 'BB']]], { fields: ['id'] }))[0];
     if (!bb) throw new Error('Country BB not found');
     cfg.countryBB = bb.id;
+    // Odoo 20 ships no Barbados states: add the 11 parishes (ISO 3166-2:BB codes) so checkout gets a parish drop-down.
+    const PARISHES = [['01', 'Christ Church'], ['02', 'Saint Andrew'], ['03', 'Saint George'], ['04', 'Saint James'], ['05', 'Saint John'], ['06', 'Saint Joseph'],
+      ['07', 'Saint Lucy'], ['08', 'Saint Michael'], ['09', 'Saint Peter'], ['10', 'Saint Philip'], ['11', 'Saint Thomas']];
+    const have = await rpc('res.country.state', 'search_read', [[['country_id', '=', bb.id]]], { fields: ['id', 'code', 'name'] });
+    let added = 0;
+    for (const [code, name] of PARISHES) {
+      if (have.some((s) => s.code === code || s.name === name)) continue;
+      try { await rpc('res.country.state', 'create', [{ country_id: bb.id, code, name }]); added++; } catch (e) { out.notes.push('parish ' + name + ': ' + short(e)); }
+    }
+    out.parishesAdded = added;
     const st = (await rpc('res.country.state', 'search_read', [[['country_id', '=', bb.id], ['name', 'ilike', 'George']]], { fields: ['id', 'name'] }))[0];
     out.partnerErrors = await writeSafe('res.partner', [cfg.companyPartnerId], {
       name: BIZ.company, street: BIZ.street, city: BIZ.city, state_id: st ? st.id : false, country_id: bb.id,
