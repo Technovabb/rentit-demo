@@ -56,6 +56,9 @@
     wireName: 'Book now, pay later by bank transfer',
     wirePending: '<p>Thank you. We will check your dates and send your quote. A 50% deposit secures your booking. The rest is due 5 days before your event.</p>',
     sampleNote: 'Sample booking for the demo',
+    eventStep: 'Event details',
+    eventTitle: 'About your event',
+    eventIntro: 'Your answers help us plan the delivery and collection.',
   }, prev.text || {});
 
   // ------------------------------------------------------------------ helpers
@@ -592,6 +595,92 @@
       else await rpc('ir.ui.view', 'create', [{ name: 'Rent It product facts', type: 'qweb', key, inherit_id: base.id, mode: 'extension', priority: 90, website_id: wid(), arch_db: arch }], { context: wctx() });
       out.productFacts = ex ? 'updated' : 'created';
     } catch (e) { out.productFacts = 'skipped: ' + short(e); }
+    return out;
+  };
+
+  // Rent It's event questions, on the checkout's extra step (between address and payment).
+  // The event type goes into the booking's Customer Reference, the one order field website forms may write.
+  // Every other answer is posted as a note on the booking, labelled with its `name`.
+  // A follow-up (showIf) only shows, and is only required and sent, when the earlier answer matches.
+  const EVENT_QUESTIONS = [
+    { name: 'client_order_ref', label: 'What type of event is it?', type: 'char', required: true, placeholder: 'Wedding, birthday, christening, corporate...' },
+    { name: 'Event date', label: 'Event date', type: 'date', required: true },
+    { name: 'Indoors or outdoors', label: 'Is it indoors or outdoors?', type: 'radio', required: true, options: ['Indoors', 'Outdoors'] },
+    { name: 'Floor and access', label: 'Which floor is it on?', type: 'radio', required: true, showIf: ['Indoors or outdoors', 'Indoors'],
+      options: ['Ground floor', 'Upstairs, stairs only', 'Upstairs, with an elevator'] },
+    { name: 'Ground', label: 'What is the ground like?', type: 'radio', required: true, showIf: ['Indoors or outdoors', 'Outdoors'],
+      options: ['Grass', 'Cement', 'Sand'] },
+    { name: 'Truck can pull up', label: 'Can our truck pull up to the area where the items will be used?', type: 'radio', required: true, options: ['Yes', 'No', 'Not sure'] },
+    { name: 'Delivery', label: 'When should we deliver?', type: 'radio', required: true, options: ['The day before the event', 'On the day of the event'] },
+    { name: 'Collection', label: 'When should we collect?', type: 'radio', required: true, options: ['On the day, after the event', 'The day after the event'] },
+    { name: 'Heard about us', label: 'How did you hear about us?', type: 'select',
+      options: ['Instagram', 'Facebook', 'Google', 'Word of mouth', 'Saw our truck', 'Other'] },
+    { name: 'Notes', label: 'Anything else we should know?', type: 'text', placeholder: 'Event times, gate or parking details...' },
+  ];
+  const FORM_TYPES = { char: 'char', text: 'text', date: 'date', radio: 'selection', select: 'many2one' };
+  function eventFormHtml() {
+    const fields = EVENT_QUESTIONS.map((q, i) => {
+      const id = `ri_ev${i}`, name = esc(q.name), req = q.required ? ' required="1"' : '';
+      const ph = q.placeholder ? ` placeholder="${esc(q.placeholder)}"` : '';
+      let input;
+      if (q.type === 'char') input = `<input type="text" class="form-control s_website_form_input" name="${name}" id="${id}"${ph}${req}/>`;
+      else if (q.type === 'text') input = `<textarea class="form-control s_website_form_input" name="${name}" id="${id}" rows="3"${ph}${req}></textarea>`;
+      else if (q.type === 'date') {
+        input = `<div class="s_website_form_date input-group date"><input type="text" class="form-control datetimepicker-input s_website_form_input" name="${name}" id="${id}"${req}/>`
+          + '<div class="input-group-text o_input_group_date_icon"><i class="oi oi-filled" data-icon="calendar_today"></i></div></div>';
+      } else if (q.type === 'select') {
+        input = `<select class="form-select s_website_form_input" name="${name}" id="${id}"${req}><option value="">Choose one</option>`
+          + q.options.map((o) => `<option value="${esc(o)}">${esc(o)}</option>`).join('') + '</select>';
+      } else {
+        input = `<div class="row s_col_no_resize s_col_no_bgcolor s_website_form_multiple" data-name="${name}" data-display="horizontal">`
+          + q.options.map((o, j) => `<div class="radio col-12 col-lg-4 col-md-6"><div class="form-check"><input type="radio" class="s_website_form_input form-check-input" id="${id}_${j}" name="${name}" value="${esc(o)}"${req}/>`
+            + `<label class="form-check-label s_website_form_check_label" for="${id}_${j}">${esc(o)}</label></div></div>`).join('') + '</div>';
+      }
+      const cls = ['s_website_form_field', 'mb-3', 'col-12'];
+      if (q.name !== 'client_order_ref') cls.push('s_website_form_custom');
+      if (q.required) cls.push('s_website_form_required');
+      let vis = '';
+      if (q.showIf) {
+        cls.push('s_website_form_field_hidden_if', 'd-none');
+        vis = ` data-visibility-dependency="${esc(q.showIf[0])}" data-visibility-comparator="selected" data-visibility-condition="${esc(q.showIf[1])}"`;
+      }
+      const forId = q.type === 'radio' ? '' : ` for="${id}"`;
+      const mark = q.required ? '<span class="s_website_form_mark"> *</span>' : '';
+      return `<div class="${cls.join(' ')}" data-type="${FORM_TYPES[q.type]}" data-name="Field"${vis}>`
+        + `<label class="s_website_form_label d-block"${forId}><span class="s_website_form_label_content">${esc(q.label)}</span>${mark}</label>${input}</div>`;
+    }).join('');
+    // Same form attributes as Odoo's own extra-info form: it posts to the cart, then goes on to payment.
+    return '<section class="s_website_form" data-vcss="001" data-snippet="s_website_form"><div class="container">'
+      + '<form action="/website/form/" method="post" enctype="multipart/form-data" class="o_mark_required s_website_form_no_recaptcha" data-mark="*"'
+      + ' data-force_action="shop.sale.order" data-model_name="sale.order" data-success-mode="redirect" data-success-page="/shop/payment" hide-change-model="true">'
+      + `<div class="s_website_form_rows s_col_no_bgcolor row"><span id="s_website_form_result"></span>${fields}</div></form></div></section>`;
+  }
+  RIB.checkoutQuestions = async () => {
+    need();
+    const out = { extraStep: null, form: null, stepName: null, questions: EVENT_QUESTIONS.map((q) => q.name) };
+    // The shop editor's "Extra Step" switch: activates the step's view (as this website's own copy) and publishes the step.
+    await post('/shop/config/website', { extra_step: 'true' });
+    out.extraStep = await viewState('website_sale.extra_info');
+    const roots = await rpc('ir.ui.view', 'search_read', [[['key', '=', 'website_sale.extra_info'], ['website_id', 'in', [wid(), false]]]],
+      { fields: ['id', 'website_id'], context: { active_test: false } });
+    const base = roots.find((x) => idOf(x.website_id) === wid()) || roots.find((x) => !x.website_id);
+    if (!base) throw new Error('website_sale.extra_info not found');
+    const key = 'website.rentit_event_questions';
+    const arch = '<data name="Rent It event questions">'
+      + `<xpath expr="//h4[hasclass('mb-3')]" position="replace"><h4 class="mb-3">${esc(RIB.text.eventTitle)}</h4><p class="text-muted">${esc(RIB.text.eventIntro)}</p></xpath>`
+      + `<xpath expr="//section[hasclass('s_website_form')]" position="replace">${eventFormHtml()}</xpath></data>`;
+    const ex = (await rpc('ir.ui.view', 'search_read', [[['key', '=', key], ['website_id', '=', wid()]]], { fields: ['id'], context: { active_test: false } }))[0];
+    if (ex) await rpc('ir.ui.view', 'write', [[ex.id], { arch_db: arch, active: true, inherit_id: base.id }], { context: wctx() });
+    else await rpc('ir.ui.view', 'create', [{ name: 'Rent It event questions', type: 'qweb', key, inherit_id: base.id, mode: 'extension', priority: 90, website_id: wid(), arch_db: arch }], { context: wctx() });
+    out.form = ex ? 'updated' : 'created';
+    // The step's name in the checkout breadcrumb, and the button that leads to it.
+    if (F('website.checkout.step')) {
+      const step = (await rpc('website.checkout.step', 'search_read', [[['website_id', '=', wid()], ['step_href', '=', '/shop/extra_info']]], { fields: ['id', 'is_published'] }))[0];
+      if (step) {
+        const errs = await writeSafe('website.checkout.step', [step.id], pick('website.checkout.step', { name: RIB.text.eventStep, main_button_label: 'Continue' }), wctx());
+        out.stepName = errs.length ? 'errors: ' + errs.join('; ') : RIB.text.eventStep + (step.is_published ? '' : ' (step not published)');
+      } else out.stepName = 'no /shop/extra_info step for this website';
+    }
     return out;
   };
 
@@ -1436,7 +1525,7 @@
   RIB.help = () => [
     'introspect', 'installApps (repeat)', 'introspect', 'company', 'tax', 'settings', 'deposit', 'website',
     'categories', 'products(offset,limit) / loop', 'rentalPricing', 'packageOptions', 'images(offset,limit) / loop', 'stock(offset,limit)',
-    'delivery', 'payments', 'gallery', 'theme', 'customCode', 'pages', 'menus', 'shopWording', 'shopLayout', 'placeholders',
+    'delivery', 'payments', 'gallery', 'theme', 'customCode', 'pages', 'menus', 'shopWording', 'shopLayout', 'checkoutQuestions', 'placeholders',
     'sampleOrders(offset,limit)', 'verify',
   ];
 
