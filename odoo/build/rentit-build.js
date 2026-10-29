@@ -456,7 +456,7 @@
       name: BIZ.site, logo, favicon: fav, cookies_bar: true, configurator_done: true,
       shop_ppg: 24, shop_ppr: 4, account_on_checkout: 'optional', ecommerce_access: 'everyone',
       contact_us_link_url: BIZ.wa, prevent_sale: true, prevent_sale_for: 'zero_price',
-      social_instagram: BIZ.insta,
+      social_instagram: BIZ.insta, tz: 'America/Barbados',
     }, skipped);
     if (sorts.includes('website_sequence asc')) vals.shop_default_sort = 'website_sequence asc';
     if (vals.prevent_sale_for && !(cfg.sel['website.prevent_sale_for'] || ['zero_price']).includes('zero_price')) delete vals.prevent_sale_for;
@@ -534,6 +534,26 @@
     for (const key of ['website_sale.filmstrip_categories_pills', 'website_sale_renting.shop_rental_datepicker_opt']) {
       try { await post('/website/theme_customize_data', { is_view_data: true, enable: [key], disable: [] }); out.options.push(key + ' on'); }
       catch (e) { out.options.push(key + ' skipped: ' + short(e)); }
+    }
+    // The "Specifications" table only repeats the upgrade choices shown above it.
+    try { await post('/website/theme_customize_data', { is_view_data: true, enable: [], disable: ['website_sale.product_attributes_body'] }); out.options.push('specifications table off'); }
+    catch (e) { out.options.push('specifications table skipped: ' + short(e)); }
+    // Events happen at weekends. The trial's rental calendar is Mon-Fri, which pushes default bookings past the weekend.
+    if (has('res.company', 'rental_resource_calendar_id')) {
+      try {
+        const RC = 'resource.calendar', name = 'Rent It: 7 days, 7am to 7pm';
+        let calId = ((await rpc(RC, 'search_read', [[['name', '=', name]]], { fields: ['id'] }))[0] || {}).id;
+        if (!calId) {
+          const att = [];
+          for (let d = 0; d < 7; d++) {
+            att.push([0, 0, { dayofweek: String(d), hour_from: 7, hour_to: 12, day_period: 'morning' }]);
+            att.push([0, 0, { dayofweek: String(d), hour_from: 12, hour_to: 19, day_period: 'afternoon' }]);
+          }
+          calId = idOf(await rpc(RC, 'create', [{ name, attendance_ids: att }]));
+        }
+        await rpc('res.company', 'write', [[RIB.cfg.companyId], { rental_resource_calendar_id: calId }]);
+        out.rentalWeek = name;
+      } catch (e) { out.rentalWeek = 'skipped: ' + short(e); }
     }
     // Upgrade and "Piece" options are choices on the product page, not useful as shop filters.
     if (has('product.attribute', 'visibility')) {
