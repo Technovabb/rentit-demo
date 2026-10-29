@@ -3,7 +3,7 @@
   <div class="container">
     <span class="ri-eyebrow">Barbados event rentals</span>
     <h1>Rent what you need.<br/>When you need it.</h1>
-    <p class="ri-lead">Tents, chairs, tables, linens and d&#233;cor for weddings, birthdays and company events. Over 330 items with prices online, delivered across Barbados.</p>
+    <p class="ri-lead">Tents, chairs, tables, linens and d&#233;cor for weddings, birthdays and company events. Over 330 items, most with prices online, delivered across Barbados.</p>
     <form class="ri-search" action="/shop" method="get" role="search">
       <label class="ri-search-q">
         <span class="visually-hidden">What are you looking to rent?</span>
@@ -11,12 +11,12 @@
         <input type="search" name="search" placeholder="What are you looking to rent?" autocomplete="off"/>
       </label>
       <label class="ri-search-d">
-        <span class="ri-search-lbl">From</span>
-        <input type="date" name="start_date" aria-label="Rental start date"/>
+        <span class="ri-search-lbl">From</span><span class="visually-hidden"> (rental start date)</span>
+        <input type="date" name="start_date"/>
       </label>
       <label class="ri-search-d">
-        <span class="ri-search-lbl">To</span>
-        <input type="date" name="end_date" aria-label="Rental end date"/>
+        <span class="ri-search-lbl">To</span><span class="visually-hidden"> (rental end date)</span>
+        <input type="date" name="end_date"/>
       </label>
       <button type="submit" class="btn btn-primary ri-search-btn">Search</button>
     </form>
@@ -48,11 +48,11 @@
       <a class="ri-link" href="__SHOP__">View all</a>
     </div>
     <div class="ri-pcats">
-      <a class="ri-pcat" href="__CAT:packages__"><span class="ri-ph"><img src="__IMG:pf-56-sm__" alt="Beachside wedding tables with flowers and a sea view" loading="lazy" style="object-position: 50% 78%;"/></span><b>Packages</b><span class="ri-from">From $250 / day</span></a>
-      <a class="ri-pcat" href="__CAT:chairs__"><span class="ri-ph"><img src="__IMG:pf-14-sm__" alt="Long dinner table with white chiavari chairs" loading="lazy"/></span><b>Chairs</b><span class="ri-from">From $4 / day</span></a>
-      <a class="ri-pcat" href="__CAT:tables__"><span class="ri-ph"><img src="__IMG:pf-75-sm__" alt="Farm table set for dinner with tropical flowers" loading="lazy"/></span><b>Tables</b><span class="ri-from">From $15 / day</span></a>
-      <a class="ri-pcat" href="__CAT:linens__"><span class="ri-ph"><img src="__IMG:pf-12-sm__" alt="Red tablecloth with gold chargers and candelabras" loading="lazy"/></span><b>Linens</b><span class="ri-from">From $15 / day</span></a>
-      <a class="ri-pcat" href="__CAT:lounge-furniture__"><span class="ri-ph"><img src="__IMG:pf-61-sm__" alt="Pink and white armchairs in front of a balloon backdrop" loading="lazy"/></span><b>Lounge furniture</b><span class="ri-from">From $50 / day</span></a>
+      <a class="ri-pcat" href="__CAT:packages__"><span class="ri-ph"><img src="__IMG:pf-56-sm__" alt="" loading="lazy" style="object-position: 50% 78%;"/></span><b>Packages</b><span class="ri-from">From $250 / day</span></a>
+      <a class="ri-pcat" href="__CAT:chairs__"><span class="ri-ph"><img src="__IMG:pf-14-sm__" alt="" loading="lazy"/></span><b>Chairs</b><span class="ri-from">From $4 / day</span></a>
+      <a class="ri-pcat" href="__CAT:tables__"><span class="ri-ph"><img src="__IMG:pf-75-sm__" alt="" loading="lazy"/></span><b>Tables</b><span class="ri-from">From $15 / day</span></a>
+      <a class="ri-pcat" href="__CAT:linens__"><span class="ri-ph"><img src="__IMG:pf-12-sm__" alt="" loading="lazy"/></span><b>Linens</b><span class="ri-from">From $15 / day</span></a>
+      <a class="ri-pcat" href="__CAT:lounge-furniture__"><span class="ri-ph"><img src="__IMG:pf-61-sm__" alt="" loading="lazy"/></span><b>Lounge furniture</b><span class="ri-from">From $50 / day</span></a>
     </div>
   </div>
 </section>
@@ -64,11 +64,11 @@
       <a class="ri-link" href="__SHOP__">View all</a>
     </div>
     <div class="ri-feat">
-      <a class="ri-fcard" href="__PROD:4204__"><span class="ri-ph"><img src="__PIMG:4204__" alt="20 by 20 high peak tent with a white top" loading="lazy"/></span><span class="ri-body"><b>20&#215;20 High Peak Tent, White Top</b><span class="ri-price">$350 <small>/ day</small></span><span class="ri-cat-lbl">Tents</span></span></a>
-      <a class="ri-fcard" href="__PROD:2635__"><span class="ri-ph"><img src="__PIMG:2635__" alt="Gold chiavari chair" loading="lazy"/></span><span class="ri-body"><b>Gold Chiavari Chair</b><span class="ri-price">$7.50 <small>/ day</small></span><span class="ri-cat-lbl">Chairs</span></span></a>
-      <a class="ri-fcard" href="__PROD:2881__"><span class="ri-ph"><img src="__PIMG:2881__" alt="6ft round table" loading="lazy"/></span><span class="ri-body"><b>6ft Round Table</b><span class="ri-price">$28 <small>/ day</small></span><span class="ri-cat-lbl">Tables</span></span></a>
-      <a class="ri-fcard" href="__PROD:3827__"><span class="ri-ph"><img src="__PIMG:3827__" alt="Two-seater sofa" loading="lazy"/></span><span class="ri-body"><b>Two-Seater Sofa</b><span class="ri-price">$150 <small>/ day</small></span><span class="ri-cat-lbl">Lounge furniture</span></span></a>
-      <a class="ri-fcard" href="__PROD:2464__"><span class="ri-ph"><img src="__PIMG:2464__" alt="Hexagonal wooden arch" loading="lazy"/></span><span class="ri-body"><b>Hexagonal Wooden Arch</b><span class="ri-price">$150 <small>/ day</small></span><span class="ri-cat-lbl">Arches</span></span></a>
+      <a class="ri-fcard" href="__PROD:4204__"><span class="ri-ph"><img src="__PIMG:4204__" alt="" loading="lazy"/></span><span class="ri-body"><b>20&#215;20 High Peak Tent, White Top</b><span class="ri-price">$350 <small>/ day</small></span><span class="ri-cat-lbl">Tents</span></span></a>
+      <a class="ri-fcard" href="__PROD:2635__"><span class="ri-ph"><img src="__PIMG:2635__" alt="" loading="lazy"/></span><span class="ri-body"><b>Gold Chiavari Chair</b><span class="ri-price">$7.50 <small>/ day</small></span><span class="ri-cat-lbl">Chairs</span></span></a>
+      <a class="ri-fcard" href="__PROD:2881__"><span class="ri-ph"><img src="__PIMG:2881__" alt="" loading="lazy"/></span><span class="ri-body"><b>6ft Round Table</b><span class="ri-price">$28 <small>/ day</small></span><span class="ri-cat-lbl">Tables</span></span></a>
+      <a class="ri-fcard" href="__PROD:3827__"><span class="ri-ph"><img src="__PIMG:3827__" alt="" loading="lazy"/></span><span class="ri-body"><b>Two-Seater Sofa</b><span class="ri-price">$150 <small>/ day</small></span><span class="ri-cat-lbl">Lounge furniture</span></span></a>
+      <a class="ri-fcard" href="__PROD:2464__"><span class="ri-ph"><img src="__PIMG:2464__" alt="" loading="lazy"/></span><span class="ri-body"><b>Hexagonal Wooden Arch</b><span class="ri-price">$150 <small>/ day</small></span><span class="ri-cat-lbl">Arches</span></span></a>
     </div>
     <p class="ri-fine">Prices in Barbados dollars for a 24-hour rental, before 17.5% VAT.</p>
   </div>
@@ -98,7 +98,7 @@
       <ol>
         <li><span class="ri-num">1</span><span>Pick your dates and items</span></li>
         <li><span class="ri-num">2</span><span>We confirm your quote, with delivery</span></li>
-        <li><span class="ri-num">3</span><span>Pay 50% and we deliver</span></li>
+        <li><span class="ri-num">3</span><span>Pay 50% to hold your date, the rest 5 days before</span></li>
       </ol>
       <a class="ri-link" href="__PAGE:how-it-works__">How it works</a>
     </div>
@@ -125,7 +125,7 @@
   <div class="container">
     <div class="ri-head">
       <h2>What clients say</h2>
-      <span class="ri-rating"><span class="ri-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span> 5.0 on Google (3 reviews)</span>
+      <span class="ri-rating"><span class="ri-stars" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</span> 5.0 on Google (3 reviews)</span>
     </div>
     <div class="row g-3">
       <div class="col-12 col-lg-4"><figure class="ri-quote"><blockquote>&#8220;The service and communication were way above anything that we had expected.&#8221;</blockquote><figcaption>Ana Marie</figcaption></figure></div>

@@ -4,27 +4,27 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
 <style>
 /* Rent It.BB demo theme by Tech Nova: clean white marketplace look, navy text, teal actions. */
-:root{--ri-brand:#0E7C86;--ri-brand-ink:#0A5F67;--ri-brand-50:#E7F5F6;--ri-brand-100:#C5E7EA;--ri-ink:#0F2A44;--ri-ink-2:#3A4D61;--ri-muted:#5E6E7F;--ri-line:#E2E8EF;--ri-line-2:#EEF2F6;--ri-bg:#FFFFFF;--ri-soft:#F4F7FA;--ri-star:#F2A93B;--ri-wa:#1FAE53;--ri-r:12px;--ri-shadow:0 1px 2px rgba(15,42,68,.06),0 8px 24px rgba(15,42,68,.08);--ri-ui:'Inter',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
---bs-primary:#0E7C86;--bs-primary-rgb:14,124,134;--bs-link-color:#0E7C86;--bs-link-color-rgb:14,124,134;--bs-link-hover-color:#0A5F67;--bs-body-font-family:var(--ri-ui);--bs-body-color:#0F2A44;--bs-body-bg:#FFFFFF}
+:root{--ri-brand:#0E7C86;--ri-brand-ink:#0A5F67;--ri-brand-50:#E7F5F6;--ri-brand-100:#C5E7EA;--ri-ink:#0F2A44;--ri-ink-2:#3A4D61;--ri-muted:#5E6E7F;--ri-line:#E2E8EF;--ri-line-2:#EEF2F6;--ri-bg:#FFFFFF;--ri-soft:#F4F7FA;--ri-star:#F2A93B;--ri-wa:#1FAE53;--ri-r:12px;--ri-shadow:0 1px 2px rgba(15,42,68,.06),0 8px 24px rgba(15,42,68,.08);--ri-ui:'Inter',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif}
 #wrapwrap{overflow-x:clip}
 body,#wrapwrap{font-family:var(--ri-ui);color:var(--ri-ink);background:var(--ri-bg);-webkit-font-smoothing:antialiased}
 h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6,.display-1,.display-2,.display-3,.display-4{font-family:var(--ri-ui);color:var(--ri-ink);letter-spacing:-.02em}
 h1,.h1,h2,.h2{font-weight:800;line-height:1.1}
 h3,h4,h5,h6,.h3,.h4,.h5,.h6{font-weight:700}
 a{color:var(--ri-brand)} a:hover{color:var(--ri-brand-ink)}
-#wrapwrap :focus-visible{outline:3px solid var(--ri-brand-100)!important;outline-offset:2px}
+#wrapwrap :focus-visible:not([contenteditable]){outline:3px solid var(--ri-brand-ink)!important;outline-offset:2px}
+#wrapwrap .ri-hero :focus-visible,#wrapwrap .ri-banner :focus-visible,#wrapwrap .ri-cta :focus-visible,footer#bottom :focus-visible{outline-color:#8FD9DF!important}
 .text-primary{color:var(--ri-brand)!important}.bg-primary{background-color:var(--ri-brand)!important}
 
 /* buttons: scoped to the page and its dialogs so Odoo editor controls keep their own look */
-#wrapwrap .btn,.modal-content .btn{border-radius:10px!important;font-weight:600}
+#wrapwrap .btn,.modal-content .btn{--btn-border-radius:10px;font-weight:600}
 .btn-primary,.btn-primary:focus,.o_wsale_product_btn .btn-primary,#add_to_cart,button[name="add_to_cart"],.a-submit.btn-primary{background:var(--ri-brand)!important;border-color:var(--ri-brand)!important;color:#fff!important}
 .btn-primary:hover,.btn-primary:active,#add_to_cart:hover,button[name="add_to_cart"]:hover{background:var(--ri-brand-ink)!important;border-color:var(--ri-brand-ink)!important;color:#fff!important}
 .btn-secondary,.btn-outline-primary{border-color:var(--ri-brand)!important;color:var(--ri-brand)!important;background:#fff!important}
 .btn-secondary:hover,.btn-outline-primary:hover{background:var(--ri-brand-50)!important}
-.btn-light{background:#fff;border-color:#fff;color:var(--ri-ink)!important}
-.btn-light:hover{background:var(--ri-brand-50);border-color:var(--ri-brand-50)}
-.btn-outline-light{color:#fff!important;border-color:rgba(255,255,255,.7)!important;background:transparent}
-.btn-outline-light:hover{background:rgba(255,255,255,.12)!important}
+.ri-banner .btn-light,.ri-hero .btn-light,.ri-cta .btn-light{background:#fff;border-color:#fff;color:var(--ri-ink)!important}
+.ri-banner .btn-light:hover,.ri-hero .btn-light:hover,.ri-cta .btn-light:hover{background:var(--ri-brand-50);border-color:var(--ri-brand-50)}
+.ri-banner .btn-outline-light,.ri-hero .btn-outline-light,.ri-cta .btn-outline-light{color:#fff!important;border-color:rgba(255,255,255,.7)!important;background:transparent}
+.ri-banner .btn-outline-light:hover,.ri-hero .btn-outline-light:hover,.ri-cta .btn-outline-light:hover{background:rgba(255,255,255,.12)!important}
 .ri-btn-wa{background:var(--ri-wa)!important;border-color:var(--ri-wa)!important;color:#fff!important}
 .ri-btn-wa:hover{background:#17924A!important;border-color:#17924A!important}
 
@@ -109,12 +109,12 @@ footer#bottom h1,footer#bottom h2,footer#bottom h3,footer#bottom h4,footer#botto
 .ri-search-q{flex:1 1 auto}
 .ri-search-q svg{width:20px;height:20px;flex-shrink:0;fill:none;stroke:var(--ri-muted);stroke-width:2;stroke-linecap:round}
 .ri-search input{border:0;outline:0;background:transparent;width:100%;min-width:0;height:48px;font:500 .95rem var(--ri-ui);color:var(--ri-ink)}
-.ri-search input::placeholder{color:#8696A6}
+.ri-search input::placeholder{color:var(--ri-muted)}
 .ri-search-d{flex:0 0 auto;border-left:1px solid var(--ri-line)!important;border-radius:0!important;flex-direction:column;align-items:flex-start!important;justify-content:center;gap:0!important}
 .ri-search-d input{height:26px;font-size:.88rem;width:132px}
 .ri-search-lbl{font-size:.68rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ri-muted)}
 .ri-search-btn{flex:0 0 auto;padding:0 1.6rem!important;font-size:1rem!important}
-.ri-search label:focus-within{box-shadow:inset 0 0 0 2px var(--ri-brand-100)}
+.ri-search label:focus-within{box-shadow:inset 0 0 0 2px var(--ri-brand)}
 
 /* quick category tiles + assurances */
 .ri-quick{position:relative;z-index:2;background:transparent;padding:0 0 clamp(24px,4vw,40px)}
@@ -152,7 +152,7 @@ a.ri-fcard:hover{box-shadow:var(--ri-shadow);transform:translateY(-2px);color:va
 
 /* banner */
 .ri-banner{position:relative;border-radius:16px;overflow:hidden;background-color:var(--ri-ink);background-size:cover;background-position:center 60%}
-.ri-banner:before{content:'';position:absolute;top:0;right:0;bottom:0;left:0;background:linear-gradient(90deg,rgba(9,72,82,.96) 0%,rgba(12,58,80,.86) 45%,rgba(15,42,68,.45) 100%)}
+.ri-banner:before{content:'';position:absolute;top:0;right:0;bottom:0;left:0;background:linear-gradient(90deg,rgba(9,72,82,.96) 0%,rgba(12,58,80,.9) 45%,rgba(15,42,68,.8) 100%)}
 .ri-banner-in{position:relative;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:1.2rem 2rem;padding:clamp(26px,4.5vw,44px) clamp(22px,4.5vw,48px);color:#fff}
 .ri-banner h2{color:#fff;font-size:clamp(1.35rem,2.8vw,1.9rem);margin:0 0 .4rem}
 .ri-banner p{color:#D5E6EC;margin:0;max-width:36rem}
@@ -239,12 +239,13 @@ a.ri-pack:hover{box-shadow:var(--ri-shadow);color:var(--ri-ink)}
 .ri-cta .ri-btns{position:relative;z-index:1}
 
 /* FAQ accordion */
-.ri-faq .accordion{--bs-accordion-border-color:var(--ri-line);--bs-accordion-active-bg:var(--ri-brand-50);--bs-accordion-active-color:var(--ri-brand-ink);--bs-accordion-btn-focus-box-shadow:0 0 0 .25rem var(--ri-brand-100)}
+.ri-faq .accordion{--accordion-border-color:var(--ri-line);--accordion-active-bg:var(--ri-brand-50);--accordion-active-color:var(--ri-brand-ink);--accordion-btn-focus-box-shadow:0 0 0 .25rem var(--ri-brand-100)}
 .ri-faq .accordion-item{background:#fff;border:1px solid var(--ri-line)!important;border-radius:12px!important;overflow:hidden;margin-bottom:.7rem}
 .ri-faq .accordion-button{font-weight:600;font-size:1rem;color:var(--ri-ink);background:#fff;padding:1.1rem 1.25rem;box-shadow:none}
 .ri-faq .accordion-button:not(.collapsed){background:var(--ri-brand-50);color:var(--ri-brand-ink)}
 .ri-faq .accordion-body{color:var(--ri-ink-2);padding:1rem 1.25rem 1.2rem}
 .ri-faq .accordion-body p:last-child{margin-bottom:0}
+.ri-faq .accordion-button:focus-visible{box-shadow:inset 0 0 0 3px var(--ri-brand-ink)}
 .ri-help{background:#fff;border:1px solid var(--ri-line);border-radius:var(--ri-r);padding:1.6rem}
 
 /* note */
@@ -257,20 +258,23 @@ a.ri-pack:hover{box-shadow:var(--ri-shadow);color:var(--ri-ink)}
  .ri-search-d{flex:1 1 0;border-left:0!important}
  .ri-search-d+.ri-search-d{border-left:1px solid var(--ri-line)!important}
  .ri-search-d input{width:100%}
+ .ri-home-hero>.o_we_bg_filter{background-image:linear-gradient(180deg,rgba(255,255,255,.93) 0%,rgba(255,255,255,.86) 100%)!important}
  .ri-quick-row{grid-template-columns:repeat(3,minmax(0,1fr));max-width:none}
  .ri-assure{grid-template-columns:1fr;gap:.9rem}
- .ri-pcats,.ri-feat{grid-template-columns:none;grid-auto-flow:column;grid-auto-columns:minmax(200px,38%);overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:6px;-webkit-overflow-scrolling:touch}
+ .ri-pcats,.ri-feat{grid-template-columns:none;grid-auto-flow:column;grid-auto-columns:minmax(200px,38%);overflow-x:auto;scroll-snap-type:x mandatory;padding:6px;margin:-6px -6px 0;scroll-padding-inline:6px;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+ .ri-pcats::-webkit-scrollbar,.ri-feat::-webkit-scrollbar{display:none}
  .ri-pcat,.ri-fcard{scroll-snap-align:start}
+ .ri-gallery{grid-template-columns:1fr 1fr}
  .ri-gallery figure.ri-wide{grid-column:span 2;grid-row:span 1;aspect-ratio:2/1}
 }
 @media (max-width:767.98px){
  .ri-home-hero{padding-top:36px!important}
- .ri-home-hero>.o_we_bg_filter{background-image:linear-gradient(180deg,rgba(255,255,255,.93) 0%,rgba(255,255,255,.86) 100%)!important}
  .ri-hero>.o_we_bg_filter{background-image:linear-gradient(180deg,rgba(10,32,52,.86) 0%,rgba(12,70,84,.88) 100%)!important}
  .ri-search-btn{flex:1 1 100%;height:48px}
+ .ri-search input,.ri-search-d input{font-size:16px}
+ .ri-search-d input{height:30px}
  .ri-pcats,.ri-feat{grid-auto-columns:62%}
  footer#bottom{padding-bottom:72px}
- .ri-gallery{grid-template-columns:1fr 1fr}
  .ri-hero .btn-lg,.ri-cta .btn-lg,.ri-banner .btn-lg{width:100%}
  .ri-banner .ri-btns{width:100%}
  .ri-big b{font-size:1.9rem}

@@ -50,8 +50,8 @@
   RIB.text = Object.assign({
     priceOnRequest: 'Price on request: ask us on WhatsApp at 234-8230 and we will send you a price.',
     cutleryNote: 'Rent the full set, or single pieces.',
-    carrierName: 'Delivery, set-up & collection',
-    carrierDesc: 'We deliver, set up and collect. The delivery fee for your parish is confirmed in your quote.',
+    carrierName: 'Delivery and collection',
+    carrierDesc: 'We deliver and collect. The delivery fee for your parish is confirmed in your quote.',
     demoCard: 'Pay by card (demo, no real charge)',
     wireName: 'Book now, pay later by bank transfer',
     wirePending: '<p>Thank you. We will check your dates and send your quote. A 50% deposit secures your booking. The rest is due 5 days before your event.</p>',
@@ -528,15 +528,22 @@
     + '<li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2.5 6h11v10h-11zM13.5 9h4l3 3.2V16h-7"/><circle cx="6.5" cy="17.5" r="1.8"/><circle cx="17" cy="17.5" r="1.8"/></svg><span><b>Delivered across Barbados</b>Delivery fee added to your quote</span></li>'
     + '<li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l8 3v6c0 4.5-3.4 8-8 9-4.6-1-8-4.5-8-9V6z"/><path d="M8.5 12l2.5 2.5 4.5-5"/></svg><span><b>50% holds your date</b>Paid once you approve your quote</span></li>'
     + '</ul>';
+  const viewState = async (key) => {
+    const v = await rpc('ir.ui.view', 'search_read', [[['key', '=', key], ['website_id', 'in', [wid(), false]]]],
+      { fields: ['active', 'website_id'], context: { active_test: false } });
+    if (!v.length) return 'key not found';
+    const r = v.find((x) => x.website_id) || v[0];
+    return r.active ? 'on' : 'off';
+  };
   RIB.shopLayout = async () => {
     need();
     const out = { options: [], hiddenFilters: [], dateFormat: null, productFacts: null };
     for (const key of ['website_sale.filmstrip_categories_pills', 'website_sale_renting.shop_rental_datepicker_opt']) {
-      try { await post('/website/theme_customize_data', { is_view_data: true, enable: [key], disable: [] }); out.options.push(key + ' on'); }
+      try { await post('/website/theme_customize_data', { is_view_data: true, enable: [key], disable: [] }); out.options.push(key + ' ' + await viewState(key)); }
       catch (e) { out.options.push(key + ' skipped: ' + short(e)); }
     }
     // The "Specifications" table only repeats the upgrade choices shown above it.
-    try { await post('/website/theme_customize_data', { is_view_data: true, enable: [], disable: ['website_sale.product_attributes_body'] }); out.options.push('specifications table off'); }
+    try { await post('/website/theme_customize_data', { is_view_data: true, enable: [], disable: ['website_sale.product_attributes_body'] }); out.options.push('specifications table ' + await viewState('website_sale.product_attributes_body')); }
     catch (e) { out.options.push('specifications table skipped: ' + short(e)); }
     // Events happen at weekends. The trial's rental calendar is Mon-Fri, which pushes default bookings past the weekend.
     if (has('res.company', 'rental_resource_calendar_id')) {
@@ -554,7 +561,7 @@
         await rpc('res.company', 'write', [[RIB.cfg.companyId], { rental_resource_calendar_id: calId }]);
         out.rentalWeek = name;
       } catch (e) { out.rentalWeek = 'skipped: ' + short(e); }
-    }
+    } else out.rentalWeek = 'skipped: res.company.rental_resource_calendar_id not on this version';
     // Upgrade and "Piece" options are choices on the product page, not useful as shop filters.
     if (has('product.attribute', 'visibility')) {
       // Templates with variants (the cutlery sets) carry the RI- code on their variants only.
@@ -575,11 +582,13 @@
     // Three facts under "Add to cart" on every product page (website-specific inherited view).
     try {
       const key = 'website.rentit_product_facts';
-      const base = (await rpc('ir.ui.view', 'search_read', [[['key', '=', 'website_sale.product'], ['website_id', '=', false]]], { fields: ['id'] }))[0];
+      // Odoo renders a website's own copy of the template when one exists, and only that copy's children.
+      const roots = await rpc('ir.ui.view', 'search_read', [[['key', '=', 'website_sale.product'], ['website_id', 'in', [wid(), false]]]], { fields: ['id', 'website_id'] });
+      const base = roots.find((x) => idOf(x.website_id) === wid()) || roots.find((x) => !x.website_id);
       if (!base) throw new Error('website_sale.product not found');
       const arch = `<data name="Rent It product facts"><xpath expr="//div[@id='o_wsale_product_cta_section']" position="after">${PRODUCT_FACTS}</xpath></data>`;
       const ex = (await rpc('ir.ui.view', 'search_read', [[['key', '=', key], ['website_id', '=', wid()]]], { fields: ['id'], context: { active_test: false } }))[0];
-      if (ex) await rpc('ir.ui.view', 'write', [[ex.id], { arch_db: arch, active: true }], { context: wctx() });
+      if (ex) await rpc('ir.ui.view', 'write', [[ex.id], { arch_db: arch, active: true, inherit_id: base.id }], { context: wctx() });
       else await rpc('ir.ui.view', 'create', [{ name: 'Rent It product facts', type: 'qweb', key, inherit_id: base.id, mode: 'extension', priority: 90, website_id: wid(), arch_db: arch }], { context: wctx() });
       out.productFacts = ex ? 'updated' : 'created';
     } catch (e) { out.productFacts = 'skipped: ' + short(e); }
@@ -923,7 +932,7 @@
         name: RIB.text.carrierName, default_code: 'RI-DELIVERY', type: 'service', sale_ok: false, purchase_ok: false,
         list_price: 0, taxes_id: [[6, 0, []]], is_published: false })]));
       prod = (await rpc('product.template', 'read', [[id]], { fields: ['id', 'product_variant_id'] }))[0];
-    }
+    } else await rpc('product.template', 'write', [[prod.id], { name: RIB.text.carrierName }]);
     const vals = pick(D, {
       name: RIB.text.carrierName, delivery_type: 'fixed', fixed_price: 0, product_id: idOf(prod.product_variant_id),
       [pub]: true, website_description: RIB.text.carrierDesc, carrier_description: RIB.text.carrierDesc,
@@ -1263,12 +1272,18 @@
       const wf = await rpc(act.res_model, 'fields_get', [], { attributes: ['type'] });
       if (wf.rental_wizard_line_ids) {
         const st = c2.default_status || (kind === 'pickup' ? 'pickup' : 'return');
-        const lids = (c2.order_line_ids && c2.order_line_ids.length) ? c2.order_line_ids
+        const hasIds = Array.isArray(c2.order_line_ids);
+        if (hasIds && !c2.order_line_ids.length) return btn + ': nothing to process';
+        const lids = hasIds ? c2.order_line_ids
           : await rpc('sale.order.line', 'search', [[['order_id', '=', soId], ['is_rental', '=', true]]]);
-        const ol = await rpc('sale.order.line', 'read', [lids], { fields: ['product_id', 'product_uom_qty', 'qty_returned'] });
-        Object.assign(vals, { order_id: soId, status: st, rental_wizard_line_ids: ol.map((l) => [0, 0, {
-          order_line_id: l.id, product_id: idOf(l.product_id), qty_reserved: l.product_uom_qty, qty_delivered: l.product_uom_qty,
-          qty_returned: kind === 'pickup' ? (l.qty_returned || 0) : l.product_uom_qty, status: st }]) });
+        const ol = await rpc('sale.order.line', 'read', [lids], { fields: ['product_id', 'product_uom_qty', 'qty_delivered', 'qty_returned'] });
+        const wl = ol.map((l) => {
+          const d = l.qty_delivered || 0, r = l.qty_returned || 0;
+          return { order_line_id: l.id, product_id: idOf(l.product_id), qty_reserved: l.product_uom_qty,
+            qty_delivered: kind === 'pickup' ? l.product_uom_qty - d : d, qty_returned: kind === 'pickup' ? r : d - r, status: st };
+        }).filter((v) => (kind === 'pickup' ? v.qty_delivered : v.qty_returned) > 0);
+        if (!wl.length) return btn + ': nothing to process';
+        Object.assign(vals, { order_id: soId, status: st, rental_wizard_line_ids: wl.map((v) => [0, 0, v]) });
       }
       wizId = idOf(await rpc(act.res_model, 'create', [vals], { context: c2 }));
     }

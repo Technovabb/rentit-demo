@@ -5,7 +5,7 @@
 #ri-wa-fab:hover{background:#17924A}
 #ri-wa-fab.ri-away{opacity:0;visibility:hidden;pointer-events:none}
 #ri-wa-fab{transition:opacity .2s,visibility .2s}
-#ri-wa-fab:focus-visible{outline:3px solid #C5E7EA;outline-offset:3px}
+#ri-wa-fab:focus-visible{outline:3px solid #0A5F67;outline-offset:3px}
 #ri-wa-fab svg{width:26px;height:26px;flex-shrink:0}
 #ri-wa-modal{position:fixed;top:0;right:0;bottom:0;left:0;z-index:1060;display:flex;align-items:center;justify-content:center;padding:16px}
 #ri-wa-modal[hidden]{display:none}
@@ -20,7 +20,7 @@
 #ri-wa-modal .ri-acts{display:flex;gap:8px;flex-wrap:wrap}
 #ri-wa-modal .ri-acts button{flex:1;min-height:46px;border-radius:999px;font:700 .9rem 'Inter',system-ui,sans-serif;cursor:pointer;border:1.5px solid #E2E8EF;background:#fff;color:#0F2A44;padding:0 12px;white-space:nowrap}
 #ri-wa-modal .ri-acts button.ri-main{background:#0E7C86;border-color:#0E7C86;color:#fff}
-#ri-wa-modal button:focus-visible{outline:3px solid #C5E7EA;outline-offset:2px}
+#ri-wa-modal button:focus-visible{outline:3px solid #0A5F67;outline-offset:2px}
 @media (max-width:767.98px){#ri-wa-fab{height:52px;padding:0 14px;right:14px;bottom:14px}#ri-wa-fab .ri-lbl{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}}
 </style>
 <script>
@@ -173,21 +173,39 @@
     open(msg || null);
   }, true);
 
-  // Home page search: dates can't be in the past, the end date can't be before the start, and empty fields stay out of the URL.
+  // Home page search: rentals start tomorrow at the earliest and last at least a day (the shop's own default),
+  // empty fields stay out of the URL, and dates go to Odoo as Barbados midnight.
   function wireSearch() {
     var forms = document.querySelectorAll('form.ri-search');
     var today = new Date(Date.now() - new Date().getTimezoneOffset() * 60000).toISOString().slice(0, 10);
+    function addDay(d) { var t = new Date(d + 'T00:00:00Z'); t.setUTCDate(t.getUTCDate() + 1); return t.toISOString().slice(0, 10); }
     Array.prototype.forEach.call(forms, function (f) {
       var s = f.querySelector('input[name="start_date"]'), e = f.querySelector('input[name="end_date"]');
       if (!s || !e) return;
-      s.min = today; e.min = today;
+      s.min = addDay(today); e.min = addDay(s.min);
       s.addEventListener('change', function () {
-        e.min = s.value || today;
-        if (s.value && (!e.value || e.value < s.value)) e.value = s.value;
+        var m = addDay(s.value || today);
+        e.min = m;
+        if (s.value && (!e.value || e.value < m)) e.value = m;
+        e.required = !!s.value;
       });
+      e.addEventListener('change', function () { s.required = !!e.value; });
       f.addEventListener('submit', function () {
-        Array.prototype.forEach.call(f.querySelectorAll('input'), function (i) { if (!i.value) i.disabled = true; });
-        setTimeout(function () { Array.prototype.forEach.call(f.querySelectorAll('input'), function (i) { i.disabled = false; }); }, 0);
+        var added = [];
+        Array.prototype.forEach.call(f.querySelectorAll('input'), function (i) {
+          if (!i.value) { i.disabled = true; return; }
+          if (i.type === 'date') {
+            // Odoo reads a bare date as 00:00 UTC, which is 8pm the day before in Barbados (UTC-4 all year).
+            var h = document.createElement('input');
+            h.type = 'hidden'; h.name = i.name; h.value = i.value + ' 04:00:00';
+            f.appendChild(h); added.push(h);
+            i.disabled = true;
+          }
+        });
+        setTimeout(function () {
+          added.forEach(function (h) { h.remove(); });
+          Array.prototype.forEach.call(f.querySelectorAll('input'), function (i) { i.disabled = false; });
+        }, 0);
       });
     });
   }
