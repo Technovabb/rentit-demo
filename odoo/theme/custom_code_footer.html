@@ -1,26 +1,26 @@
 <style>
-#ri-demo-bar{background:#16142D;color:#D9D6EE;font:500 .78rem/1.4 'Montserrat',system-ui,sans-serif;padding:7px 16px;text-align:center}
+#ri-demo-bar{background:#0F2A44;color:#C9D6E2;font:500 .78rem/1.4 'Inter',system-ui,sans-serif;padding:7px 16px;text-align:center}
 #ri-demo-bar b{color:#fff;font-weight:700}
-#ri-wa-fab{position:fixed;right:18px;bottom:18px;z-index:1040;display:inline-flex;align-items:center;gap:10px;height:56px;padding:0 20px 0 16px;border:0;border-radius:999px;background:#1FAE53;color:#fff;font:700 .95rem 'Montserrat',system-ui,sans-serif;box-shadow:0 10px 30px rgba(20,120,60,.35);cursor:pointer}
+#ri-wa-fab{position:fixed;right:18px;bottom:18px;z-index:1040;display:inline-flex;align-items:center;gap:10px;height:56px;padding:0 20px 0 16px;border:0;border-radius:999px;background:#1FAE53;color:#fff;font:700 .95rem 'Inter',system-ui,sans-serif;box-shadow:0 10px 30px rgba(20,120,60,.35);cursor:pointer}
 #ri-wa-fab:hover{background:#17924A}
 #ri-wa-fab.ri-away{opacity:0;visibility:hidden;pointer-events:none}
 #ri-wa-fab{transition:opacity .2s,visibility .2s}
-#ri-wa-fab:focus-visible{outline:3px solid #DDD7FF;outline-offset:3px}
+#ri-wa-fab:focus-visible{outline:3px solid #C5E7EA;outline-offset:3px}
 #ri-wa-fab svg{width:26px;height:26px;flex-shrink:0}
 #ri-wa-modal{position:fixed;top:0;right:0;bottom:0;left:0;z-index:1060;display:flex;align-items:center;justify-content:center;padding:16px}
 #ri-wa-modal[hidden]{display:none}
-#ri-wa-modal .ri-scrim{position:absolute;top:0;right:0;bottom:0;left:0;background:rgba(22,20,45,.55)}
-#ri-wa-modal .ri-box{position:relative;width:min(480px,100%);max-height:calc(100vh - 32px);overflow:auto;background:#fff;color:#16142D;border-radius:20px;padding:24px;box-shadow:0 24px 60px rgba(22,20,45,.25);font-family:'Montserrat',system-ui,sans-serif}
-#ri-wa-modal h2{font:700 1.2rem/1.3 'Montserrat',system-ui,sans-serif;margin:0 40px 6px 0;color:#16142D;letter-spacing:0}
-#ri-wa-modal .ri-x{position:absolute;top:14px;right:14px;width:40px;height:40px;border:1px solid #E7E1D8;border-radius:999px;background:#fff;font-size:1.3rem;line-height:1;cursor:pointer;color:#16142D}
+#ri-wa-modal .ri-scrim{position:absolute;top:0;right:0;bottom:0;left:0;background:rgba(15,42,68,.55)}
+#ri-wa-modal .ri-box{position:relative;width:min(480px,100%);max-height:calc(100vh - 32px);overflow:auto;background:#fff;color:#0F2A44;border-radius:20px;padding:24px;box-shadow:0 24px 60px rgba(15,42,68,.25);font-family:'Inter',system-ui,sans-serif}
+#ri-wa-modal h2{font:700 1.2rem/1.3 'Inter',system-ui,sans-serif;margin:0 40px 6px 0;color:#0F2A44;letter-spacing:0}
+#ri-wa-modal .ri-x{position:absolute;top:14px;right:14px;width:40px;height:40px;border:1px solid #E2E8EF;border-radius:999px;background:#fff;font-size:1.3rem;line-height:1;cursor:pointer;color:#0F2A44}
 #ri-wa-modal .ri-chat{background:#E9FBE9;border-radius:14px;padding:14px;margin:14px 0}
 #ri-wa-modal .ri-to{font-size:.76rem;font-weight:700;color:#3D6B45;margin-bottom:8px}
 #ri-wa-modal .ri-bubble{background:#D9FDD3;border-radius:12px 12px 4px 12px;padding:10px 12px;margin-left:12%;font-size:.88rem;white-space:pre-wrap;word-break:break-word;box-shadow:0 1px 1px rgba(0,0,0,.08)}
-#ri-wa-modal .ri-info{background:#F0EDFF;color:#2B17A8;border-radius:12px;padding:12px 14px;font-size:.86rem;margin:0 0 16px}
+#ri-wa-modal .ri-info{background:#E7F5F6;color:#0A5F67;border-radius:12px;padding:12px 14px;font-size:.86rem;margin:0 0 16px}
 #ri-wa-modal .ri-acts{display:flex;gap:8px;flex-wrap:wrap}
-#ri-wa-modal .ri-acts button{flex:1;min-height:46px;border-radius:999px;font:700 .9rem 'Montserrat',system-ui,sans-serif;cursor:pointer;border:1.5px solid #E7E1D8;background:#fff;color:#16142D;padding:0 12px;white-space:nowrap}
-#ri-wa-modal .ri-acts button.ri-main{background:#4325EB;border-color:#4325EB;color:#fff}
-#ri-wa-modal button:focus-visible{outline:3px solid #DDD7FF;outline-offset:2px}
+#ri-wa-modal .ri-acts button{flex:1;min-height:46px;border-radius:999px;font:700 .9rem 'Inter',system-ui,sans-serif;cursor:pointer;border:1.5px solid #E2E8EF;background:#fff;color:#0F2A44;padding:0 12px;white-space:nowrap}
+#ri-wa-modal .ri-acts button.ri-main{background:#0E7C86;border-color:#0E7C86;color:#fff}
+#ri-wa-modal button:focus-visible{outline:3px solid #C5E7EA;outline-offset:2px}
 @media (max-width:767.98px){#ri-wa-fab{height:52px;padding:0 14px;right:14px;bottom:14px}#ri-wa-fab .ri-lbl{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}}
 </style>
 <script>
@@ -173,10 +173,30 @@
     open(msg || null);
   }, true);
 
+  // Home page search: dates can't be in the past, the end date can't be before the start, and empty fields stay out of the URL.
+  function wireSearch() {
+    var forms = document.querySelectorAll('form.ri-search');
+    var today = new Date(Date.now() - new Date().getTimezoneOffset() * 60000).toISOString().slice(0, 10);
+    Array.prototype.forEach.call(forms, function (f) {
+      var s = f.querySelector('input[name="start_date"]'), e = f.querySelector('input[name="end_date"]');
+      if (!s || !e) return;
+      s.min = today; e.min = today;
+      s.addEventListener('change', function () {
+        e.min = s.value || today;
+        if (s.value && (!e.value || e.value < s.value)) e.value = s.value;
+      });
+      f.addEventListener('submit', function () {
+        Array.prototype.forEach.call(f.querySelectorAll('input'), function (i) { if (!i.value) i.disabled = true; });
+        setTimeout(function () { Array.prototype.forEach.call(f.querySelectorAll('input'), function (i) { i.disabled = false; }); }, 0);
+      });
+    });
+  }
+
   function init() {
     if (editing()) return;
     addBar();
     addFab();
+    wireSearch();
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
   else init();

@@ -1,141 +1,136 @@
-<section class="s_cover o_colored_level oe_img_bg o_bg_img_center ri-hero pt96 pb96" data-snippet="s_cover" data-name="Hero" style="background-image: url('__IMG:pf-14__');">
-  <div class="o_we_bg_filter" style="background-image: linear-gradient(100deg, rgba(25, 12, 92, 0.92) 0%, rgba(55, 25, 170, 0.72) 45%, rgba(30, 14, 90, 0.2) 100%);"></div>
-  <div class="container s_allow_columns">
-    <span class="ri-eyebrow">Event rentals &#183; Barbados</span>
-    <h1>Everything for your event, <em>delivered.</em></h1>
-    <p class="ri-lead">Tents, tables, chairs, linens and d&#233;cor. Over 330 items with prices online. Pick your date, build your list, and we&#8217;ll confirm.</p>
-    <div class="ri-btns">
-      <a class="btn btn-light btn-lg" href="__SHOP__">Shop rentals</a>
-      <a class="btn btn-outline-light btn-lg" href="__PAGE:how-it-works__">How booking works</a>
-    </div>
-  </div>
-</section>
-
-<section class="s_numbers o_colored_level ri-trust" data-snippet="s_numbers" data-name="Trust strip">
+<section class="s_cover o_colored_level oe_img_bg o_bg_img_center ri-home-hero" data-snippet="s_cover" data-name="Hero" style="background-image: url('__IMG:pf-21__');">
+  <div class="o_we_bg_filter ri-home-hero-filter"></div>
   <div class="container">
-    <div class="row g-0">
-      <div class="col-6 col-lg-3"><div class="ri-t"><b><span class="ri-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span> 5.0</b><span class="ri-l">Google rating (3 reviews)</span></div></div>
-      <div class="col-6 col-lg-3"><div class="ri-t"><b>250</b><span class="ri-l">Events</span></div></div>
-      <div class="col-6 col-lg-3"><div class="ri-t"><b>330+</b><span class="ri-l">Items with prices online</span></div></div>
-      <div class="col-6 col-lg-3"><div class="ri-t"><b>Since 2019</b><span class="ri-l">Family-owned, St George</span></div></div>
-    </div>
+    <span class="ri-eyebrow">Barbados event rentals</span>
+    <h1>Rent what you need.<br/>When you need it.</h1>
+    <p class="ri-lead">Tents, chairs, tables, linens and d&#233;cor for weddings, birthdays and company events. Over 330 items with prices online, delivered across Barbados.</p>
+    <form class="ri-search" action="/shop" method="get" role="search">
+      <label class="ri-search-q">
+        <span class="visually-hidden">What are you looking to rent?</span>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+        <input type="search" name="search" placeholder="What are you looking to rent?" autocomplete="off"/>
+      </label>
+      <label class="ri-search-d">
+        <span class="ri-search-lbl">From</span>
+        <input type="date" name="start_date" aria-label="Rental start date"/>
+      </label>
+      <label class="ri-search-d">
+        <span class="ri-search-lbl">To</span>
+        <input type="date" name="end_date" aria-label="Rental end date"/>
+      </label>
+      <button type="submit" class="btn btn-primary ri-search-btn">Search</button>
+    </form>
   </div>
 </section>
 
-<section class="s_three_columns o_colored_level ri-section" data-snippet="s_three_columns" data-name="Shop by category">
+<section class="s_text_block o_colored_level ri-quick" data-snippet="s_text_block" data-name="Quick categories">
   <div class="container">
-    <div class="ri-head">
-      <div><span class="ri-eyebrow">Shop by category</span><h2>Everything in one place</h2></div>
-      <a class="ri-link" href="__SHOP__">See all items</a>
+    <div class="ri-quick-row">
+      <a class="ri-qtile" href="__CAT:packages__"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="8" width="18" height="13" rx="1.5"/><path d="M3 12h18M12 8v13M12 8c-1.6-3.2-5.4-3.6-5.8-1.5C5.8 8.3 9.2 8 12 8zM12 8c1.6-3.2 5.4-3.6 5.8-1.5.4 1.8-3 1.5-5.8 1.5z"/></svg><span>Packages</span></a>
+      <a class="ri-qtile" href="__CAT:tents__"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2.5 20L12 4l9.5 16z"/><path d="M12 11l-3.6 9M12 11l3.6 9"/></svg><span>Tents</span></a>
+      <a class="ri-qtile" href="__CAT:chairs__"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3h10v9H7zM5 12h14v3H5zM6 15v6M18 15v6M7 7h10"/></svg><span>Chairs</span></a>
+      <a class="ri-qtile" href="__CAT:tables__"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="7" width="20" height="3" rx="1"/><path d="M5 10v10M19 10v10M8.5 10v3.5h7V10"/></svg><span>Tables</span></a>
+      <a class="ri-qtile" href="__CAT:linens__"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7h18M5 7c0 5-.8 8.5-2 12h18c-1.2-3.5-2-7-2-12M9.5 7v12M14.5 7v12"/></svg><span>Linens</span></a>
+      <a class="ri-qtile" href="__SHOP__"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="5" cy="12" r="1.4"/><circle cx="12" cy="12" r="1.4"/><circle cx="19" cy="12" r="1.4"/></svg><span>More categories</span></a>
     </div>
-    <div class="row g-3">
-      <div class="col-6 col-md-4 col-lg-2"><a class="ri-cat" href="__CAT:tents__"><span class="ri-ph"><img src="__PIMG:4204__" alt="20 by 20 high peak tent with a white top" loading="lazy"/></span><b>Tents</b></a></div>
-      <div class="col-6 col-md-4 col-lg-2"><a class="ri-cat" href="__CAT:chairs__"><span class="ri-ph"><img src="__PIMG:2635__" alt="Gold chiavari chair" loading="lazy"/></span><b>Chairs</b></a></div>
-      <div class="col-6 col-md-4 col-lg-2"><a class="ri-cat" href="__CAT:tables__"><span class="ri-ph"><img src="__PIMG:2890__" alt="Gold luxury serpentine table" loading="lazy"/></span><b>Tables</b></a></div>
-      <div class="col-6 col-md-4 col-lg-2"><a class="ri-cat" href="__CAT:linens__"><span class="ri-ph"><img src="__PIMG:2812__" alt="Rose gold sequin round tablecloth" loading="lazy"/></span><b>Linens</b></a></div>
-      <div class="col-6 col-md-4 col-lg-2"><a class="ri-cat" href="__CAT:lounge-furniture__"><span class="ri-ph"><img src="__PIMG:3827__" alt="Two-seater sofa" loading="lazy"/></span><b>Lounge furniture</b></a></div>
-      <div class="col-6 col-md-4 col-lg-2"><a class="ri-cat" href="__CAT:luxe-picnic__"><span class="ri-ph"><img src="__PIMG:2843__" alt="Large luxe picnic table" loading="lazy"/></span><b>Luxe picnic</b></a></div>
-      <div class="col-6 col-md-4 col-lg-2"><a class="ri-cat" href="__CAT:arches__"><span class="ri-ph"><img src="__PIMG:2464__" alt="Hexagonal wooden arch" loading="lazy"/></span><b>Arches</b></a></div>
-      <div class="col-6 col-md-4 col-lg-2"><a class="ri-cat" href="__CAT:bars__"><span class="ri-ph"><img src="__PIMG:4267__" alt="8ft white bar with pedestals" loading="lazy"/></span><b>Bars</b></a></div>
-      <div class="col-6 col-md-4 col-lg-2"><a class="ri-cat" href="__CAT:cakes-treats__"><span class="ri-ph"><img src="__PIMG:2563__" alt="Gold ferris wheel cupcake stand" loading="lazy"/></span><b>Cakes &amp; treats</b></a></div>
-      <div class="col-6 col-md-4 col-lg-2"><a class="ri-cat" href="__CAT:centerpieces-vases__"><span class="ri-ph"><img src="__PIMG:2611__" alt="Candelabra centerpiece" loading="lazy"/></span><b>Centerpieces &amp; vases</b></a></div>
-      <div class="col-6 col-md-4 col-lg-2"><a class="ri-cat" href="__CAT:signage__"><span class="ri-ph"><img src="__PIMG:2849__" alt="Happy Birthday LED sign" loading="lazy"/></span><b>Signage</b></a></div>
-      <div class="col-6 col-md-4 col-lg-2"><a class="ri-cat" href="__CAT:props__"><span class="ri-ph"><img src="__PIMG:2873__" alt="Gold lantern set" loading="lazy"/></span><b>Props</b></a></div>
+    <div class="ri-assure">
+      <div class="ri-assure-i"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2.5 6h11v10h-11zM13.5 9h4l3 3.2V16h-7"/><circle cx="6.5" cy="17.5" r="1.8"/><circle cx="17" cy="17.5" r="1.8"/></svg><div><b>We deliver and collect</b><span>Across Barbados. The delivery fee is added to your quote.</span></div></div>
+      <div class="ri-assure-i"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg><div><b>Priced per 24 hours</b><span>From delivery to pick-up. Prices are before 17.5% VAT.</span></div></div>
+      <div class="ri-assure-i"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l8 3v6c0 4.5-3.4 8-8 9-4.6-1-8-4.5-8-9V6z"/><path d="M8.5 12l2.5 2.5 4.5-5"/></svg><div><b>50% holds your date</b><span>Pay the deposit once you approve your quote.</span></div></div>
     </div>
   </div>
 </section>
 
-<section class="s_three_columns o_colored_level ri-section ri-bg-white" data-snippet="s_three_columns" data-name="Event ideas">
+<section class="s_three_columns o_colored_level ri-section ri-tight" data-snippet="s_three_columns" data-name="Popular categories">
   <div class="container">
     <div class="ri-head">
-      <div><span class="ri-eyebrow">What are you planning?</span><h2>Ideas from real Rent It.BB set-ups</h2></div>
-      <p>Every photo here is one of our own events. Tap one to see the items that suit it.</p>
+      <h2>Popular categories</h2>
+      <a class="ri-link" href="__SHOP__">View all</a>
     </div>
-    <div class="row g-3">
-      <div class="col-6 col-lg-4"><a class="ri-event" href="__CAT:packages__"><img src="__IMG:pf-56-sm__" alt="Beachside wedding tables with gold chiavari chairs" loading="lazy"/><span class="ri-lbl"><b>Weddings</b><span>Ceremony and reception packages</span></span></a></div>
-      <div class="col-6 col-lg-4"><a class="ri-event" href="__CAT:centerpieces-vases__"><img src="__IMG:pf-12-sm__" alt="Red and gold birthday table with a candelabra" loading="lazy"/><span class="ri-lbl"><b>Birthdays</b><span>Centerpieces, linens and more</span></span></a></div>
-      <div class="col-6 col-lg-4"><a class="ri-event" href="__CAT:lounge-furniture__"><img src="__IMG:pf-63-sm__" alt="Oh Baby balloon backdrop with pink armchairs" loading="lazy"/><span class="ri-lbl"><b>Baby showers</b><span>Armchairs, sofas and ottomans</span></span></a></div>
-      <div class="col-6 col-lg-4"><a class="ri-event" href="__CAT:signage__"><img src="__IMG:pf-40-sm__" alt="Will you marry me sign with lanterns and a red carpet at a marina" loading="lazy"/><span class="ri-lbl"><b>Proposals</b><span>Light-up signs for the big moment</span></span></a></div>
-      <div class="col-6 col-lg-4"><a class="ri-event" href="__CAT:tables__"><img src="__IMG:pf-75-sm__" alt="Farm table dinner with heliconia flowers" loading="lazy"/><span class="ri-lbl"><b>Dinners &amp; company events</b><span>Farm tables, banquet tables and more</span></span></a></div>
-      <div class="col-6 col-lg-4"><a class="ri-event" href="__CAT:luxe-picnic__"><img src="__IMG:pf-39-sm__" alt="Cushions dressed with white roses" loading="lazy"/><span class="ri-lbl"><b>Luxe picnics</b><span>Picnic tables, cushions and rugs</span></span></a></div>
-    </div>
-  </div>
-</section>
-
-<section class="s_three_columns o_colored_level ri-section" data-snippet="s_three_columns" data-name="How it works">
-  <div class="container">
-    <div class="ri-head">
-      <div><span class="ri-eyebrow">How it works</span><h2>From idea to event day in four steps</h2></div>
-      <a class="ri-link" href="__PAGE:how-it-works__">Booking details</a>
-    </div>
-    <div class="row g-3">
-      <div class="col-12 col-md-6 col-lg-3"><div class="ri-card"><span class="ri-num">1</span><h3>Pick your date and items</h3><p>Choose your event date and add what you need. Most items show their price for a 24-hour rental.</p></div></div>
-      <div class="col-12 col-md-6 col-lg-3"><div class="ri-card"><span class="ri-num">2</span><h3>We confirm</h3><p>We check everything is free on your date and send your quote, with delivery added.</p></div></div>
-      <div class="col-12 col-md-6 col-lg-3"><div class="ri-card"><span class="ri-num">3</span><h3>Pay 50% to hold it</h3><p>Once you approve the quote, a 50% deposit holds your items. The balance is due 5 days before your event.</p></div></div>
-      <div class="col-12 col-md-6 col-lg-3"><div class="ri-card"><span class="ri-num">4</span><h3>We deliver and collect</h3><p>We bring everything to your venue, then pick it up when your rental time is over.</p></div></div>
+    <div class="ri-pcats">
+      <a class="ri-pcat" href="__CAT:packages__"><span class="ri-ph"><img src="__IMG:pf-56-sm__" alt="Beachside wedding tables with flowers and a sea view" loading="lazy"/></span><b>Packages</b><span class="ri-from">From $250 / day</span></a>
+      <a class="ri-pcat" href="__CAT:chairs__"><span class="ri-ph"><img src="__IMG:pf-14-sm__" alt="Long dinner table with white chiavari chairs" loading="lazy"/></span><b>Chairs</b><span class="ri-from">From $4 / day</span></a>
+      <a class="ri-pcat" href="__CAT:tables__"><span class="ri-ph"><img src="__IMG:pf-75-sm__" alt="Farm table set for dinner with tropical flowers" loading="lazy"/></span><b>Tables</b><span class="ri-from">From $15 / day</span></a>
+      <a class="ri-pcat" href="__CAT:linens__"><span class="ri-ph"><img src="__IMG:pf-12-sm__" alt="Red tablecloth with gold chargers and candelabras" loading="lazy"/></span><b>Linens</b><span class="ri-from">From $15 / day</span></a>
+      <a class="ri-pcat" href="__CAT:lounge-furniture__"><span class="ri-ph"><img src="__IMG:pf-61-sm__" alt="Pink and white armchairs in front of a balloon backdrop" loading="lazy"/></span><b>Lounge furniture</b><span class="ri-from">From $50 / day</span></a>
     </div>
   </div>
 </section>
 
-<section class="s_three_columns o_colored_level ri-section ri-bg-white" data-snippet="s_three_columns" data-name="Packages">
+<section class="s_three_columns o_colored_level ri-section ri-tight ri-bg-soft" data-snippet="s_three_columns" data-name="Featured rentals">
   <div class="container">
     <div class="ri-head">
-      <div><span class="ri-eyebrow">Ready-made</span><h2>Packages that make planning easier</h2></div>
-      <a class="ri-link" href="__CAT:packages__">See all packages</a>
+      <h2>Featured rentals</h2>
+      <a class="ri-link" href="__SHOP__">View all</a>
     </div>
-    <div class="row g-3">
-      <div class="col-6 col-lg-3"><a class="ri-pack" href="__PROD:4338__"><span class="ri-ph"><img src="__PIMG:4338__" alt="Ceremony package for 100 guests" loading="lazy"/></span><span class="ri-body"><b>Ceremony Package for 100</b><span class="ri-sub">100 white folding chairs, an arch, a signing table, 4 pedestals and an easel</span><span class="ri-price">$900 <small>BBD</small></span></span></a></div>
-      <div class="col-6 col-lg-3"><a class="ri-pack" href="__PROD:4351__"><span class="ri-ph"><img src="__PIMG:4351__" alt="Reception package for 100 guests" loading="lazy"/></span><span class="ri-body"><b>Reception Package for 100</b><span class="ri-sub">40&#215;60 frame tent, 100 dining chairs, 10 tables with cloths and a head table</span><span class="ri-price">$6,000 <small>BBD</small></span></span></a></div>
-      <div class="col-6 col-lg-3"><a class="ri-pack" href="__PROD:4354__"><span class="ri-ph"><img src="__PIMG:4354__" alt="Cocktail hour lounge package" loading="lazy"/></span><span class="ri-body"><b>Cocktail Hour Package A</b><span class="ri-sub">Sofas, ottomans, benches, side and coffee tables, and 5 cocktail tables</span><span class="ri-price">$1,700 <small>BBD</small></span></span></a></div>
-      <div class="col-6 col-lg-3"><a class="ri-pack" href="__PROD:4357__"><span class="ri-ph"><img src="__PIMG:4357__" alt="Bar package with an 8ft bar and coolers" loading="lazy"/></span><span class="ri-body"><b>Bar Package B</b><span class="ri-sub">An 8ft bar and two 120-quart coolers</span><span class="ri-price">$450 <small>BBD</small></span></span></a></div>
+    <div class="ri-feat">
+      <a class="ri-fcard" href="__PROD:4204__"><span class="ri-ph"><img src="__PIMG:4204__" alt="20 by 20 high peak tent with a white top" loading="lazy"/></span><span class="ri-body"><b>20&#215;20 High Peak Tent, White Top</b><span class="ri-price">$350 <small>/ day</small></span><span class="ri-cat-lbl">Tents</span></span></a>
+      <a class="ri-fcard" href="__PROD:2635__"><span class="ri-ph"><img src="__PIMG:2635__" alt="Gold chiavari chair" loading="lazy"/></span><span class="ri-body"><b>Gold Chiavari Chair</b><span class="ri-price">$7.50 <small>/ day</small></span><span class="ri-cat-lbl">Chairs</span></span></a>
+      <a class="ri-fcard" href="__PROD:2881__"><span class="ri-ph"><img src="__PIMG:2881__" alt="6ft round table" loading="lazy"/></span><span class="ri-body"><b>6ft Round Table</b><span class="ri-price">$28 <small>/ day</small></span><span class="ri-cat-lbl">Tables</span></span></a>
+      <a class="ri-fcard" href="__PROD:3827__"><span class="ri-ph"><img src="__PIMG:3827__" alt="Two-seater sofa" loading="lazy"/></span><span class="ri-body"><b>Two-Seater Sofa</b><span class="ri-price">$150 <small>/ day</small></span><span class="ri-cat-lbl">Lounge furniture</span></span></a>
+      <a class="ri-fcard" href="__PROD:2464__"><span class="ri-ph"><img src="__PIMG:2464__" alt="Hexagonal wooden arch" loading="lazy"/></span><span class="ri-body"><b>Hexagonal Wooden Arch</b><span class="ri-price">$150 <small>/ day</small></span><span class="ri-cat-lbl">Arches</span></span></a>
+    </div>
+    <p class="ri-fine">Prices in Barbados dollars for a 24-hour rental, before 17.5% VAT.</p>
+  </div>
+</section>
+
+<section class="s_call_to_action o_colored_level ri-section ri-tight" data-snippet="s_call_to_action" data-name="Packages banner">
+  <div class="container">
+    <div class="ri-banner" style="background-image: url('__IMG:pf-56-sm__');">
+      <div class="ri-banner-in">
+        <div>
+          <h2>Planning a wedding or a big event?</h2>
+          <p>Ready-made ceremony and reception packages for 50 to 200 guests, with tents, chairs, tables and linens.</p>
+        </div>
+        <div class="ri-btns">
+          <a class="btn btn-light btn-lg" href="__CAT:packages__">See packages</a>
+          <a class="btn btn-outline-light btn-lg" href="#whatsapp" data-ri-wa="Hi Rent It.BB, I'm planning an event and would like help choosing a package. My date is: ... Guests: ...">WhatsApp us</a>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
-<section class="s_text_block o_colored_level ri-section ri-bg-sand" data-snippet="s_text_block" data-name="Recent set-ups">
+<section class="s_text_block o_colored_level ri-steps-band" data-snippet="s_text_block" data-name="How to book">
+  <div class="container">
+    <div class="ri-steps">
+      <h2>It&#8217;s easy to book</h2>
+      <ol>
+        <li><span class="ri-num">1</span><span>Pick your dates and items</span></li>
+        <li><span class="ri-num">2</span><span>We confirm your quote, with delivery</span></li>
+        <li><span class="ri-num">3</span><span>Pay 50% and we deliver</span></li>
+      </ol>
+      <a class="ri-link" href="__PAGE:how-it-works__">How it works</a>
+    </div>
+  </div>
+</section>
+
+<section class="s_text_block o_colored_level ri-section ri-tight" data-snippet="s_text_block" data-name="Recent set-ups">
   <div class="container">
     <div class="ri-head">
-      <div><span class="ri-eyebrow">Our work</span><h2>Recent set-ups</h2></div>
+      <h2>Real events, real set-ups</h2>
       <a class="ri-link" href="https://www.instagram.com/rentit.bb/" target="_blank" rel="noopener">More on Instagram</a>
     </div>
     <div class="ri-gallery">
-      <figure class="ri-wide"><img src="__IMG:pf-21__" alt="Gold chiavari chairs around a sequin-dressed table" loading="lazy"/></figure>
+      <figure class="ri-wide"><img src="__IMG:pf-73__" alt="Wooden table set with orange napkins and tropical flowers" loading="lazy"/></figure>
       <figure><img src="__IMG:pf-24-sm__" alt="Menu card for a 30th birthday lunch on a gold charger" loading="lazy"/></figure>
       <figure><img src="__IMG:pf-16-sm__" alt="Candlelit table with roses" loading="lazy"/></figure>
       <figure><img src="__IMG:pf-34-sm__" alt="BABY balloon letters" loading="lazy"/></figure>
-      <figure><img src="__IMG:pf-53-sm__" alt="Black napkin on a gold-rim charger" loading="lazy"/></figure>
+      <figure><img src="__IMG:pf-40-sm__" alt="Will you marry me sign with lanterns and a red carpet at a marina" loading="lazy"/></figure>
     </div>
   </div>
 </section>
 
-<section class="s_three_columns o_colored_level ri-section ri-bg-white" data-snippet="s_three_columns" data-name="Testimonials">
+<section class="s_three_columns o_colored_level ri-section ri-tight ri-bg-soft" data-snippet="s_three_columns" data-name="Testimonials">
   <div class="container">
     <div class="ri-head">
-      <div><span class="ri-eyebrow">Kind words</span><h2>What clients say</h2></div>
+      <h2>What clients say</h2>
+      <span class="ri-rating"><span class="ri-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span> 5.0 on Google (3 reviews)</span>
     </div>
     <div class="row g-3">
       <div class="col-12 col-lg-4"><figure class="ri-quote"><blockquote>&#8220;The service and communication were way above anything that we had expected.&#8221;</blockquote><figcaption>Ana Marie</figcaption></figure></div>
       <div class="col-12 col-lg-4"><figure class="ri-quote"><blockquote>&#8220;It was a bank holiday&#8230; but that was no problem. Dominic said that he would still come and set the tents up for our staff party.&#8221;</blockquote><figcaption>A client, staff party</figcaption></figure></div>
       <div class="col-12 col-lg-4"><figure class="ri-quote"><blockquote>&#8220;I told my work mates about this page that I stumbled across&#8230; as I was strolling IG. Then that was where I met this wonderful team!&#8221;</blockquote><figcaption>Shaunice</figcaption></figure></div>
-    </div>
-  </div>
-</section>
-
-<section class="s_call_to_action o_colored_level ri-section" data-snippet="s_call_to_action" data-name="Call to action">
-  <div class="container">
-    <div class="ri-cta">
-      <div class="row g-4 align-items-center">
-        <div class="col-lg-7">
-          <h2>Not sure what you need?</h2>
-          <p>Send us your date and guest count on WhatsApp and we&#8217;ll help you put your list together.</p>
-        </div>
-        <div class="col-lg-5">
-          <div class="ri-btns justify-content-lg-end">
-            <a class="btn btn-light btn-lg" href="__SHOP__">Browse the shop</a>
-            <a class="btn btn-outline-light btn-lg" href="#whatsapp" data-ri-wa="Hi Rent It.BB, can you help me put together a rental list for my event? My date is: ... Guests: ...">WhatsApp us</a>
-          </div>
-        </div>
-      </div>
     </div>
   </div>
 </section>

@@ -481,13 +481,13 @@
     const out = {};
     try {
       await rpc(assetsModel(), 'make_scss_customization', [colors,
-        { 'o-color-1': '#4325EB', 'o-color-2': '#16142D', 'o-color-3': '#FBF8F4', 'o-color-4': '#FFFFFF', 'o-color-5': '#16142D' }], { context: wctx() });
+        { 'o-color-1': '#0E7C86', 'o-color-2': '#0F2A44', 'o-color-3': '#F4F7FA', 'o-color-4': '#FFFFFF', 'o-color-5': '#0F2A44' }], { context: wctx() });
       out.palette = 'ok';
     } catch (e) { out.palette = 'skipped: ' + short(e); }
     try {
       await rpc(assetsModel(), 'make_scss_customization', [values,
-        { font: "'Montserrat'", 'headings-font': "'Fraunces'", 'navbar-font': "'Montserrat'", 'buttons-font': "'Montserrat'",
-          'google-fonts': "('Montserrat', 'Fraunces')", 'btn-border-radius': '999px' }], { context: wctx() });
+        { font: "'Inter'", 'headings-font': "'Inter'", 'navbar-font': "'Inter'", 'buttons-font': "'Inter'",
+          'google-fonts': "('Inter')", 'btn-border-radius': '10px' }], { context: wctx() });
       out.fonts = 'ok';
     } catch (e) { out.fonts = 'skipped: ' + short(e); }
     out.note = 'First page load after this recompiles CSS (10-20 s). Undo with RIB.run("theme", {reset:true}).';
@@ -519,6 +519,48 @@
       await post('/website/theme_customize_data', { is_view_data: true, enable: ['website_sale.products_add_to_cart'], disable: [] });
       out.cardAddToCart = 'on';
     } catch (e) { out.cardAddToCart = 'skipped (turn on "Add to Cart" in the shop page options by hand): ' + short(e); }
+    return out;
+  };
+
+  // Shop look: category pills on top, the rental date picker on /shop, product-page facts, day-first dates.
+  const PRODUCT_FACTS = '<ul class="ri-pfacts">'
+    + '<li><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg><span><b>Priced per 24 hours</b>From delivery to pick-up, before 17.5% VAT</span></li>'
+    + '<li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2.5 6h11v10h-11zM13.5 9h4l3 3.2V16h-7"/><circle cx="6.5" cy="17.5" r="1.8"/><circle cx="17" cy="17.5" r="1.8"/></svg><span><b>Delivered across Barbados</b>Delivery fee added to your quote</span></li>'
+    + '<li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l8 3v6c0 4.5-3.4 8-8 9-4.6-1-8-4.5-8-9V6z"/><path d="M8.5 12l2.5 2.5 4.5-5"/></svg><span><b>50% holds your date</b>Paid once you approve your quote</span></li>'
+    + '</ul>';
+  RIB.shopLayout = async () => {
+    need();
+    const out = { options: [], hiddenFilters: [], dateFormat: null, productFacts: null };
+    for (const key of ['website_sale.filmstrip_categories_pills', 'website_sale_renting.shop_rental_datepicker_opt']) {
+      try { await post('/website/theme_customize_data', { is_view_data: true, enable: [key], disable: [] }); out.options.push(key + ' on'); }
+      catch (e) { out.options.push(key + ' skipped: ' + short(e)); }
+    }
+    // Upgrade and "Piece" options are choices on the product page, not useful as shop filters.
+    if (has('product.attribute', 'visibility')) {
+      const lines = await rpc('product.template.attribute.line', 'search_read', [[['product_tmpl_id.default_code', '=like', 'RI-%']]], { fields: ['attribute_id'] });
+      const aids = [...new Set(lines.map((l) => idOf(l.attribute_id)))];
+      if (aids.length) {
+        await rpc('product.attribute', 'write', [aids, { visibility: 'hidden' }]);
+        out.hiddenFilters = (await rpc('product.attribute', 'read', [aids], { fields: ['name'] })).map((a) => a.name);
+      }
+    } else out.hiddenFilters = 'product.attribute.visibility not on this version';
+    // Barbados writes dates day first.
+    try {
+      const langs = await rpc('res.lang', 'search_read', [[['code', '=', 'en_US']]], { fields: ['id', 'date_format'] });
+      if (langs[0] && langs[0].date_format !== '%d/%m/%Y') await rpc('res.lang', 'write', [[langs[0].id], { date_format: '%d/%m/%Y' }]);
+      out.dateFormat = langs[0] ? 'en_US: %d/%m/%Y' : 'en_US not found';
+    } catch (e) { out.dateFormat = 'skipped: ' + short(e); }
+    // Three facts under "Add to cart" on every product page (website-specific inherited view).
+    try {
+      const key = 'website.rentit_product_facts';
+      const base = (await rpc('ir.ui.view', 'search_read', [[['key', '=', 'website_sale.product'], ['website_id', '=', false]]], { fields: ['id'] }))[0];
+      if (!base) throw new Error('website_sale.product not found');
+      const arch = `<data name="Rent It product facts"><xpath expr="//div[@id='o_wsale_product_cta_section']" position="after">${PRODUCT_FACTS}</xpath></data>`;
+      const ex = (await rpc('ir.ui.view', 'search_read', [[['key', '=', key], ['website_id', '=', wid()]]], { fields: ['id'], context: { active_test: false } }))[0];
+      if (ex) await rpc('ir.ui.view', 'write', [[ex.id], { arch_db: arch, active: true }], { context: wctx() });
+      else await rpc('ir.ui.view', 'create', [{ name: 'Rent It product facts', type: 'qweb', key, inherit_id: base.id, mode: 'extension', priority: 90, website_id: wid(), arch_db: arch }], { context: wctx() });
+      out.productFacts = ex ? 'updated' : 'created';
+    } catch (e) { out.productFacts = 'skipped: ' + short(e); }
     return out;
   };
 
@@ -1058,7 +1100,9 @@
       const isHome = norm(k.url) === '/' && /^home$/i.test(k.name.trim());
       const isDup = desiredUrls.has(norm(k.url));
       const ours = M.menus.includes(k.id);
-      if (isHome || isDup || ours) { remove.push(k.id); out.removed.push(`${k.name} (${k.url})`); } else out.kept.push(`${k.name} (${k.url})`);
+      // Odoo adds an "Appointment" item when the trial installs Appointments; it has nothing to do with rentals.
+      const isAppt = norm(k.url) === '/appointment';
+      if (isHome || isDup || ours || isAppt) { remove.push(k.id); out.removed.push(`${k.name} (${k.url})`); } else out.kept.push(`${k.name} (${k.url})`);
     }
     if (remove.length) await rpc(WM, 'unlink', [remove]);
     M.menus = M.menus.filter((id) => !remove.includes(id));
@@ -1334,7 +1378,7 @@
   RIB.help = () => [
     'introspect', 'installApps (repeat)', 'introspect', 'company', 'tax', 'settings', 'deposit', 'website',
     'categories', 'products(offset,limit) / loop', 'rentalPricing', 'packageOptions', 'images(offset,limit) / loop', 'stock(offset,limit)',
-    'delivery', 'payments', 'gallery', 'theme', 'customCode', 'pages', 'menus', 'shopWording', 'placeholders',
+    'delivery', 'payments', 'gallery', 'theme', 'customCode', 'pages', 'menus', 'shopWording', 'shopLayout', 'placeholders',
     'sampleOrders(offset,limit)', 'verify',
   ];
 
