@@ -48,7 +48,7 @@
       <a class="ri-link" href="__SHOP__">View all</a>
     </div>
     <div class="ri-pcats">
-      <a class="ri-pcat" href="__CAT:packages__"><span class="ri-ph"><img src="__IMG:pf-56-sm__" alt="Beachside wedding tables with flowers and a sea view" loading="lazy"/></span><b>Packages</b><span class="ri-from">From $250 / day</span></a>
+      <a class="ri-pcat" href="__CAT:packages__"><span class="ri-ph"><img src="__IMG:pf-56-sm__" alt="Beachside wedding tables with flowers and a sea view" loading="lazy" style="object-position: 50% 78%;"/></span><b>Packages</b><span class="ri-from">From $250 / day</span></a>
       <a class="ri-pcat" href="__CAT:chairs__"><span class="ri-ph"><img src="__IMG:pf-14-sm__" alt="Long dinner table with white chiavari chairs" loading="lazy"/></span><b>Chairs</b><span class="ri-from">From $4 / day</span></a>
       <a class="ri-pcat" href="__CAT:tables__"><span class="ri-ph"><img src="__IMG:pf-75-sm__" alt="Farm table set for dinner with tropical flowers" loading="lazy"/></span><b>Tables</b><span class="ri-from">From $15 / day</span></a>
       <a class="ri-pcat" href="__CAT:linens__"><span class="ri-ph"><img src="__IMG:pf-12-sm__" alt="Red tablecloth with gold chargers and candelabras" loading="lazy"/></span><b>Linens</b><span class="ri-from">From $15 / day</span></a>

@@ -449,7 +449,7 @@
   RIB.website = async () => {
     need();
     const cfg = RIB.cfg, skipped = [];
-    const logo = await fetchB64('brand/logo.png');
+    const logo = await fetchB64('brand/logo-header.png'); // side-by-side lockup of their own logo pieces, readable at header size
     const fav = await fetchB64('brand/mark-512.png');
     const sorts = cfg.sel['website.shop_default_sort'] || [];
     const vals = pick('website', {
@@ -537,7 +537,9 @@
     }
     // Upgrade and "Piece" options are choices on the product page, not useful as shop filters.
     if (has('product.attribute', 'visibility')) {
-      const lines = await rpc('product.template.attribute.line', 'search_read', [[['product_tmpl_id.default_code', '=like', 'RI-%']]], { fields: ['attribute_id'] });
+      // Templates with variants (the cutlery sets) carry the RI- code on their variants only.
+      const lines = await rpc('product.template.attribute.line', 'search_read', [['|', ['product_tmpl_id.default_code', '=like', 'RI-%'],
+        ['product_tmpl_id.product_variant_ids.default_code', '=like', 'RI-%']]], { fields: ['attribute_id'] });
       const aids = [...new Set(lines.map((l) => idOf(l.attribute_id)))];
       if (aids.length) {
         await rpc('product.attribute', 'write', [aids, { visibility: 'hidden' }]);
@@ -1100,8 +1102,8 @@
       const isHome = norm(k.url) === '/' && /^home$/i.test(k.name.trim());
       const isDup = desiredUrls.has(norm(k.url));
       const ours = M.menus.includes(k.id);
-      // Odoo adds an "Appointment" item when the trial installs Appointments; it has nothing to do with rentals.
-      const isAppt = norm(k.url) === '/appointment';
+      // Trials add items for other apps they install (Appointments, Field Service); they have nothing to do with rentals.
+      const isAppt = ['/appointment', '/service-requests'].includes(norm(k.url));
       if (isHome || isDup || ours || isAppt) { remove.push(k.id); out.removed.push(`${k.name} (${k.url})`); } else out.kept.push(`${k.name} (${k.url})`);
     }
     if (remove.length) await rpc(WM, 'unlink', [remove]);
@@ -1153,7 +1155,11 @@
     // Website templates only: never copy-on-write report, portal or mail templates of other apps.
     const views = (await rpc('ir.ui.view', 'search_read', [dom], { fields: ['id', 'key', 'website_id', 'arch_db'] }))
       .filter((v) => /^(website|theme_)/.test(v.key || ''));
-    const specificKeys = new Set(views.filter((v) => v.website_id).map((v) => v.key));
+    // Writing a generic view with website_id in the context lands on this website's own copy when one exists,
+    // even if that copy has no placeholders (e.g. our footer). So skip every generic view that has a copy here.
+    const genericKeys = [...new Set(views.filter((v) => !v.website_id).map((v) => v.key))];
+    const specificKeys = new Set(genericKeys.length ? (await rpc('ir.ui.view', 'search_read',
+      [[['key', 'in', genericKeys], ['website_id', '=', wid()]]], { fields: ['key'], context: { active_test: false } })).map((v) => v.key) : []);
     const out = { changed: [], errors: [] };
     for (const v of views) {
       if (!v.website_id && specificKeys.has(v.key)) continue;
