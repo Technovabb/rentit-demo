@@ -632,8 +632,10 @@
         input = `<select class="form-select s_website_form_input" name="${name}" id="${id}"${req}><option value="">Choose one</option>`
           + q.options.map((o) => `<option value="${esc(o)}">${esc(o)}</option>`).join('') + '</select>';
       } else {
-        input = `<div class="row s_col_no_resize s_col_no_bgcolor s_website_form_multiple" data-name="${name}" data-display="horizontal">`
-          + q.options.map((o, j) => `<div class="radio col-12 col-lg-4 col-md-6"><div class="form-check"><input type="radio" class="s_website_form_input form-check-input" id="${id}_${j}" name="${name}" value="${esc(o)}"${req}/>`
+        // Short answers sit side by side; long ones get a line each so they don't wrap.
+        const vertical = q.options.some((o) => o.length > 14);
+        input = `<div class="row s_col_no_resize s_col_no_bgcolor s_website_form_multiple" data-name="${name}" data-display="${vertical ? 'vertical' : 'horizontal'}">`
+          + q.options.map((o, j) => `<div class="radio col-12${vertical ? '' : ' col-lg-4 col-md-6'}"><div class="form-check"><input type="radio" class="s_website_form_input form-check-input" id="${id}_${j}" name="${name}" value="${esc(o)}"${req}/>`
             + `<label class="form-check-label s_website_form_check_label" for="${id}_${j}">${esc(o)}</label></div></div>`).join('') + '</div>';
       }
       const cls = ['s_website_form_field', 'mb-3', 'col-12'];
