@@ -414,8 +414,16 @@
       t = { id: idOf(r), name: def.name }; created = true;
     }
     cfg.taxId = t.id;
+    // The copy keeps the 15% tax's group, and carts and quotes print the group's name ("Tax 15%").
+    let group = idOf((await rpc('account.tax', 'read', [[t.id]], { fields: ['tax_group_id'] }))[0].tax_group_id);
+    const TG = 'account.tax.group', groupName = 'VAT 17.5%';
+    const named = (await rpc(TG, 'search_read', [[['name', '=', groupName], ['company_id', '=', cfg.companyId]]], { fields: ['id'] }))[0];
+    if (!named || named.id !== group) {
+      group = named ? named.id : idOf(await rpc(TG, 'copy', [[group]], { default: { name: groupName } }));
+      await rpc('account.tax', 'write', [[t.id], { tax_group_id: group }]);
+    }
     const fiscal = await fixFiscalPositions(t.id);
-    return { taxId: t.id, name: t.name, created, fiscal, note: 'Prices are shown before VAT, as on rentit.bb ("+17.5% VAT").' };
+    return { taxId: t.id, name: t.name, created, taxLabel: groupName, fiscal, note: 'Prices are shown before VAT, as on rentit.bb ("+17.5% VAT").' };
   };
 
   // Odoo has no Barbados chart, so the trial gets the generic one, set up as if the company were in the United States:
