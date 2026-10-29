@@ -414,8 +414,47 @@
       t = { id: idOf(r), name: def.name }; created = true;
     }
     cfg.taxId = t.id;
-    return { taxId: t.id, name: t.name, created, note: 'Prices are shown before VAT, as on rentit.bb ("+17.5% VAT").' };
+    const fiscal = await fixFiscalPositions(t.id);
+    return { taxId: t.id, name: t.name, created, fiscal, note: 'Prices are shown before VAT, as on rentit.bb ("+17.5% VAT").' };
   };
+
+  // Odoo has no Barbados chart, so the trial gets the generic one, set up as if the company were in the United States:
+  // "Domestic" is for US addresses, and every other address gets "Foreign Trade", which swaps VAT for 0% Exports.
+  // Rent It charges 17.5% VAT on every booking (its events are all in Barbados), so Domestic becomes Barbados
+  // and positions that would drop the VAT are no longer picked automatically.
+  async function fixFiscalPositions(taxId) {
+    const FP = 'account.fiscal.position', out = { changed: [], ordersFixed: [] };
+    const bb = idOf((await rpc('res.country', 'search_read', [[['code', '=', 'BB']]], { fields: ['id'] }))[0].id);
+    const fps = await rpc(FP, 'search_read', [[['company_id', '=', RIB.cfg.companyId]]],
+      { fields: ['id', 'name', 'auto_apply', 'country_id', 'country_group_id', 'tax_map'] });
+    const home = fps.find((f) => f.name === 'Domestic');
+    if (home && idOf(home.country_id) !== bb) {
+      await rpc(FP, 'write', [[home.id], { country_id: bb }]);
+      out.changed.push(home.name + ': now Barbados');
+    }
+    const dropsVat = fps.filter((f) => f.auto_apply && !f.country_id && !f.country_group_id && f.tax_map && String(taxId) in f.tax_map);
+    for (const f of dropsVat) {
+      await rpc(FP, 'write', [[f.id], { auto_apply: false }]);
+      out.changed.push(f.name + ': no longer automatic');
+    }
+    // Sample bookings made before this fix keep the old position: move them over and put the products' taxes back.
+    const oldIds = dropsVat.map((f) => f.id);
+    if (!oldIds.length) return out;
+    const orders = await rpc('sale.order', 'search_read', [[['partner_id.name', '=like', '%(sample)'], ['state', '!=', 'cancel'],
+      ['fiscal_position_id', 'in', oldIds]]], { fields: ['id', 'name'] });
+    for (const o of orders) {
+      try {
+        await rpc('sale.order', 'write', [[o.id], { fiscal_position_id: home ? home.id : false }], { context: QUIET });
+        const lines = await rpc('sale.order.line', 'search_read', [[['order_id', '=', o.id], ['display_type', '=', false], ['product_id', '!=', false]]],
+          { fields: ['id', 'product_id'] });
+        const prods = await rpc('product.product', 'read', [[...new Set(lines.map((l) => idOf(l.product_id)))]], { fields: ['taxes_id'] });
+        const taxesOf = Object.fromEntries(prods.map((p) => [p.id, p.taxes_id]));
+        for (const l of lines) await rpc('sale.order.line', 'write', [[l.id], { tax_ids: [[6, 0, taxesOf[idOf(l.product_id)]]] }], { context: QUIET });
+        out.ordersFixed.push(o.name);
+      } catch (e) { out.ordersFixed.push(o.name + ' skipped: ' + short(e)); }
+    }
+    return out;
+  }
 
   RIB.settings = async () => {
     need();
