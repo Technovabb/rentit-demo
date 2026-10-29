@@ -1256,7 +1256,22 @@
       }
       return btn + ' via pickings ' + pids.join(',');
     }
-    const wizId = act.res_id || idOf(await rpc(act.res_model, 'create', [{}], { context: c2 }));
+    let wizId = act.res_id;
+    if (!wizId) {
+      // Odoo 17+ fills rental.order.wizard lines in an onchange, which a plain create() skips: pass the lines in.
+      const vals = {};
+      const wf = await rpc(act.res_model, 'fields_get', [], { attributes: ['type'] });
+      if (wf.rental_wizard_line_ids) {
+        const st = c2.default_status || (kind === 'pickup' ? 'pickup' : 'return');
+        const lids = (c2.order_line_ids && c2.order_line_ids.length) ? c2.order_line_ids
+          : await rpc('sale.order.line', 'search', [[['order_id', '=', soId], ['is_rental', '=', true]]]);
+        const ol = await rpc('sale.order.line', 'read', [lids], { fields: ['product_id', 'product_uom_qty', 'qty_returned'] });
+        Object.assign(vals, { order_id: soId, status: st, rental_wizard_line_ids: ol.map((l) => [0, 0, {
+          order_line_id: l.id, product_id: idOf(l.product_id), qty_reserved: l.product_uom_qty, qty_delivered: l.product_uom_qty,
+          qty_returned: kind === 'pickup' ? (l.qty_returned || 0) : l.product_uom_qty, status: st }]) });
+      }
+      wizId = idOf(await rpc(act.res_model, 'create', [vals], { context: c2 }));
+    }
     const fv = await rpc(act.res_model, 'get_views', [[[false, 'form']]], { options: {}, context: c2 });
     const arch = (fv.views && fv.views.form && fv.views.form.arch) || '';
     const names = [...arch.matchAll(/<button\b[^>]*>/g)].map((m) => m[0]).filter((b) => /type="object"/.test(b))
@@ -1265,6 +1280,8 @@
     await rpc(act.res_model, names[0], [[wizId]], { context: c2 });
     return `${btn} -> ${act.res_model}.${names[0]}`;
   }
+  // For repairs by hand, e.g. await RIB.rentalAction(id, 'return')
+  RIB.rentalAction = (soId, kind) => runRentalAction(soId, kind, Object.assign({ in_rental_app: true }, QUIET));
 
   RIB.sampleOrders = async (offset = 0, limit = 4) => {
     need();
