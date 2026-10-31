@@ -1361,7 +1361,7 @@
     const extra = await fill(await fetchText('pages/contact-extra.xml'));
     checkXml(extra.s, 'contact-extra.xml');
     // Only target what is there: an XPath that matches nothing makes Odoo refuse the view.
-    const hasSection = (c) => new RegExp(`class="[^"]*\\b${c}\\b`).test(base.arch_db);
+    const hasSection = (c) => new RegExp(`<section[^>]*\\sclass="[^"]*\\b${c}\\b`).test(base.arch_db);
     const filler = ['s_title', 's_faq_list', 's_hr', 's_accordion_image'].filter(hasSection);
     const xp = filler.map((c) => `<xpath expr="//section[hasclass('${c}')]" position="replace"/>`);
     const intro = base.arch_db.includes('anything related to our company or services');
