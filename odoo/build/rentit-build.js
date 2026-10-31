@@ -778,7 +778,7 @@
     const ex = await rpc('product.ribbon', 'search_read', [[[nf, 'ilike', 'New']]], { fields: ['id', nf] });
     const hit = ex.find((r) => String(r[nf]).replace(/<[^>]*>/g, '').trim().toLowerCase() === 'new');
     if (hit) return (RIB.map.ribbonId = hit.id);
-    const full = pick('product.ribbon', { [nf]: 'New', bg_color: '#4325EB', text_color: '#FFFFFF', position: 'left', style: 'ribbon', assign: 'manual' });
+    const full = pick('product.ribbon', { [nf]: 'New', bg_color: '#044CAB', text_color: '#FFFFFF', position: 'left', style: 'ribbon', assign: 'manual' });
     for (const k of ['position', 'style', 'assign']) {
       const s = RIB.cfg.sel['product.ribbon.' + k]; if (k in full && s && !s.includes(full[k])) delete full[k];
     }

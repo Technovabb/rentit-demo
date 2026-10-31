@@ -89,13 +89,15 @@ These are full-size originals from rentit.bb, not the square crops. They mix por
 
 | File | Size | Bytes |
 |---|---|---|
-| brand/logo.png | 900×556 | 73 KB |
-| brand/logo-white.png | 900×556 | 45 KB |
-| brand/mark-512.png | 512×512 | 3 KB |
+| brand/logo.png | 900×612 | 59 KB |
+| brand/logo-white.png | 900×612 | 39 KB |
+| brand/logo-header.png | 830×160 | 15 KB |
+| brand/mark-512.png | 512×512 | 5 KB |
 
-- logo.png is the full logo (mark, RENT IT.BB, tagline) in #4325EB on transparent. The white is removed with smooth edges, and the hole in the diamond is transparent.
-- logo-white.png has the same shape in white, for dark backgrounds.
-- mark-512.png is the diamond mark, redrawn from its measured shape (the 512 px source file was soft and had a white background).
+- Rent It's current logo (sent 31 Oct 2026): the diamond mark, RENT IT.BB and "Why buy, when you can rent." in #1B489A on transparent. It replaces the older purple (#4325EB) logo.
+- logo.png is the full logo. logo-white.png has the same shape in white, for the dark footer.
+- logo-header.png puts the mark beside RENT IT.BB for the site header (the tagline is too small to read there), drawn at 4x.
+- mark-512.png and mark.svg are the diamond mark, drawn from its geometry, with a transparent hole. mark-512.png is the favicon.
 
 ## Kit size
 
