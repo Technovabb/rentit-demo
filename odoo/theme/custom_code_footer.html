@@ -148,6 +148,7 @@ body:has(.offcanvas.show) #ri-wa-fab,body:has(.modal.show) #ri-wa-fab{display:no
     'back to cart': 'Back to your quote', 'return to cart': 'Back to your quote',
     'item(s) added to your cart': 'Added to your quote', 'item added to your cart': 'Added to your quote',
     'added to your cart': 'Added to your quote', 'confirm order': 'Request Quote',
+    'payment method': 'Confirm your request', 'back to extra info': 'Back to event details',
   };
   function swapText(root) {
     if (!root || editing()) return;
@@ -186,7 +187,7 @@ body:has(.offcanvas.show) #ri-wa-fab,body:has(.modal.show) #ri-wa-fab{display:no
     var keep = null;
     Array.prototype.forEach.call(radios, function (r) {
       var row = r.closest('li, .o_payment_option, .list-group-item');
-      if (r.dataset.providerCode === 'demo') { if (row) row.style.display = 'none'; }
+      if (r.dataset.providerCode === 'demo') { if (row) row.style.setProperty('display', 'none', 'important'); } // beats Bootstrap's d-flex
       else if (!keep) keep = r;
     });
     if (keep && !keep.checked) keep.click();
