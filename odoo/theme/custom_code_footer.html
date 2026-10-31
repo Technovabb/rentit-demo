@@ -199,7 +199,7 @@ body:has(.offcanvas.show) #ri-wa-fab,body:has(.modal.show) #ri-wa-fab{display:no
   function quoteConfirmation() {
     if (location.pathname.indexOf('/shop/confirmation') !== 0) return;
     Array.prototype.forEach.call(document.querySelectorAll('#wrap h5, #wrap h4'), function (h) {
-      var m = h.textContent.trim().match(/^Order (\S+)$/);
+      var m = h.textContent.trim().match(/^Order\s+(\S+)$/);
       if (m) h.textContent = 'Quote request ' + m[1];
     });
     var box = document.querySelector('#o_custom_payment_details .card-body');
