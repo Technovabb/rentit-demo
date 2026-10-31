@@ -1,0 +1,21 @@
+<section class="s_title o_colored_level ri-bg-white pt64 pb40" data-snippet="s_title" data-name="Title">
+  <div class="container s_allow_columns">
+    <span class="ri-eyebrow">Terms &amp; Conditions</span>
+    <h1>Rental terms</h1>
+    <p class="ri-muted mb-0" style="max-width: 44rem;">Our full rental terms are being finalised and will be published on this page.</p>
+  </div>
+</section>
+
+<section class="s_text_block o_colored_level ri-section pt0" data-snippet="s_text_block" data-name="Key points">
+  <div class="container s_allow_columns" style="max-width: 48rem;">
+    <h2 class="h4">The key points</h2>
+    <ul class="ri-list">
+      <li>Prices are per day and exclude 17.5% VAT.</li>
+      <li>Delivery, setup and collection are arranged by our team. The delivery fee is shown on your quote.</li>
+      <li>A 50% deposit secures your booking. It&#8217;s due once you approve your quote.</li>
+      <li>The balance is due 5 days before your event.</li>
+      <li>Deposits are non-refundable.</li>
+    </ul>
+    <p class="ri-muted mb-0">Questions about our terms? Email <a href="mailto:contact@rentit.bb">contact@rentit.bb</a>.</p>
+  </div>
+</section>

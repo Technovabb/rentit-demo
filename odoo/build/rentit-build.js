@@ -51,14 +51,15 @@
     priceOnRequest: 'Price on request: ask us on WhatsApp at 234-8230 and we will send you a price.',
     cutleryNote: 'Rent the full set, or single pieces.',
     carrierName: 'Delivery and collection',
-    carrierDesc: 'We deliver and collect. The delivery fee for your parish is confirmed in your quote.',
+    carrierDesc: 'Our team delivers, sets up and collects. The delivery fee for your parish is confirmed in your quote.',
     demoCard: 'Pay by card (demo, no real charge)',
-    wireName: 'Book now, pay later by bank transfer',
-    wirePending: '<p>Thank you. We will check your dates and send your quote. A 50% deposit secures your booking. The rest is due 5 days before your event.</p>',
+    wireName: 'Request my quote (nothing to pay now)',
+    wirePending: '<p>Thank you, we have your quote request. We will check availability and email your official quote. A 50% deposit secures your booking once you approve it, and the balance is due 5 days before your event.</p>',
     sampleNote: 'Sample booking for the demo',
     eventStep: 'Event details',
     eventTitle: 'About your event',
-    eventIntro: 'Your answers help us plan the delivery and collection.',
+    eventIntro: 'Your answers help us plan the delivery, setup and collection.',
+    contactIntro: 'Questions about a rental or your quote? Send us a note and we will get back to you.',
   }, prev.text || {});
 
   // ------------------------------------------------------------------ helpers
@@ -531,13 +532,13 @@
     const out = {};
     try {
       await rpc(assetsModel(), 'make_scss_customization', [colors,
-        { 'o-color-1': '#0E7C86', 'o-color-2': '#0F2A44', 'o-color-3': '#F4F7FA', 'o-color-4': '#FFFFFF', 'o-color-5': '#0F2A44' }], { context: wctx() });
+        { 'o-color-1': '#044CAB', 'o-color-2': '#272646', 'o-color-3': '#F8F8E8', 'o-color-4': '#FFFFFF', 'o-color-5': '#272646' }], { context: wctx() });
       out.palette = 'ok';
     } catch (e) { out.palette = 'skipped: ' + short(e); }
     try {
       await rpc(assetsModel(), 'make_scss_customization', [values,
-        { font: "'Inter'", 'headings-font': "'Inter'", 'navbar-font': "'Inter'", 'buttons-font': "'Inter'",
-          'google-fonts': "('Inter')", 'btn-border-radius': '10px' }], { context: wctx() });
+        { font: "'Montserrat'", 'headings-font': "'Montserrat'", 'navbar-font': "'Montserrat'", 'buttons-font': "'Montserrat'",
+          'google-fonts': "('Montserrat', 'Allura')", 'btn-border-radius': '999px' }], { context: wctx() });
       out.fonts = 'ok';
     } catch (e) { out.fonts = 'skipped: ' + short(e); }
     out.note = 'First page load after this recompiles CSS (10-20 s). Undo with RIB.run("theme", {reset:true}).';
@@ -550,9 +551,9 @@
     if (F('website.checkout.step')) {
       const rows = await rpc('website.checkout.step', 'search_read', [[['website_id', '=', wid()]]], { fields: ['id', 'step_href', 'name'] });
       const plan = {
-        '/shop/cart': { name: 'Your booking', main_button_label: 'Continue' },
+        '/shop/cart': { name: 'Your quote', main_button_label: 'Continue' },
         '/shop/checkout': { main_button_label: 'Continue' },
-        '/shop/payment': { name: 'Confirm', main_button_label: 'Send booking request' },
+        '/shop/payment': { name: 'Confirm', main_button_label: 'Request Quote' },
       };
       for (const r of rows) {
         const v = plan[r.step_href]; if (!v) continue;
@@ -574,9 +575,9 @@
 
   // Shop look: category pills on top, the rental date picker on /shop, product-page facts, day-first dates.
   const PRODUCT_FACTS = '<ul class="ri-pfacts">'
-    + '<li><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg><span><b>Priced per 24 hours</b>From delivery to pick-up, before 17.5% VAT</span></li>'
-    + '<li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2.5 6h11v10h-11zM13.5 9h4l3 3.2V16h-7"/><circle cx="6.5" cy="17.5" r="1.8"/><circle cx="17" cy="17.5" r="1.8"/></svg><span><b>Delivered across Barbados</b>Delivery fee added to your quote</span></li>'
-    + '<li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l8 3v6c0 4.5-3.4 8-8 9-4.6-1-8-4.5-8-9V6z"/><path d="M8.5 12l2.5 2.5 4.5-5"/></svg><span><b>50% holds your date</b>Paid once you approve your quote</span></li>'
+    + '<li><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg><span><b>Priced per day</b>Plus 17.5% VAT</span></li>'
+    + '<li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2.5 6h11v10h-11zM13.5 9h4l3 3.2V16h-7"/><circle cx="6.5" cy="17.5" r="1.8"/><circle cx="17" cy="17.5" r="1.8"/></svg><span><b>Delivered and set up</b>Island-wide. The delivery fee is on your quote</span></li>'
+    + '<li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l8 3v6c0 4.5-3.4 8-8 9-4.6-1-8-4.5-8-9V6z"/><path d="M8.5 12l2.5 2.5 4.5-5"/></svg><span><b>50% deposit</b>Shown on your quote, paid once you approve it</span></li>'
     + '</ul>';
   const viewState = async (key) => {
     const v = await rpc('ir.ui.view', 'search_read', [[['key', '=', key], ['website_id', 'in', [wid(), false]]]],
@@ -657,7 +658,7 @@
       options: ['Ground floor', 'Upstairs, stairs only', 'Upstairs, with an elevator'] },
     { name: 'Ground', label: 'What is the ground like?', type: 'radio', required: true, showIf: ['Indoors or outdoors', 'Outdoors'],
       options: ['Grass', 'Cement', 'Sand'] },
-    { name: 'Truck can pull up', label: 'Can our truck pull up to the area where the items will be used?', type: 'radio', required: true, options: ['Yes', 'No', 'Not sure'] },
+    { name: 'Truck can pull up', label: 'Can our truck pull up to the setup area?', type: 'radio', required: true, options: ['Yes', 'No', 'Not sure'] },
     { name: 'Delivery', label: 'When should we deliver?', type: 'radio', required: true, options: ['The day before the event', 'On the day of the event'] },
     { name: 'Collection', label: 'When should we collect?', type: 'radio', required: true, options: ['On the day, after the event', 'The day after the event'] },
     { name: 'Heard about us', label: 'How did you hear about us?', type: 'select',
@@ -812,10 +813,11 @@
     let desc = p.description || '';
     if (p.price === null) desc = (desc ? desc + '\n' : '') + RIB.text.priceOnRequest;
     if (p.variants) desc = RIB.text.cutleryNote + (desc ? '\n' + desc : '');
+    const cats = p.categories.concat(((RIB._catalogue || {}).new_arrivals || []).includes(p.id) ? ['new-arrivals'] : []);
     const v = {
       name: p.name, list_price: prices ? Math.min(...prices) : (p.price ?? 0),
       is_published: true, website_sequence: (index + 1) * 10,
-      public_categ_ids: [[6, 0, p.categories.map((k) => M.cat[k]).filter(Boolean)]],
+      public_categ_ids: [[6, 0, cats.map((k) => M.cat[k]).filter(Boolean)]],
       allow_out_of_stock_order: false, show_availability: true, available_threshold: 5,
     };
     if (!p.variants) v.default_code = p.code;
@@ -941,6 +943,22 @@
     }
     out.note = 'Check one package on /shop: the upgrade choice should change the price. If rental lines ignore price_extra on this version, say so in the demo.';
     return out;
+  };
+
+  // "New Arrivals": Rent It's own pick (catalogue.new_arrivals), a shop category of its own and first in the Shop menu.
+  // The products step already files these items there; this step brings an existing database in line with the list.
+  RIB.newArrivals = async () => {
+    need();
+    const C = await catalogue(), M = RIB.map, PT = 'product.template';
+    const catId = M.cat['new-arrivals'];
+    if (!catId) throw new Error('Run categories first (it creates "New Arrivals").');
+    const want = (C.new_arrivals || []).map((id) => M.prod['RI-' + id]).filter(Boolean);
+    const have = await rpc(PT, 'search', [[['public_categ_ids', 'in', [catId]]]]);
+    const add = want.filter((id) => !have.includes(id)), drop = have.filter((id) => !want.includes(id));
+    if (add.length) await rpc(PT, 'write', [add, { public_categ_ids: [[4, catId]] }]);
+    if (drop.length) await rpc(PT, 'write', [drop, { public_categ_ids: [[3, catId]] }]);
+    return { category: catId, url: M.catUrl['new-arrivals'], items: want.length, added: add.length, removed: drop.length,
+      notFound: (C.new_arrivals || []).length - want.length };
   };
 
   async function ensureDayRecurrence() {
@@ -1196,7 +1214,15 @@
     // final URLs first so __PAGE:x__ resolves
     for (const p of pages) M.pages[p.key] = Object.assign({}, M.pages[p.key], { url: p.url });
     for (const p of pages) {
-      if (!p.file || (only && only !== p.key)) continue;
+      if (only && only !== p.key) continue;
+      // A page taken off the site (e.g. How it works) is unpublished, never deleted.
+      if (p.published === false) {
+        const gone = await rpc('website.page', 'search_read', [[['url', '=', p.url], ['website_id', 'in', [wid(), false]]]], { fields: ['id'] });
+        if (gone.length) await rpc('website.page', 'write', [gone.map((x) => x.id), { is_published: false }], { context: wctx() });
+        out.done.push({ key: p.key, url: p.url, unpublished: gone.length });
+        continue;
+      }
+      if (!p.file) continue;
       try {
         const raw = await fetchText('pages/' + p.file);
         const { s, missing } = await fill(raw);
@@ -1252,18 +1278,34 @@
     const kids = await rpc(WM, 'search_read', [[['parent_id', '=', top]]], { fields: ['id', 'name', 'url', 'sequence'] });
     const norm = (u) => String(u || '').replace(/[?#].*$/, '').replace(/\/+$/, '') || '/';
     const desired = pages.filter((p) => p.menu).sort((a, b) => a.sequence - b.sequence)
-      .map((p) => ({ name: p.name, url: (M.pages[p.key] && M.pages[p.key].url) || p.url, sequence: p.sequence }));
-    const used = new Set(), out = { updated: [], created: [], removed: [], kept: [] };
+      .map((p) => ({ name: p.name, url: (M.pages[p.key] && M.pages[p.key].url) || p.url, sequence: p.sequence, submenu: p.submenu }));
+    const used = new Set(), out = { updated: [], created: [], removed: [], kept: [], submenu: null };
     for (const d of desired) {
       const hit = kids.find((k) => !used.has(k.id) && norm(k.url) === norm(d.url)) ||
         kids.find((k) => !used.has(k.id) && k.name.trim().toLowerCase() === d.name.toLowerCase());
-      if (hit) { used.add(hit.id); await rpc(WM, 'write', [[hit.id], { name: d.name, url: d.url, sequence: d.sequence }]); out.updated.push(d.name); }
+      if (hit) { used.add(hit.id); d.id = hit.id; await rpc(WM, 'write', [[hit.id], { name: d.name, url: d.url, sequence: d.sequence }]); out.updated.push(d.name); }
       else {
         const id = idOf(await rpc(WM, 'create', [{ name: d.name, url: d.url, parent_id: top, website_id: wid(), sequence: d.sequence }]));
-        used.add(id); if (!M.menus.includes(id)) M.menus.push(id); out.created.push(d.name);
+        d.id = id; used.add(id); if (!M.menus.includes(id)) M.menus.push(id); out.created.push(d.name);
       }
     }
+    // A menu item with children becomes a dropdown. Shop lists every category (pages.json "submenu": [category key, label];
+    // an empty key is the whole shop, so phones, where the dropdown expands, can still reach it).
+    for (const d of desired.filter((x) => x.submenu)) {
+      const subs = await rpc(WM, 'search_read', [[['parent_id', '=', d.id]]], { fields: ['id', 'name', 'url'] });
+      const want = d.submenu.map(([key, name], i) => ({ name, url: key ? M.catUrl[key] : d.url, sequence: (i + 1) * 10 }));
+      const keep = new Set(), sub = { created: 0, updated: 0, removed: 0, missing: want.filter((w) => !w.url).map((w) => w.name) };
+      for (const w of want.filter((x) => x.url)) {
+        const hit = subs.find((s) => !keep.has(s.id) && s.name.trim().toLowerCase() === w.name.toLowerCase());
+        if (hit) { keep.add(hit.id); await rpc(WM, 'write', [[hit.id], w]); sub.updated++; }
+        else { keep.add(idOf(await rpc(WM, 'create', [Object.assign({ parent_id: d.id, website_id: wid() }, w)]))); sub.created++; }
+      }
+      const extra = subs.filter((s) => !keep.has(s.id)).map((s) => s.id);
+      if (extra.length) { await rpc(WM, 'unlink', [extra]); sub.removed = extra.length; }
+      out.submenu = Object.assign({ under: d.name }, sub);
+    }
     const desiredUrls = new Set(desired.map((d) => norm(d.url)));
+    const retired = new Set(pages.filter((p) => p.published === false).map((p) => norm(p.url)));
     const remove = [];
     for (const k of kids.filter((k) => !used.has(k.id))) {
       const isHome = norm(k.url) === '/' && /^home$/i.test(k.name.trim());
@@ -1271,7 +1313,7 @@
       const ours = M.menus.includes(k.id);
       // Trials add items for other apps they install (Appointments, Field Service); they have nothing to do with rentals.
       const isAppt = ['/appointment', '/service-requests'].includes(norm(k.url));
-      if (isHome || isDup || ours || isAppt) { remove.push(k.id); out.removed.push(`${k.name} (${k.url})`); } else out.kept.push(`${k.name} (${k.url})`);
+      if (isHome || isDup || ours || isAppt || retired.has(norm(k.url))) { remove.push(k.id); out.removed.push(`${k.name} (${k.url})`); } else out.kept.push(`${k.name} (${k.url})`);
     }
     if (remove.length) await rpc(WM, 'unlink', [remove]);
     M.menus = M.menus.filter((id) => !remove.includes(id));
@@ -1306,6 +1348,32 @@
       }
     } catch (e) { out.footerView = 'skipped: ' + short(e); }
     return out;
+  };
+
+  // /contactus is Odoo's own page; its form emails the company address. Take out the sample sections Odoo ships with it
+  // ("50,000+ companies...", sample FAQs, "Come visit us" with train directions) and add Rent It's own ways to reach them.
+  RIB.contactPage = async () => {
+    need();
+    const roots = await rpc('ir.ui.view', 'search_read', [[['key', '=', 'website.contactus'], ['website_id', 'in', [wid(), false]]]],
+      { fields: ['id', 'website_id', 'arch_db'], context: { active_test: false } });
+    const base = roots.find((x) => idOf(x.website_id) === wid()) || roots.find((x) => !x.website_id);
+    if (!base) throw new Error('website.contactus not found');
+    const extra = await fill(await fetchText('pages/contact-extra.xml'));
+    checkXml(extra.s, 'contact-extra.xml');
+    // Only target what is there: an XPath that matches nothing makes Odoo refuse the view.
+    const hasSection = (c) => new RegExp(`class="[^"]*\\b${c}\\b`).test(base.arch_db);
+    const filler = ['s_title', 's_faq_list', 's_hr', 's_accordion_image'].filter(hasSection);
+    const xp = filler.map((c) => `<xpath expr="//section[hasclass('${c}')]" position="replace"/>`);
+    const intro = base.arch_db.includes('anything related to our company or services');
+    if (intro) xp.push(`<xpath expr="//p[contains(., 'anything related to our company or services')]" position="replace"><p>${esc(RIB.text.contactIntro)}</p></xpath>`);
+    xp.push(hasSection('s_form_aside') ? `<xpath expr="//section[hasclass('s_form_aside')]" position="after">${extra.s}</xpath>`
+      : `<xpath expr="//div[@id='wrap']" position="inside">${extra.s}</xpath>`);
+    const arch = `<data name="Rent It contact page">${xp.join('')}</data>`;
+    const key = 'website.rentit_contact_page';
+    const ex = (await rpc('ir.ui.view', 'search_read', [[['key', '=', key], ['website_id', '=', wid()]]], { fields: ['id'], context: { active_test: false } }))[0];
+    if (ex) await rpc('ir.ui.view', 'write', [[ex.id], { arch_db: arch, active: true, inherit_id: base.id }], { context: wctx() });
+    else await rpc('ir.ui.view', 'create', [{ name: 'Rent It contact page', type: 'qweb', key, inherit_id: base.id, mode: 'extension', priority: 90, website_id: wid(), arch_db: arch }], { context: wctx() });
+    return { view: ex ? 'updated' : 'created', removedSections: filler, introReplaced: intro, missingTokens: extra.missing };
   };
 
   // Odoo's snippets ship placeholder contact details (555 numbers, yourcompany.example.com). Swap in Rent It's real ones.
@@ -1573,8 +1641,8 @@
 
   RIB.help = () => [
     'introspect', 'installApps (repeat)', 'introspect', 'company', 'tax', 'settings', 'deposit', 'website',
-    'categories', 'products(offset,limit) / loop', 'rentalPricing', 'packageOptions', 'images(offset,limit) / loop', 'stock(offset,limit)',
-    'delivery', 'payments', 'gallery', 'theme', 'customCode', 'pages', 'menus', 'shopWording', 'shopLayout', 'checkoutQuestions', 'placeholders',
+    'categories', 'products(offset,limit) / loop', 'rentalPricing', 'packageOptions', 'newArrivals', 'images(offset,limit) / loop', 'stock(offset,limit)',
+    'delivery', 'payments', 'gallery', 'theme', 'customCode', 'pages', 'menus', 'contactPage', 'shopWording', 'shopLayout', 'checkoutQuestions', 'placeholders',
     'sampleOrders(offset,limit)', 'verify',
   ];
 

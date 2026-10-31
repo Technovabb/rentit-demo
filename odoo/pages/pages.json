@@ -1,8 +1,17 @@
 [
   { "key": "homepage", "file": "homepage.xml", "url": "/", "name": "Home", "menu": false, "sequence": 0 },
-  { "key": "shop", "file": null, "url": "/shop", "name": "Shop", "menu": true, "sequence": 10 },
-  { "key": "how-it-works", "file": "how-it-works.xml", "url": "/how-it-works", "name": "How it works", "menu": true, "sequence": 20 },
+  { "key": "shop", "file": null, "url": "/shop", "name": "Shop", "menu": true, "sequence": 10,
+    "submenu": [
+      ["", "Shop all"], ["new-arrivals", "New Arrivals"], ["packages", "Packages"], ["tents", "Tents"], ["arches", "Arches"],
+      ["bars", "Bars"], ["cakes-treats", "Cakes & Treats"], ["chairs", "Chairs"], ["charger-plate", "Chargers"], ["crockery", "Crockery"],
+      ["centerpieces-vases", "Centerpieces & Vases"], ["cutlery", "Cutlery"], ["glassware", "Glassware"], ["lighting", "Lighting"],
+      ["linens", "Linens"], ["lounge-furniture", "Lounge Furniture"], ["luxe-picnic", "Luxe Picnic"], ["napkins", "Napkins"],
+      ["props", "Props"], ["signage", "Signage"], ["tables", "Tables"], ["umbrella", "Umbrellas"]
+    ] },
+  { "key": "how-it-works", "file": null, "url": "/how-it-works", "name": "How it works", "menu": false, "published": false, "sequence": 20 },
   { "key": "about", "file": "about.xml", "url": "/about-us", "name": "About us", "menu": true, "sequence": 30 },
   { "key": "faq", "file": "faq.xml", "url": "/faq", "name": "FAQs", "menu": true, "sequence": 40 },
-  { "key": "contactus", "file": null, "url": "/contactus", "name": "Contact", "menu": true, "sequence": 50 }
+  { "key": "contactus", "file": null, "url": "/contactus", "name": "Contact", "menu": true, "sequence": 50 },
+  { "key": "terms", "file": "terms.xml", "url": "/terms", "name": "Terms & Conditions", "menu": false, "sequence": 60 },
+  { "key": "privacy", "file": "privacy.xml", "url": "/privacy", "name": "Privacy Policy", "menu": false, "sequence": 70 }
 ]

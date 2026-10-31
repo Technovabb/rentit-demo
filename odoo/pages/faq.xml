@@ -2,7 +2,7 @@
   <div class="container s_allow_columns">
     <span class="ri-eyebrow">FAQs</span>
     <h1>Questions people often ask</h1>
-    <p class="ri-muted mb-0" style="max-width: 44rem;">How booking, payment, rental times and delivery work at Rent It.BB.</p>
+    <p class="ri-muted mb-0" style="max-width: 44rem;">How quotes, payment, rental times and delivery work at Rent It.BB.</p>
   </div>
 </section>
 
@@ -15,8 +15,7 @@
             <h2 class="accordion-header" id="ri-faq-h1"><button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#ri-faq-1" aria-expanded="true" aria-controls="ri-faq-1">How do I place a booking?</button></h2>
             <div id="ri-faq-1" class="accordion-collapse collapse show" aria-labelledby="ri-faq-h1" data-bs-parent="#ri-faq" role="region">
               <div class="accordion-body">
-                <p>Build your list of the items you want, then send it to us with your event details. We&#8217;ll check that everything is available and send you a quote to look over and approve.</p>
-                <p>You can also WhatsApp us on 234-8230 with the items you need and your event details.</p>
+                <p>Browse the collection and add what you need to your quote. Then continue to your quote and complete a short form with your event details. We&#8217;ll check that everything is available and email your official quote to look over and approve.</p>
               </div>
             </div>
           </div>
@@ -40,7 +39,7 @@
             <h2 class="accordion-header" id="ri-faq-h4"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#ri-faq-4" aria-expanded="false" aria-controls="ri-faq-4">Do you deliver?</button></h2>
             <div id="ri-faq-4" class="accordion-collapse collapse" aria-labelledby="ri-faq-h4" data-bs-parent="#ri-faq" role="region">
               <div class="accordion-body">
-                <p>Yes. We deliver every order, and items can&#8217;t be collected from us at this time. There is a delivery fee, and we add it to your quote.</p>
+                <p>Yes. Our team delivers, sets up and collects every order, island-wide. Items can&#8217;t be collected from us at this time. The delivery fee is added to your quote.</p>
               </div>
             </div>
           </div>
@@ -65,14 +64,13 @@
       <div class="col-lg-4">
         <div class="ri-help">
           <h3 class="h5">Still have a question?</h3>
-          <p class="ri-muted">Message us on WhatsApp or send us a note. We&#8217;re happy to help.</p>
+          <p class="ri-muted">Send us a note and we&#8217;ll be happy to help.</p>
           <div class="d-grid gap-2">
-            <a class="btn ri-btn-wa btn-lg" href="#whatsapp" data-ri-wa="Hi Rent It.BB, I have a question about renting for my event.">WhatsApp 234-8230</a>
-            <a class="btn btn-outline-primary btn-lg" href="__PAGE:contactus__">Contact us</a>
+            <a class="btn btn-primary btn-lg" href="__PAGE:contactus__">Contact us</a>
           </div>
-          <p class="ri-muted small mt-3 mb-0">You can also email contact@rentit.bb.</p>
+          <p class="ri-muted small mt-3 mb-0">You can also email <a href="mailto:contact@rentit.bb">contact@rentit.bb</a> or WhatsApp <a href="https://wa.me/12462348230" target="_blank" rel="noopener">+1 (246) 234-8230</a>.</p>
         </div>
-        <div class="ri-note mt-3">See the full booking steps on <a href="__PAGE:how-it-works__">How it works</a>.</div>
+        <div class="ri-note mt-3">Ready to start? <a href="__SHOP__">Browse the collection</a> and request your quote online.</div>
       </div>
     </div>
   </div>

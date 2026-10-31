@@ -1,40 +1,108 @@
 <style>
-#ri-demo-bar{background:#0F2A44;color:#C9D6E2;font:500 .78rem/1.4 'Inter',system-ui,sans-serif;padding:7px 16px;text-align:center}
-#ri-demo-bar b{color:#fff;font-weight:700}
-#ri-wa-fab{position:fixed;right:18px;bottom:18px;z-index:1040;display:inline-flex;align-items:center;gap:10px;height:56px;padding:0 20px 0 16px;border:0;border-radius:999px;background:#1FAE53;color:#fff;font:700 .95rem 'Inter',system-ui,sans-serif;box-shadow:0 10px 30px rgba(20,120,60,.35);cursor:pointer}
-#ri-wa-fab:hover{background:#17924A}
+#ri-demo-bar{background:#272646;color:#CFCEE0;font:500 .76rem/1.4 'Montserrat',system-ui,sans-serif;padding:7px 16px;text-align:center}
+#ri-demo-bar b{color:#fff;font-weight:600}
+#ri-wa-fab{position:fixed;right:16px;bottom:16px;z-index:1040;display:flex;align-items:center;justify-content:center;width:44px;height:44px;border-radius:50%;background:#fff;color:#1FAE53;border:1px solid #E6E4D6;box-shadow:0 4px 14px rgba(39,38,70,.14);transition:background .2s,color .2s,opacity .2s,visibility .2s}
+#ri-wa-fab:hover{background:#1FAE53;color:#fff;border-color:#1FAE53}
+#ri-wa-fab:focus-visible{outline:3px solid #2050BB;outline-offset:3px}
+#ri-wa-fab svg{width:22px;height:22px}
 #ri-wa-fab.ri-away{opacity:0;visibility:hidden;pointer-events:none}
-#ri-wa-fab{transition:opacity .2s,visibility .2s}
-#ri-wa-fab:focus-visible{outline:3px solid #0A5F67;outline-offset:3px}
-#ri-wa-fab svg{width:26px;height:26px;flex-shrink:0}
-#ri-wa-modal{position:fixed;top:0;right:0;bottom:0;left:0;z-index:1060;display:flex;align-items:center;justify-content:center;padding:16px}
-#ri-wa-modal[hidden]{display:none}
-#ri-wa-modal .ri-scrim{position:absolute;top:0;right:0;bottom:0;left:0;background:rgba(15,42,68,.55)}
-#ri-wa-modal .ri-box{position:relative;width:min(480px,100%);max-height:calc(100vh - 32px);overflow:auto;background:#fff;color:#0F2A44;border-radius:20px;padding:24px;box-shadow:0 24px 60px rgba(15,42,68,.25);font-family:'Inter',system-ui,sans-serif}
-#ri-wa-modal h2{font:700 1.2rem/1.3 'Inter',system-ui,sans-serif;margin:0 40px 6px 0;color:#0F2A44;letter-spacing:0}
-#ri-wa-modal .ri-x{position:absolute;top:14px;right:14px;width:40px;height:40px;border:1px solid #E2E8EF;border-radius:999px;background:#fff;font-size:1.3rem;line-height:1;cursor:pointer;color:#0F2A44}
-#ri-wa-modal .ri-chat{background:#E9FBE9;border-radius:14px;padding:14px;margin:14px 0}
-#ri-wa-modal .ri-to{font-size:.76rem;font-weight:700;color:#3D6B45;margin-bottom:8px}
-#ri-wa-modal .ri-bubble{background:#D9FDD3;border-radius:12px 12px 4px 12px;padding:10px 12px;margin-left:12%;font-size:.88rem;white-space:pre-wrap;word-break:break-word;box-shadow:0 1px 1px rgba(0,0,0,.08)}
-#ri-wa-modal .ri-info{background:#E7F5F6;color:#0A5F67;border-radius:12px;padding:12px 14px;font-size:.86rem;margin:0 0 16px}
-#ri-wa-modal .ri-acts{display:flex;gap:8px;flex-wrap:wrap}
-#ri-wa-modal .ri-acts button{flex:1;min-height:46px;border-radius:999px;font:700 .9rem 'Inter',system-ui,sans-serif;cursor:pointer;border:1.5px solid #E2E8EF;background:#fff;color:#0F2A44;padding:0 12px;white-space:nowrap}
-#ri-wa-modal .ri-acts button.ri-main{background:#0E7C86;border-color:#0E7C86;color:#fff}
-#ri-wa-modal button:focus-visible{outline:3px solid #0A5F67;outline-offset:2px}
-@media (max-width:767.98px){#ri-wa-fab{height:52px;padding:0 14px;right:14px;bottom:14px}#ri-wa-fab .ri-lbl{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}}
 </style>
 <script>
 (function () {
   'use strict';
-  var NUMBER = '246 234 8230';
-  var DEFAULT_MSG = "Hi Rent It.BB, I'm planning an event and would like a quote.";
-  var lastFocus = null, modal = null, bubble = null;
+  var WA_URL = 'https://wa.me/12462348230';
+  // Tracking IDs from Rent It go here. Until they are filled in nothing is loaded or sent;
+  // events still go to window.dataLayer so they can be checked in the browser.
+  var TRACK = { ga4: '', adsSendTo: '', pixel: '' };
 
   function editing() {
     var b = document.body;
     return !b || b.classList.contains('editor_enable') || b.classList.contains('o_edit_mode');
   }
+  function onCheckout() {
+    var p = location.pathname;
+    return ['cart', 'checkout', 'address', 'payment', 'confirmation', 'confirm_order', 'extra_info'].some(function (s) {
+      return p.indexOf('/shop/' + s) === 0;
+    });
+  }
+  var desktop = window.matchMedia ? window.matchMedia('(min-width: 992px)') : { matches: true };
 
+  // ---------------------------------------------------------------- tracking
+  function consented() {
+    var m = document.cookie.match(/(?:^|;\s*)website_cookies_bar=([^;]+)/);
+    if (!m) return false;
+    try { return !!JSON.parse(decodeURIComponent(m[1])).optional; } catch (e) { return false; }
+  }
+  function loadTags() {
+    if (!consented()) return;
+    var gid = TRACK.ga4 || (TRACK.adsSendTo && TRACK.adsSendTo.split('/')[0]);
+    if (gid && typeof window.gtag !== 'function') {
+      var s = document.createElement('script'); s.async = true; s.src = 'https://www.googletagmanager.com/gtag/js?id=' + encodeURIComponent(gid);
+      document.head.appendChild(s);
+      window.dataLayer = window.dataLayer || [];
+      window.gtag = function () { window.dataLayer.push(arguments); };
+      window.gtag('js', new Date());
+      if (TRACK.ga4) window.gtag('config', TRACK.ga4);
+      if (TRACK.adsSendTo) window.gtag('config', TRACK.adsSendTo.split('/')[0]);
+    }
+    if (TRACK.pixel && typeof window.fbq !== 'function') {
+      var f = window.fbq = function () { f.callMethod ? f.callMethod.apply(f, arguments) : f.queue.push(arguments); };
+      if (!window._fbq) window._fbq = f;
+      f.push = f; f.loaded = true; f.version = '2.0'; f.queue = [];
+      var t = document.createElement('script'); t.async = true; t.src = 'https://connect.facebook.net/en_US/fbevents.js';
+      document.head.appendChild(t);
+      window.fbq('init', TRACK.pixel); window.fbq('track', 'PageView');
+    }
+  }
+  var EVENTS = {
+    add_to_quote: ['add_to_cart', 'AddToCart'],
+    quote_request: ['generate_lead', 'Lead'],
+    whatsapp_click: ['whatsapp_click', 'Contact'],
+    site_search: ['search', 'Search'],
+  };
+  function track(name, params) {
+    params = params || {};
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push(Object.assign({ event: 'ri_' + name }, params));
+    var ev = EVENTS[name];
+    if (typeof window.gtag === 'function') {
+      window.gtag('event', ev[0], params);
+      if (name === 'quote_request' && TRACK.adsSendTo) window.gtag('event', 'conversion', { send_to: TRACK.adsSendTo });
+    }
+    if (typeof window.fbq === 'function') window.fbq('track', ev[1], params.search_term ? { search_string: params.search_term } : {});
+  }
+  window.RI_TRACK = { ids: TRACK, track: track };
+
+  function wireTracking() {
+    document.addEventListener('click', function (e) {
+      if (editing() || !e.target.closest) return;
+      var add = e.target.closest('#add_to_cart, button[name="add_to_cart"], a[name="add_to_cart"], .o_wsale_product_btn_primary');
+      if (add) {
+        var card = add.closest('.oe_product, form');
+        var title = (card && card.querySelector('.o_wsale_products_item_title, h1')) || document.querySelector('#product_details h1');
+        track('add_to_quote', { item_name: title ? title.textContent.trim().replace(/\s+/g, ' ') : '' });
+      }
+      if (e.target.closest('a[href*="wa.me/"]')) track('whatsapp_click', { page: location.pathname });
+      var hit = e.target.closest('.o_searchbar_form .dropdown-menu a, .o_searchbar_form .o_dropdown_menu a');
+      if (hit) {
+        var q = hit.closest('.o_searchbar_form').querySelector('input[name="search"]');
+        if (q && q.value.trim()) track('site_search', { search_term: q.value.trim() });
+      }
+    }, true);
+    document.addEventListener('submit', function (e) {
+      var q = e.target && e.target.querySelector && e.target.querySelector('input[name="search"]');
+      if (q && q.value.trim()) track('site_search', { search_term: q.value.trim() });
+    }, true);
+    // The quote request is the main conversion: the confirmation page after "Request Quote".
+    if (location.pathname.indexOf('/shop/confirmation') === 0) {
+      var ref = (document.querySelector('#wrap h1, #wrap h3, #wrap .h3') || {}).textContent || location.pathname;
+      var key = 'ri_quote_tracked_' + ref.trim().slice(0, 60);
+      try { if (sessionStorage.getItem(key)) return; sessionStorage.setItem(key, '1'); } catch (err) { /* private mode */ }
+      track('quote_request', {});
+    }
+  }
+
+  // ---------------------------------------------------------------- demo bar + WhatsApp
   function addBar() {
     if (document.getElementById('ri-demo-bar')) return;
     var bar = document.createElement('div');
@@ -45,93 +113,7 @@
     var wrap = document.getElementById('wrapwrap');
     if (header && header.parentNode) header.parentNode.insertBefore(bar, header);
     else if (wrap) wrap.insertBefore(bar, wrap.firstChild);
-    else document.body.insertBefore(bar, document.body.firstChild);
   }
-
-  function pageMessage() {
-    var h = document.querySelector('#product_details h1, #product_detail h1, h1[itemprop="name"]');
-    if (h && h.textContent.trim()) return "Hi Rent It.BB, I'd like to ask about the " + h.textContent.trim().replace(/\s+/g, ' ') + '.';
-    return DEFAULT_MSG;
-  }
-
-  function buildModal() {
-    modal = document.createElement('div');
-    modal.id = 'ri-wa-modal';
-    modal.hidden = true;
-    modal.innerHTML =
-      '<div class="ri-scrim" data-ri-close=""></div>' +
-      '<div class="ri-box" role="dialog" aria-modal="true" aria-labelledby="ri-wa-title" aria-describedby="ri-wa-info">' +
-      '<button type="button" class="ri-x" data-ri-close="" aria-label="Close">&#215;</button>' +
-      '<h2 id="ri-wa-title">WhatsApp preview</h2>' +
-      '<div class="ri-chat"><div class="ri-to">To: Rent It.BB, ' + NUMBER + '</div><div class="ri-bubble"></div></div>' +
-      '<p class="ri-info" id="ri-wa-info">On the live site this opens WhatsApp to ' + NUMBER + ' with this message typed. This demo does not send anything.</p>' +
-      '<div class="ri-acts"><button type="button" class="ri-copy">Copy message</button><button type="button" class="ri-main" data-ri-close="">Close</button></div>' +
-      '</div>';
-    document.body.appendChild(modal);
-    bubble = modal.querySelector('.ri-bubble');
-    modal.addEventListener('click', function (e) {
-      if (e.target.closest('[data-ri-close]')) close();
-      var c = e.target.closest('.ri-copy');
-      if (c) {
-        var text = bubble.textContent;
-        var say = function (t) { c.textContent = t; setTimeout(function () { c.textContent = 'Copy message'; }, 1800); };
-        var pick = function () {
-          try { var rg = document.createRange(); rg.selectNodeContents(bubble); var sel = window.getSelection(); sel.removeAllRanges(); sel.addRange(rg); say('Text selected'); } catch (err) {}
-        };
-        if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(text).then(function () { say('Copied'); }, pick);
-        else pick();
-      }
-    });
-    document.addEventListener('keydown', function (e) {
-      if (!modal || modal.hidden) return;
-      if (e.key === 'Escape' || e.key === 'Esc') { e.preventDefault(); close(); return; }
-      if (e.key !== 'Tab') return;
-      var f = modal.querySelectorAll('button:not([disabled])');
-      if (!f.length) return;
-      var first = f[0], last = f[f.length - 1];
-      var inside = modal.contains(document.activeElement);
-      if (e.shiftKey && (document.activeElement === first || !inside)) { e.preventDefault(); last.focus(); }
-      else if (!e.shiftKey && (document.activeElement === last || !inside)) { e.preventDefault(); first.focus(); }
-    });
-  }
-
-  function setInert(on) {
-    ['wrapwrap', 'ri-wa-fab'].forEach(function (id) {
-      var el = document.getElementById(id);
-      if (!el) return;
-      if (on) { el.setAttribute('inert', ''); el.setAttribute('aria-hidden', 'true'); }
-      else { el.removeAttribute('inert'); el.removeAttribute('aria-hidden'); }
-    });
-  }
-
-  function open(msg) {
-    if (!modal) buildModal();
-    if (!modal.hidden) { bubble.textContent = msg || pageMessage(); return; }
-    lastFocus = document.activeElement;
-    bubble.textContent = msg || pageMessage();
-    modal.hidden = false;
-    document.documentElement.style.overflow = 'hidden';
-    setInert(true);
-    var main = modal.querySelector('.ri-main');
-    if (main) main.focus();
-  }
-
-  function close() {
-    if (!modal || modal.hidden) return;
-    modal.hidden = true;
-    document.documentElement.style.overflow = '';
-    setInert(false);
-    if (lastFocus && lastFocus.focus && document.contains(lastFocus)) lastFocus.focus();
-    lastFocus = null;
-  }
-
-  function onCheckout() {
-    var p = location.pathname;
-    return ['cart', 'checkout', 'address', 'payment', 'confirmation', 'confirm_order', 'extra_info'].some(function (s) {
-      return p.indexOf('/shop/' + s) === 0;
-    });
-  }
-
   function watchAddToCart(fab) {
     if (!('IntersectionObserver' in window) || !window.matchMedia) return;
     var btn = document.querySelector('#o_wsale_cta_wrapper, #add_to_cart, button[name="add_to_cart"]');
@@ -142,71 +124,104 @@
     new IntersectionObserver(function (es) { seen = es[0].isIntersecting; apply(); }).observe(btn);
     if (phone.addEventListener) phone.addEventListener('change', apply);
   }
-
   function addFab() {
     if (document.getElementById('ri-wa-fab') || onCheckout()) return;
-    var b = document.createElement('button');
-    b.id = 'ri-wa-fab';
-    b.type = 'button';
-    b.setAttribute('aria-haspopup', 'dialog');
-    b.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.4 8.4 0 0 1-12.4 7.4L3 20.5l1.6-5.4A8.4 8.4 0 1 1 21 11.5z"/><path d="M8.5 9.5c.4 2.3 2.7 4.6 5 5l1.2-1.2 2 .9c-.3 1.2-1.2 1.8-2.4 1.8-3.5 0-7.3-3.8-7.3-7.3 0-1.2.6-2.1 1.8-2.4l.9 2-1.2 1.2z"/></svg><span class="ri-lbl">WhatsApp us</span>';
-    b.setAttribute('aria-label', 'WhatsApp us (preview)');
-    b.addEventListener('click', function () { open(); });
-    document.body.appendChild(b);
-    watchAddToCart(b);
+    var a = document.createElement('a');
+    a.id = 'ri-wa-fab';
+    a.href = WA_URL;
+    a.target = '_blank';
+    a.rel = 'noopener';
+    a.title = 'WhatsApp';
+    a.setAttribute('aria-label', 'Chat with Rent It.BB on WhatsApp');
+    a.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.4 8.4 0 0 1-12.4 7.4L3 20.5l1.6-5.4A8.4 8.4 0 1 1 21 11.5z"/><path d="M8.5 9.5c.4 2.3 2.7 4.6 5 5l1.2-1.2 2 .9c-.3 1.2-1.2 1.8-2.4 1.8-3.5 0-7.3-3.8-7.3-7.3 0-1.2.6-2.1 1.8-2.4l.9 2-1.2 1.2z"/></svg>';
+    document.body.appendChild(a);
+    watchAddToCart(a);
   }
 
-  // Any WhatsApp link on the site opens the preview instead, so the demo never messages the real business.
-  var WA = '[data-ri-wa], a[href="#whatsapp"], a[href^="https://wa.me"], a[href^="http://wa.me"], a[href*="whatsapp.com/send"], a[href^="whatsapp:"]';
-  document.addEventListener('auxclick', function (e) {
-    if (editing()) return;
-    if (e.target.closest && e.target.closest(WA)) e.preventDefault();
-  }, true);
-  document.addEventListener('click', function (e) {
-    if (editing()) return;
-    var a = e.target.closest && e.target.closest(WA);
-    if (!a) return;
-    e.preventDefault();
-    e.stopPropagation();
-    var msg = a.getAttribute('data-ri-wa');
-    if (!msg && a.href) { try { msg = new URL(a.href).searchParams.get('text'); } catch (err) { msg = null; } }
-    open(msg || null);
-  }, true);
+  // ---------------------------------------------------------------- "Quote", not "cart"
+  var WORDS = {
+    'add to cart': 'Add to Quote', 'view cart': 'View quote', 'go to cart': 'View quote',
+    'your cart is empty!': 'Your quote is empty.', 'your cart is empty': 'Your quote is empty.',
+    'shopping cart': 'Your quote', 'order summary': 'Quote summary', 'order overview': 'Quote summary',
+    'proceed to checkout': 'Continue', 'checkout': 'Continue', 'continue shopping': 'Continue browsing',
+    'back to cart': 'Back to your quote', 'return to cart': 'Back to your quote',
+    'item(s) added to your cart': 'Added to your quote', 'item added to your cart': 'Added to your quote',
+    'added to your cart': 'Added to your quote', 'confirm order': 'Request Quote',
+  };
+  function swapText(root) {
+    if (!root || editing()) return;
+    var walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, null);
+    var n, todo = [];
+    while ((n = walker.nextNode())) {
+      var k = n.nodeValue.trim().toLowerCase();
+      if (k && WORDS[k] && !(n.parentNode && n.parentNode.closest && n.parentNode.closest('script,style,textarea,[contenteditable]'))) todo.push(n);
+    }
+    todo.forEach(function (t) { t.nodeValue = t.nodeValue.replace(t.nodeValue.trim(), WORDS[t.nodeValue.trim().toLowerCase()]); });
+    Array.prototype.forEach.call((root.querySelectorAll ? root : document).querySelectorAll('[title],[aria-label]'), function (el) {
+      ['title', 'aria-label'].forEach(function (a) {
+        var v = el.getAttribute(a); if (v && WORDS[v.trim().toLowerCase()]) el.setAttribute(a, WORDS[v.trim().toLowerCase()]);
+      });
+    });
+    if (location.pathname.indexOf('/shop/payment') === 0) {
+      Array.prototype.forEach.call(document.querySelectorAll('[name="o_payment_submit_button"]'), function (b) {
+        if (!/request quote/i.test(b.textContent)) b.textContent = 'Request Quote';
+      });
+    }
+  }
+  function quoteHeader() {
+    Array.prototype.forEach.call(document.querySelectorAll('header .o_wsale_my_cart > a'), function (a) {
+      if (a.querySelector('.ri-quote-lbl')) return;
+      var s = document.createElement('span'); s.className = 'ri-quote-lbl'; s.textContent = 'Quote';
+      a.appendChild(s);
+      a.setAttribute('aria-label', 'Your quote'); a.title = 'Your quote';
+    });
+  }
+  // The quote is requested, not paid for, at checkout: keep the demo card for deposits on sent quotes,
+  // but only offer the quote request here.
+  function quoteOnlyPayment() {
+    if (location.pathname.indexOf('/shop/payment') !== 0) return;
+    var radios = document.querySelectorAll('input[name="o_payment_radio"]');
+    var keep = null;
+    Array.prototype.forEach.call(radios, function (r) {
+      var row = r.closest('li, .o_payment_option, .list-group-item');
+      if (r.dataset.providerCode === 'demo') { if (row) row.style.display = 'none'; }
+      else if (!keep) keep = r;
+    });
+    if (keep && !keep.checked) keep.click();
+  }
 
-  // Home page search: rentals start tomorrow at the earliest and last at least a day (the shop's own default),
-  // empty fields stay out of the URL, and dates go to Odoo as Barbados midnight.
-  function wireSearch() {
-    var forms = document.querySelectorAll('form.ri-search');
-    var today = new Date(Date.now() - new Date().getTimezoneOffset() * 60000).toISOString().slice(0, 10);
-    function addDay(d) { var t = new Date(d + 'T00:00:00Z'); t.setUTCDate(t.getUTCDate() + 1); return t.toISOString().slice(0, 10); }
-    Array.prototype.forEach.call(forms, function (f) {
-      var s = f.querySelector('input[name="start_date"]'), e = f.querySelector('input[name="end_date"]');
-      if (!s || !e) return;
-      s.min = addDay(today); e.min = addDay(s.min);
-      s.addEventListener('change', function () {
-        var m = addDay(s.value || today);
-        e.min = m;
-        if (s.value && (!e.value || e.value < m)) e.value = m;
-        e.required = !!s.value;
+  // ---------------------------------------------------------------- Shop menu: hover to open on desktop, click goes to the shop
+  function wireShopMenu() {
+    var toggles = document.querySelectorAll('header#top .navbar-nav .dropdown > .dropdown-toggle');
+    Array.prototype.forEach.call(toggles, function (t) {
+      if (t.textContent.trim().toLowerCase() !== 'shop') return;
+      var li = t.parentNode, openT = null, closeT = null;
+      li.classList.add('ri-shop-dd');
+      li.addEventListener('mouseenter', function () {
+        if (!desktop.matches) return;
+        clearTimeout(closeT); openT = setTimeout(function () { li.classList.add('ri-open'); }, 140);
       });
-      e.addEventListener('change', function () { s.required = !!e.value; });
-      f.addEventListener('submit', function () {
-        var added = [];
-        Array.prototype.forEach.call(f.querySelectorAll('input'), function (i) {
-          if (!i.value) { i.disabled = true; return; }
-          if (i.type === 'date') {
-            // Odoo reads a bare date as 00:00 UTC, which is 8pm the day before in Barbados (UTC-4 all year).
-            var h = document.createElement('input');
-            h.type = 'hidden'; h.name = i.name; h.value = i.value + ' 04:00:00';
-            f.appendChild(h); added.push(h);
-            i.disabled = true;
-          }
-        });
-        setTimeout(function () {
-          added.forEach(function (h) { h.remove(); });
-          Array.prototype.forEach.call(f.querySelectorAll('input'), function (i) { i.disabled = false; });
-        }, 0);
+      li.addEventListener('mouseleave', function () {
+        if (!desktop.matches) return;
+        clearTimeout(openT); closeT = setTimeout(function () { li.classList.remove('ri-open'); }, 180);
       });
+      t.addEventListener('click', function (e) {
+        if (!desktop.matches) return; // phones and tablets: the menu expands
+        e.preventDefault(); e.stopPropagation();
+        location.href = '/shop';
+      }, true);
+    });
+  }
+
+  // ---------------------------------------------------------------- recent events: tap to see the second photo
+  function wireEvents() {
+    document.addEventListener('click', function (e) {
+      var f = e.target.closest && e.target.closest('.ri-ev');
+      if (f && !editing()) f.classList.toggle('ri-flip');
+    });
+    document.addEventListener('keydown', function (e) {
+      var f = e.target.closest && e.target.closest('.ri-ev');
+      if (f && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); f.classList.toggle('ri-flip'); }
     });
   }
 
@@ -214,7 +229,21 @@
     if (editing()) return;
     addBar();
     addFab();
-    wireSearch();
+    quoteHeader();
+    swapText(document.getElementById('wrapwrap') || document.body);
+    quoteOnlyPayment();
+    wireShopMenu();
+    wireEvents();
+    wireTracking();
+    loadTags();
+    // Odoo adds notifications, cart pop-ups and payment options after load: reword those too.
+    if ('MutationObserver' in window) {
+      var pending = false;
+      new MutationObserver(function () {
+        if (pending) return; pending = true;
+        setTimeout(function () { pending = false; quoteHeader(); swapText(document.body); quoteOnlyPayment(); }, 60);
+      }).observe(document.body, { childList: true, subtree: true });
+    }
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
   else init();

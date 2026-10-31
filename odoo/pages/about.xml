@@ -1,5 +1,5 @@
 <section class="s_cover o_colored_level oe_img_bg o_bg_img_center ri-hero ri-page-head pt80 pb80" data-snippet="s_cover" data-name="Page header" style="background-image: url('__IMG:pf-13__');">
-  <div class="o_we_bg_filter" style="background-image: linear-gradient(100deg, rgba(10, 32, 52, 0.92) 0%, rgba(11, 80, 92, 0.74) 50%, rgba(10, 32, 52, 0.3) 100%);"></div>
+  <div class="o_we_bg_filter" style="background-image: linear-gradient(100deg, rgba(39, 38, 70, 0.92) 0%, rgba(4, 76, 171, 0.7) 50%, rgba(39, 38, 70, 0.3) 100%);"></div>
   <div class="container s_allow_columns">
     <span class="ri-eyebrow">About us</span>
     <h1>A family business, here for your event</h1>
@@ -54,7 +54,6 @@
   <div class="container">
     <div class="ri-head">
       <div><span class="ri-eyebrow">Our work</span><h2>Some of our set-ups</h2></div>
-      <a class="ri-link" href="https://www.instagram.com/rentit.bb/" target="_blank" rel="noopener">More on Instagram</a>
     </div>
     <div class="ri-gallery">
       <figure class="ri-wide"><img src="__IMG:pf-14__" alt="Long banquet table under purple light with pink flowers" loading="lazy"/></figure>
@@ -72,7 +71,7 @@
       <div class="row g-4 align-items-center">
         <div class="col-lg-7">
           <h2>Let&#8217;s plan your event</h2>
-          <p>Browse over 330 items, most with prices, or tell us what you have in mind.</p>
+          <p>Browse the collection and request your quote online, or tell us what you have in mind.</p>
         </div>
         <div class="col-lg-5">
           <div class="ri-btns justify-content-lg-end">

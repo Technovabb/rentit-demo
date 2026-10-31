@@ -1,0 +1,13 @@
+<section class="s_title o_colored_level ri-bg-white pt64 pb40" data-snippet="s_title" data-name="Title">
+  <div class="container s_allow_columns">
+    <span class="ri-eyebrow">Privacy Policy</span>
+    <h1>Your privacy</h1>
+    <p class="ri-muted mb-0" style="max-width: 44rem;">Our privacy policy is being updated and will be published on this page.</p>
+  </div>
+</section>
+
+<section class="s_text_block o_colored_level ri-section pt0" data-snippet="s_text_block" data-name="Contact">
+  <div class="container s_allow_columns" style="max-width: 48rem;">
+    <p class="mb-0">If you have a question about the information you share with us, email <a href="mailto:contact@rentit.bb">contact@rentit.bb</a>.</p>
+  </div>
+</section>

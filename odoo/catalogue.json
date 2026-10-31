@@ -4,6 +4,13 @@
  "price_unit": "per 24-hour rental",
  "categories": [
   {
+   "key": "new-arrivals",
+   "name": "New Arrivals",
+   "parent": null,
+   "sequence": 5,
+   "image": "images/4204.jpg"
+  },
+  {
    "key": "packages",
    "name": "Packages",
    "parent": null,
@@ -5797,6 +5804,18 @@
    "variants": null,
    "demo_stock": 6
   }
+ ],
+ "new_arrivals": [
+  4370,
+  4374,
+  4372,
+  4198,
+  4202,
+  4200,
+  4204,
+  4267,
+  2549,
+  2550
  ],
  "demo_stock_note": "Quantities are made up for the demo.",
  "upgrades_note": "Paid package upgrades, copied from the YITH add-ons on rentit.bb product pages (28 Oct 2026). Prices BBD before VAT."
