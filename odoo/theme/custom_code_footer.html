@@ -96,7 +96,8 @@ body:has(.offcanvas.show) #ri-wa-fab,body:has(.modal.show) #ri-wa-fab{display:no
     }, true);
     // The quote request is the main conversion: the confirmation page after "Request Quote".
     if (location.pathname.indexOf('/shop/confirmation') === 0) {
-      var ref = (document.querySelector('#wrap h1, #wrap h3, #wrap .h3') || {}).textContent || location.pathname;
+      // The order number heading makes the key unique, so a second request in the same visit still counts.
+      var ref = (document.querySelector('#wrap h5') || document.querySelector('#wrap h3') || {}).textContent || location.pathname;
       var key = 'ri_quote_tracked_' + ref.trim().slice(0, 60);
       try { if (sessionStorage.getItem(key)) return; sessionStorage.setItem(key, '1'); } catch (err) { /* private mode */ }
       track('quote_request', {});
@@ -149,6 +150,7 @@ body:has(.offcanvas.show) #ri-wa-fab,body:has(.modal.show) #ri-wa-fab{display:no
     'item(s) added to your cart': 'Added to your quote', 'item added to your cart': 'Added to your quote',
     'added to your cart': 'Added to your quote', 'confirm order': 'Request Quote',
     'payment method': 'Confirm your request', 'back to extra info': 'Back to event details',
+    'thank you for your order.': 'Thank you for your quote request.', 'to follow your order.': 'to follow your quote.',
   };
   function swapText(root) {
     if (!root || editing()) return;
@@ -191,6 +193,21 @@ body:has(.offcanvas.show) #ri-wa-fab,body:has(.modal.show) #ri-wa-fab{display:no
       else if (!keep) keep = r;
     });
     if (keep && !keep.checked) keep.click();
+  }
+  // After "Request Quote" this is a quote request, not an order waiting for payment: Odoo's bank-transfer box
+  // (amount and payment reference) gives way to what happens next.
+  function quoteConfirmation() {
+    if (location.pathname.indexOf('/shop/confirmation') !== 0) return;
+    Array.prototype.forEach.call(document.querySelectorAll('#wrap h5, #wrap h4'), function (h) {
+      var m = h.textContent.trim().match(/^Order (\S+)$/);
+      if (m) h.textContent = 'Quote request ' + m[1];
+    });
+    var box = document.querySelector('#o_custom_payment_details .card-body');
+    if (box && !box.getAttribute('data-ri')) {
+      box.setAttribute('data-ri', '1');
+      box.innerHTML = '<p class="mb-0">We have your quote request. We will check availability and email your official quote. ' +
+        'A 50% deposit secures your booking once you approve it, and the balance is due 5 days before your event.</p>';
+    }
   }
 
   // ---------------------------------------------------------------- Shop menu: hover to open on desktop, click goes to the shop
@@ -235,6 +252,7 @@ body:has(.offcanvas.show) #ri-wa-fab,body:has(.modal.show) #ri-wa-fab{display:no
     quoteHeader();
     swapText(document.getElementById('wrapwrap') || document.body);
     quoteOnlyPayment();
+    quoteConfirmation();
     wireShopMenu();
     wireEvents();
     wireTracking();
@@ -244,7 +262,7 @@ body:has(.offcanvas.show) #ri-wa-fab,body:has(.modal.show) #ri-wa-fab{display:no
       var pending = false;
       new MutationObserver(function () {
         if (pending) return; pending = true;
-        setTimeout(function () { pending = false; quoteHeader(); swapText(document.body); quoteOnlyPayment(); }, 60);
+        setTimeout(function () { pending = false; quoteHeader(); swapText(document.body); quoteOnlyPayment(); quoteConfirmation(); }, 60);
       }).observe(document.body, { childList: true, subtree: true });
     }
   }
