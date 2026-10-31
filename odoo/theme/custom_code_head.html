@@ -52,7 +52,7 @@ header#top .dropdown-menu{border:1px solid var(--ri-line);border-radius:12px;box
 header#top .dropdown-item{border-radius:8px;font-size:.9rem;color:var(--ri-ink);padding:.45rem .8rem}
 header#top .dropdown-item:hover,header#top .dropdown-item:focus{background:var(--ri-soft);color:var(--ri-brand)}
 @media (min-width:992px){
- header#top .navbar-nav .ri-shop-dd>.dropdown-menu{display:grid!important;grid-template-columns:repeat(3,minmax(178px,1fr));gap:2px 6px;padding:14px;margin-top:4px!important;top:100%;left:0;visibility:hidden;opacity:0;transform:translateY(6px);transition:opacity .18s ease,transform .18s ease,visibility 0s linear .18s;pointer-events:none}
+ header#top .navbar-nav .ri-shop-dd>.dropdown-menu{display:grid!important;grid-template-columns:repeat(3,minmax(178px,1fr));grid-template-rows:repeat(8,auto);grid-auto-flow:column;gap:2px 6px;padding:14px;margin-top:4px!important;top:100%;left:0;visibility:hidden;opacity:0;transform:translateY(6px);transition:opacity .18s ease,transform .18s ease,visibility 0s linear .18s;pointer-events:none}
  header#top .navbar-nav .ri-shop-dd.ri-open>.dropdown-menu,header#top .navbar-nav .ri-shop-dd:focus-within>.dropdown-menu{visibility:visible;opacity:1;transform:none;transition-delay:0s;pointer-events:auto}
  header#top .navbar-nav .ri-shop-dd>.dropdown-menu>li:first-child .dropdown-item{font-weight:600;color:var(--ri-brand)}
 }
@@ -122,7 +122,9 @@ footer#bottom h1,footer#bottom h2,footer#bottom h3,footer#bottom h4,footer#botto
 .ri-list li{padding:.3rem 0}
 
 /* home hero: light photo hero with search */
-.ri-home-hero{position:relative;z-index:3;background-color:var(--ri-soft);background-size:cover;background-position:center 45%;padding:clamp(52px,7vw,104px) 0 clamp(92px,10vw,132px)!important;overflow:visible}
+/* the tiles overlap the hero's foot; while the search is in use its suggestions sit above them */
+.ri-home-hero:focus-within{z-index:4}
+.ri-home-hero{position:relative;z-index:1;background-color:var(--ri-soft);background-size:cover;background-position:center 45%;padding:clamp(52px,7vw,104px) 0 clamp(92px,10vw,132px)!important;overflow:visible}
 .ri-home-hero>.o_we_bg_filter{position:absolute;top:0;right:0;bottom:0;left:0;background-image:linear-gradient(90deg,rgba(248,248,232,.97) 0%,rgba(248,248,232,.92) 38%,rgba(248,248,232,.45) 64%,rgba(248,248,232,0) 84%)}
 .ri-home-hero>.container{position:relative;z-index:1}
 .ri-home-hero h1{font-size:clamp(2.2rem,5vw,3.7rem);font-weight:700;max-width:16ch;margin:0 0 1rem;line-height:1.08}
@@ -134,7 +136,7 @@ footer#bottom h1,footer#bottom h2,footer#bottom h3,footer#bottom h4,footer#botto
 .ri-search .search-query{border:0!important;outline:0;box-shadow:none!important;background:transparent!important;width:100%;min-width:0;height:48px;padding:0!important;font:500 .95rem var(--ri-ui);color:var(--ri-ink)}
 .ri-search .search-query::placeholder{color:var(--ri-muted)}
 .ri-search label.ri-search-q:focus-within{box-shadow:inset 0 0 0 2px var(--ri-brand-100)}
-.ri-search .ri-search-btn{flex:0 0 auto;display:inline-flex;align-items:center;gap:.4rem;padding:0 1.7rem!important;font-size:.98rem!important;border-radius:999px!important}
+.ri-search .ri-search-btn{flex:0 0 auto;display:inline-flex;align-items:center;gap:.4rem;padding:0 1.7rem!important;font-size:.98rem!important;border-radius:999px!important;text-decoration:none!important}
 .ri-search .o_search_found_results{display:none!important}
 .ri-search .o_dropdown_menu,.ri-search .dropdown-menu{border:1px solid var(--ri-line);border-radius:14px;box-shadow:0 18px 40px rgba(39,38,70,.14);margin-top:6px;z-index:1050}
 

@@ -1366,6 +1366,12 @@
     const xp = filler.map((c) => `<xpath expr="//section[hasclass('${c}')]" position="replace"/>`);
     const intro = base.arch_db.includes('anything related to our company or services');
     if (intro) xp.push(`<xpath expr="//p[contains(., 'anything related to our company or services')]" position="replace"><p>${esc(RIB.text.contactIntro)}</p></xpath>`);
+    // The form's side photo is Odoo's stock building; use one of Rent It's own event photos.
+    const aside = (base.arch_db.match(/<section[^>]*s_form_aside[\s\S]*?<\/section>/) || [''])[0];
+    if (/<img\b/.test(aside) && RIB.map.img['pf-75']) {
+      xp.push(`<xpath expr="(//section[hasclass('s_form_aside')]//img)[1]" position="attributes"><attribute name="src">${esc(RIB.map.img['pf-75'])}</attribute>`
+        + '<attribute name="alt">Farm table dinner set by Rent It.BB with heliconia flowers and orange napkins</attribute></xpath>');
+    }
     xp.push(hasSection('s_form_aside') ? `<xpath expr="//section[hasclass('s_form_aside')]" position="after">${extra.s}</xpath>`
       : `<xpath expr="//div[@id='wrap']" position="inside">${extra.s}</xpath>`);
     const arch = `<data name="Rent It contact page">${xp.join('')}</data>`;

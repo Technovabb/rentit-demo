@@ -169,6 +169,7 @@
     }
   }
   function quoteHeader() {
+    if (/^Shopping Cart/.test(document.title)) document.title = document.title.replace(/^Shopping Cart/, 'Your quote');
     Array.prototype.forEach.call(document.querySelectorAll('header .o_wsale_my_cart > a'), function (a) {
       if (a.querySelector('.ri-quote-lbl')) return;
       var s = document.createElement('span'); s.className = 'ri-quote-lbl'; s.textContent = 'Quote';

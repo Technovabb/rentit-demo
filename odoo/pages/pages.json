@@ -12,6 +12,6 @@
   { "key": "about", "file": "about.xml", "url": "/about-us", "name": "About us", "menu": true, "sequence": 30 },
   { "key": "faq", "file": "faq.xml", "url": "/faq", "name": "FAQs", "menu": true, "sequence": 40 },
   { "key": "contactus", "file": null, "url": "/contactus", "name": "Contact", "menu": true, "sequence": 50 },
-  { "key": "terms", "file": "terms.xml", "url": "/terms", "name": "Terms & Conditions", "menu": false, "sequence": 60 },
+  { "key": "terms", "file": "terms.xml", "url": "/terms-and-conditions", "name": "Terms & Conditions", "menu": false, "sequence": 60 },
   { "key": "privacy", "file": "privacy.xml", "url": "/privacy", "name": "Privacy Policy", "menu": false, "sequence": 70 }
 ]
