@@ -70,6 +70,15 @@ Useful extras: `RIB.status()` (what is built so far), `RIB.help()`, `RIB.log` (c
 - `sampleOrders` skips any order whose `RI-SAMPLE-nn` ref already exists.
 - On a fresh trial (for example after the 15-day trial ends), call `RIB.forget()` and start from step 1.
 
+## rentitbb.odoo.com after 2 Nov 2026
+
+The demo data was taken out of rentitbb.odoo.com by hand, over the same session RPC. The script doesn't do this yet.
+
+- **Bookings:** the two sample orders still out were returned, so all stock is back in WH/Stock. Then every sample order, the test carts and the test card order were cancelled, not deleted. The sample customers are archived. The test card payment was cancelled, so the books have no entries.
+- **Payments:** the Demo card is unpublished and archived. Checkout only offers "Request my quote". Sent quotes now ask for a signature, not online payment: `portal_confirmation_pay` is off and `portal_confirmation_sign` is on. Staff record deposits by hand until a card provider that works for a Barbados merchant is set up.
+- **Accounting:** the fiscal country is Barbados, not the United States. All taxes and tax groups are Barbados. The default sales tax is "VAT 17.5% (RI)", and the delivery product carries it too, as on rentit.bb. The 15% purchase tax became "VAT 17.5% (purchases)" and is the default purchase tax. The 15% sales tax is archived. A $30 chair still shows "Including $ 5.25 VAT 17.5%" in the cart.
+- **Don't re-run** `sampleOrders` (it makes sample bookings) or `payments` (it republishes the Demo card) on this database. `deposit` would switch online deposit payment back on.
+
 ## Things to check by hand after the build
 
 1. A product page shows a price per day and a date picker. Booking more than the stock for dates that overlap a Reserved sample order should be blocked.
