@@ -532,13 +532,13 @@
     const out = {};
     try {
       await rpc(assetsModel(), 'make_scss_customization', [colors,
-        { 'o-color-1': '#044CAB', 'o-color-2': '#272646', 'o-color-3': '#F8F8E8', 'o-color-4': '#FFFFFF', 'o-color-5': '#272646' }], { context: wctx() });
+        { 'o-color-1': '#044CAB', 'o-color-2': '#272646', 'o-color-3': '#FFFFFF', 'o-color-4': '#FFFFFF', 'o-color-5': '#272646' }], { context: wctx() });
       out.palette = 'ok';
     } catch (e) { out.palette = 'skipped: ' + short(e); }
     try {
       await rpc(assetsModel(), 'make_scss_customization', [values,
         { font: "'Montserrat'", 'headings-font': "'Montserrat'", 'navbar-font': "'Montserrat'", 'buttons-font': "'Montserrat'",
-          'google-fonts': "('Montserrat', 'Allura')", 'btn-border-radius': '999px' }], { context: wctx() });
+          'google-fonts': "('Montserrat')", 'btn-border-radius': '999px' }], { context: wctx() });
       out.fonts = 'ok';
     } catch (e) { out.fonts = 'skipped: ' + short(e); }
     out.note = 'First page load after this recompiles CSS (10-20 s). Undo with RIB.run("theme", {reset:true}).';
@@ -1137,8 +1137,31 @@
 
   // ------------------------------------------------------------------ gallery uploads, tokens, pages, menus, custom code
   const GALLERY = [12, 13, 14, 16, 21, 24, 34, 35, 39, 40, 53, 56, 61, 63, 73, 75];
+  // Rent It's own Recent Events photos (two per event, cropped 4:5) and the home page video's poster frame.
+  const EVENTS = ['grweb', 'black-30', 'teal-boho', 'blue-silver', 'green-gold', 'ashanti', 'sky-blue', 'corporate-tent'];
   const galleryFiles = () => GALLERY.flatMap((n) => [`pf-${n}`, `pf-${n}-sm`]).map((k) => ({ key: k, path: `gallery/${k}.jpg`, name: `rentit_${k}.jpg` }))
-    .concat([{ key: 'logo-white', path: 'brand/logo-white.png', name: 'rentit_logo-white.png' }]);
+    .concat([{ key: 'logo-white', path: 'brand/logo-white.png', name: 'rentit_logo-white.png' }])
+    .concat(EVENTS.flatMap((e) => [1, 2].map((n) => ({ key: `ev-${e}-${n}`, path: `gallery/ev-${e}-${n}.jpg`, name: `rentit_ev-${e}-${n}.jpg` }))))
+    .concat([{ key: 'video-poster', path: 'media/book-with-rentit-poster.jpg', name: 'rentit_book-with-rentit-poster.jpg' }]);
+
+  // The home page video, kept in Odoo like the photos: a public attachment that /web/content streams.
+  const MEDIA = [{ key: 'video-book', path: 'media/book-with-rentit.mp4', name: 'rentit_book-with-rentit.mp4', mimetype: 'video/mp4' }];
+  RIB.media = async (force = false) => {
+    need();
+    const out = { uploaded: [], reused: [] };
+    for (const m of MEDIA) {
+      const ex = (await rpc('ir.attachment', 'search_read', [[['name', '=', m.name], ['res_model', '=', 'ir.ui.view']]], { fields: ['id'] }))[0];
+      if (ex && !force) { RIB.map.img[m.key] = `/web/content/${ex.id}/${m.name}`; out.reused.push(m.key); continue; }
+      const vals = { name: m.name, datas: await fetchB64(m.path), mimetype: m.mimetype, public: true, res_model: 'ir.ui.view', res_id: 0 };
+      let id = ex && ex.id;
+      if (id) await rpc('ir.attachment', 'write', [[id], vals]); else id = idOf(await rpc('ir.attachment', 'create', [vals]));
+      RIB.map.img[m.key] = `/web/content/${id}/${m.name}`;
+      out.uploaded.push(m.key);
+    }
+    save();
+    try { out.publicCheck = (await fetch(RIB.map.img['video-book'], { method: 'HEAD', credentials: 'omit' })).status; } catch (e) { out.publicCheck = short(e); }
+    return out;
+  };
 
   async function addData(name, b64) {
     const params = { name, data: b64, is_image: true, res_model: 'ir.ui.view', res_id: 0 };
@@ -1647,7 +1670,7 @@
   RIB.help = () => [
     'introspect', 'installApps (repeat)', 'introspect', 'company', 'tax', 'settings', 'deposit', 'website',
     'categories', 'products(offset,limit) / loop', 'rentalPricing', 'packageOptions', 'newArrivals', 'images(offset,limit) / loop', 'stock(offset,limit)',
-    'delivery', 'payments', 'gallery', 'theme', 'customCode', 'pages', 'menus', 'contactPage', 'shopWording', 'shopLayout', 'checkoutQuestions', 'placeholders',
+    'delivery', 'payments', 'gallery', 'media', 'theme', 'customCode', 'pages', 'menus', 'contactPage', 'shopWording', 'shopLayout', 'checkoutQuestions', 'placeholders',
     'sampleOrders(offset,limit)', 'verify',
   ];
 

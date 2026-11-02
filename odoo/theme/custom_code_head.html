@@ -1,10 +1,10 @@
 <meta name="robots" content="noindex, nofollow"/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin=""/>
-<link href="https://fonts.googleapis.com/css2?family=Allura&amp;family=Montserrat:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
 <style>
-/* Rent It.BB demo theme by Tech Nova, in Rent It's brand: Cobalt and Beige, Montserrat with an Allura script accent. Calm and elegant. */
-:root{--ri-brand:#044CAB;--ri-brand-ink:#033B86;--ri-brand-2:#2050BB;--ri-polo:#8AACD7;--ri-brand-50:#EDF2FA;--ri-brand-100:#C9D8EE;--ri-ink:#272646;--ri-ink-2:#4A4966;--ri-muted:#6B6A80;--ri-line:#E6E4D6;--ri-line-2:#EFEEE4;--ri-bg:#FFFFFF;--ri-soft:#F8F8E8;--ri-star:#D9A21B;--ri-wa:#1FAE53;--ri-r:12px;--ri-shadow:0 1px 2px rgba(39,38,70,.05),0 8px 24px rgba(39,38,70,.07);--ri-ui:'Montserrat',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;--ri-script:'Allura','Brush Script MT',cursive}
+/* Rent It.BB demo theme by Tech Nova, in Rent It's brand: Cobalt on white, Montserrat Bold and Medium (the Allura script is kept for artwork only). Calm and elegant. */
+:root{--ri-brand:#044CAB;--ri-brand-ink:#033B86;--ri-brand-2:#2050BB;--ri-polo:#8AACD7;--ri-brand-50:#EDF2FA;--ri-brand-100:#C9D8EE;--ri-ink:#272646;--ri-ink-2:#4A4966;--ri-muted:#6B6A80;--ri-line:#E4E7EE;--ri-line-2:#EEF0F5;--ri-bg:#FFFFFF;--ri-soft:#FFFFFF;--ri-star:#D9A21B;--ri-wa:#1FAE53;--ri-r:12px;--ri-shadow:0 1px 2px rgba(39,38,70,.05),0 8px 24px rgba(39,38,70,.07);--ri-ui:'Montserrat',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif}
 #wrapwrap{overflow-x:clip}
 body,#wrapwrap{font-family:var(--ri-ui);color:var(--ri-ink);background:var(--ri-bg);-webkit-font-smoothing:antialiased}
 h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6,.display-1,.display-2,.display-3,.display-4{font-family:var(--ri-ui);color:var(--ri-ink);letter-spacing:-.01em}
@@ -22,7 +22,7 @@ a{color:var(--ri-brand)} a:hover{color:var(--ri-brand-ink)}
 .btn-secondary,.btn-outline-primary{border-color:var(--ri-brand)!important;color:var(--ri-brand)!important;background:#fff!important}
 .btn-secondary:hover,.btn-outline-primary:hover{background:var(--ri-brand-50)!important}
 .ri-banner .btn-light,.ri-hero .btn-light,.ri-cta .btn-light{background:#fff;border-color:#fff;color:var(--ri-ink)!important}
-.ri-banner .btn-light:hover,.ri-hero .btn-light:hover,.ri-cta .btn-light:hover{background:var(--ri-soft);border-color:var(--ri-soft)}
+.ri-banner .btn-light:hover,.ri-hero .btn-light:hover,.ri-cta .btn-light:hover{background:var(--ri-brand-50);border-color:var(--ri-brand-50)}
 .ri-banner .btn-outline-light,.ri-hero .btn-outline-light,.ri-cta .btn-outline-light{color:#fff!important;border-color:rgba(255,255,255,.7)!important;background:transparent}
 .ri-banner .btn-outline-light:hover,.ri-hero .btn-outline-light:hover,.ri-cta .btn-outline-light:hover{background:rgba(255,255,255,.12)!important}
 
@@ -50,7 +50,7 @@ header#top .o_searchbar_form .form-control,header#top .o_searchbar_form input{bo
 /* Shop dropdown: every category, three columns on desktop. It opens on hover after a short pause (see footer code). */
 header#top .dropdown-menu{border:1px solid var(--ri-line);border-radius:12px;box-shadow:0 18px 40px rgba(39,38,70,.12);padding:.5rem}
 header#top .dropdown-item{border-radius:8px;font-size:.9rem;color:var(--ri-ink);padding:.45rem .8rem}
-header#top .dropdown-item:hover,header#top .dropdown-item:focus{background:var(--ri-soft);color:var(--ri-brand)}
+header#top .dropdown-item:hover,header#top .dropdown-item:focus{background:var(--ri-brand-50);color:var(--ri-brand)}
 @media (min-width:992px){
  header#top .navbar-nav .ri-shop-dd>.dropdown-menu{display:grid!important;grid-template-columns:repeat(3,minmax(178px,1fr));grid-template-rows:repeat(8,auto);grid-auto-flow:column;gap:2px 6px;padding:14px;margin-top:4px!important;top:100%;left:0;visibility:hidden;opacity:0;transform:translateY(6px);transition:opacity .18s ease,transform .18s ease,visibility 0s linear .18s;pointer-events:none}
  header#top .navbar-nav .ri-shop-dd.ri-open>.dropdown-menu,header#top .navbar-nav .ri-shop-dd:focus-within>.dropdown-menu{visibility:visible;opacity:1;transform:none;transition-delay:0s;pointer-events:auto}
@@ -86,27 +86,32 @@ header#top .dropdown-item:hover,header#top .dropdown-item:focus{background:var(-
 .ri-pfacts b{display:block;color:var(--ri-ink);font-size:.84rem}
 
 /* footer */
-footer#bottom,footer#bottom .o_footer,footer#bottom .o_footer_copyright{background:var(--ri-ink)!important;color:#CFCEE0!important}
-footer#bottom .o_footer_copyright{border-top:1px solid rgba(255,255,255,.1)}
-footer#bottom a{color:#EDEDF6!important;text-decoration:none}
+footer#bottom,footer#bottom .o_footer,footer#bottom .o_footer_copyright{background:var(--ri-brand)!important;color:#E3ECF8!important}
+footer#bottom .o_footer_copyright{border-top:1px solid rgba(255,255,255,.18)}
+footer#bottom a{color:#FFFFFF!important;text-decoration:none}
 footer#bottom a:hover{color:#fff!important;text-decoration:underline}
 footer#bottom h1,footer#bottom h2,footer#bottom h3,footer#bottom h4,footer#bottom h5,footer#bottom h6{color:#fff!important}
 .ri-footer h6{font-size:.74rem;letter-spacing:.16em;text-transform:uppercase;margin-bottom:.9rem}
 .ri-footer ul{list-style:none;padding:0;margin:0}
 .ri-footer li{padding:.18rem 0}
 .ri-footer .ri-flogo{max-width:190px;height:auto;margin-bottom:1rem}
-.ri-footer p{color:#CFCEE0}
-.ri-footer .ri-small{font-size:.78rem;color:#A3A2BC}
+.ri-footer p{color:#E3ECF8}
+.ri-footer .ri-small{font-size:.78rem;color:#C9D8EE}
+.ri-social{display:flex;gap:10px;margin-top:.9rem}
+.ri-social a{display:inline-flex;align-items:center;justify-content:center;width:38px;height:38px;border-radius:50%;border:1px solid rgba(255,255,255,.55);transition:background .2s,border-color .2s}
+.ri-social a:hover{background:#fff;border-color:#fff;text-decoration:none!important}
+.ri-social svg{width:18px;height:18px;fill:#fff;transition:fill .2s}
+.ri-social a:hover svg{fill:var(--ri-brand)}
 
 /* shared section pieces */
 .ri-section{padding-top:clamp(44px,6vw,80px)!important;padding-bottom:clamp(44px,6vw,80px)!important}
 .ri-section.ri-tight{padding-top:clamp(36px,5vw,64px)!important;padding-bottom:clamp(36px,5vw,64px)!important}
 .ri-section.pt0{padding-top:0!important}
 .ri-bg-white{background:#fff}
-.ri-bg-soft,.ri-bg-sand{background:var(--ri-soft)}
+.ri-bg-soft,.ri-bg-sand{background:#fff;border-top:1px solid var(--ri-line-2);border-bottom:1px solid var(--ri-line-2)}
 .ri-eyebrow{display:inline-block;font-size:.72rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--ri-brand);margin-bottom:.6rem}
-.ri-script{display:block;font-family:var(--ri-script);font-weight:400;font-size:clamp(2rem,3.8vw,2.7rem);line-height:1;color:var(--ri-brand);margin:0 0 .4rem;letter-spacing:0}
-.ri-script-sm{font-size:clamp(1.6rem,2.6vw,1.95rem);margin-bottom:.15rem}
+.ri-accent{display:block;font-family:var(--ri-ui);font-weight:500;font-size:clamp(1.05rem,1.6vw,1.25rem);line-height:1.3;color:var(--ri-brand);margin:0 0 .55rem;letter-spacing:.01em}
+.ri-accent-sm{font-size:.95rem;margin-bottom:.25rem}
 .ri-head{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:.6rem 1.5rem;margin-bottom:1.5rem}
 .ri-head h2{margin:0;font-size:clamp(1.4rem,2.6vw,1.9rem)}
 .ri-head p{margin:0;color:var(--ri-muted);max-width:40rem}
@@ -124,8 +129,8 @@ footer#bottom h1,footer#bottom h2,footer#bottom h3,footer#bottom h4,footer#botto
 /* home hero: light photo hero with search */
 /* the tiles overlap the hero's foot; while the search is in use its suggestions sit above them */
 .ri-home-hero:focus-within{z-index:4}
-.ri-home-hero{position:relative;z-index:1;background-color:var(--ri-soft);background-size:cover;background-position:center 45%;padding:clamp(52px,7vw,104px) 0 clamp(92px,10vw,132px)!important;overflow:visible}
-.ri-home-hero>.o_we_bg_filter{position:absolute;top:0;right:0;bottom:0;left:0;background-image:linear-gradient(90deg,rgba(248,248,232,.97) 0%,rgba(248,248,232,.92) 38%,rgba(248,248,232,.45) 64%,rgba(248,248,232,0) 84%)}
+.ri-home-hero{position:relative;z-index:1;background-color:#fff;background-size:cover;background-position:center 45%;padding:clamp(52px,7vw,104px) 0 clamp(92px,10vw,132px)!important;overflow:visible}
+.ri-home-hero>.o_we_bg_filter{position:absolute;top:0;right:0;bottom:0;left:0;background-image:linear-gradient(90deg,rgba(255,255,255,.97) 0%,rgba(255,255,255,.92) 38%,rgba(255,255,255,.45) 64%,rgba(255,255,255,0) 84%)}
 .ri-home-hero>.container{position:relative;z-index:1}
 .ri-home-hero h1{font-size:clamp(2.2rem,5vw,3.7rem);font-weight:700;max-width:16ch;margin:0 0 1rem;line-height:1.08}
 .ri-home-hero .ri-lead{font-size:clamp(1rem,1.5vw,1.1rem);color:var(--ri-ink-2);max-width:34rem;margin-bottom:1.7rem;line-height:1.6}
@@ -178,6 +183,10 @@ a.ri-fcard:hover{box-shadow:var(--ri-shadow);border-color:var(--ri-brand-100);co
 .ri-qsteps .ri-num{width:56px;height:56px;font-size:1.3rem;margin-bottom:1rem;background:#fff;color:var(--ri-brand);border:1.5px solid var(--ri-brand)}
 .ri-qsteps h3{font-size:1.08rem;margin:0 0 .45rem}
 .ri-qsteps p{color:var(--ri-muted);font-size:.92rem;line-height:1.6;margin:0;max-width:22rem}
+
+/* home page video, under the quote steps */
+.ri-video{max-width:860px;margin:clamp(28px,4vw,44px) auto 0;border-radius:16px;overflow:hidden;background:#000;box-shadow:var(--ri-shadow)}
+.ri-video video{display:block;width:100%;height:auto;aspect-ratio:16/9;background:#000}
 
 /* page head (about): photo with brand filter */
 .ri-hero{position:relative;background-color:var(--ri-ink);background-size:cover;background-position:center 40%;color:#fff;overflow:hidden}
@@ -276,7 +285,7 @@ a.ri-contact-i:hover{border-color:var(--ri-brand-100);color:var(--ri-ink);box-sh
 
 /* responsive */
 @media (max-width:991.98px){
- .ri-home-hero>.o_we_bg_filter{background-image:linear-gradient(180deg,rgba(248,248,232,.94) 0%,rgba(248,248,232,.88) 100%)!important}
+ .ri-home-hero>.o_we_bg_filter{background-image:linear-gradient(180deg,rgba(255,255,255,.94) 0%,rgba(255,255,255,.88) 100%)!important}
  .ri-quick-row{grid-template-columns:repeat(3,minmax(0,1fr));max-width:none}
  .ri-assure{grid-template-columns:1fr;gap:1rem}
  .ri-feat{grid-template-columns:none;grid-auto-flow:column;grid-auto-columns:minmax(200px,34%);overflow-x:auto;scroll-snap-type:x mandatory;padding:6px;margin:-6px -6px 0;scroll-padding-inline:6px;-webkit-overflow-scrolling:touch;scrollbar-width:none}

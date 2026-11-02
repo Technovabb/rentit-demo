@@ -1,7 +1,7 @@
 <section class="s_cover o_colored_level oe_img_bg o_bg_img_center ri-home-hero" data-snippet="s_cover" data-name="Hero" style="background-image: url('__IMG:pf-21__');">
   <div class="o_we_bg_filter ri-home-hero-filter"></div>
   <div class="container">
-    <span class="ri-script">Why buy, when you can rent</span>
+    <span class="ri-accent">Why buy, when you can rent.</span>
     <h1>Everything your event needs, delivered and set up.</h1>
     <p class="ri-lead">Planning your next event? Browse the collection, add what you need and request your quote online. Easy, convenient and available at any time.</p>
     <form method="get" class="o_searchbar_form s_searchbar_input ri-search" action="/shop" data-snippet="s_searchbar_input">
@@ -37,7 +37,7 @@
     </div>
     <div class="ri-assure">
       <div class="ri-assure-i"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2.5 6h11v10h-11zM13.5 9h4l3 3.2V16h-7"/><circle cx="6.5" cy="17.5" r="1.8"/><circle cx="17" cy="17.5" r="1.8"/></svg><div><b>Island-wide delivery</b><span>Convenient for you, with no logistics to think about. Our team handles delivery, setup and collection with care.</span></div></div>
-      <div class="ri-assure-i"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 8h14l-1.2 12.5H6.2z"/><path d="M9 10V6.5a3 3 0 0 1 6 0V10"/></svg><div><b>A one-stop shop</b><span>A wide collection in one place, from tents and furniture to tableware and d&#233;cor.</span></div></div>
+      <div class="ri-assure-i"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 8h14l-1.2 12.5H6.2z"/><path d="M9 10V6.5a3 3 0 0 1 6 0V10"/></svg><div><b>One-stop shop</b><span>A wide collection in one place, from tents and furniture to tableware and d&#233;cor.</span></div></div>
       <div class="ri-assure-i"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 14v-2a8 8 0 0 1 16 0v2"/><rect x="3" y="14" width="4" height="6" rx="1.5"/><rect x="17" y="14" width="4" height="6" rx="1.5"/><path d="M19 20c0 1.2-1.6 2-4 2h-2"/></svg><div><b>Dedicated service</b><span>From your first quote to the day of your event, our team is on hand to keep everything running smoothly.</span></div></div>
     </div>
   </div>
@@ -46,7 +46,7 @@
 <section class="s_three_columns o_colored_level ri-section ri-tight" data-snippet="s_three_columns" data-name="New arrivals">
   <div class="container">
     <div class="ri-head">
-      <div><span class="ri-script ri-script-sm">Just in</span><h2>New Arrivals</h2></div>
+      <div><span class="ri-accent ri-accent-sm">Just in</span><h2>New Arrivals</h2></div>
     </div>
     <div class="ri-feat">
       <a class="ri-fcard" href="__PROD:4370__"><span class="ri-ph"><img src="__PIMG:4370__" alt="" loading="lazy"/></span><span class="ri-body"><b>Silver Sweetheart Table</b><span class="ri-price">$175 <small>/ day + VAT</small></span></span></a>
@@ -90,6 +90,7 @@
       <li><span class="ri-num">2</span><h3>Submit your request</h3><p>Continue to your quote and complete a short form with your event details.</p></li>
       <li><span class="ri-num">3</span><h3>Receive your quote</h3><p>Your official quote is sent to your email address.</p></li>
     </ol>
+    <div class="ri-video"><video controls="controls" preload="none" playsinline="playsinline" poster="__IMG:video-poster__" src="__IMG:video-book__" aria-label="Book with Rent It.BB easily (34-second video)"></video></div>
     <div class="ri-center"><a class="btn btn-primary btn-lg" href="__SHOP__">Browse the collection</a></div>
   </div>
 </section>
@@ -100,14 +101,14 @@
       <h2>Recent Events</h2>
     </div>
     <div class="ri-events">
-      <figure class="ri-ev" tabindex="0"><img src="__IMG:pf-73-sm__" alt="Wooden table set with orange napkins and tropical flowers" loading="lazy"/><img class="ri-ev-2" src="__IMG:pf-75-sm__" alt="" loading="lazy"/></figure>
-      <figure class="ri-ev" tabindex="0"><img src="__IMG:pf-24-sm__" alt="Menu card for a 30th birthday lunch on a gold charger" loading="lazy"/><img class="ri-ev-2" src="__IMG:pf-12-sm__" alt="" loading="lazy"/></figure>
-      <figure class="ri-ev" tabindex="0"><img src="__IMG:pf-34-sm__" alt="BABY balloon letters" loading="lazy"/><img class="ri-ev-2" src="__IMG:pf-35-sm__" alt="" loading="lazy"/></figure>
-      <figure class="ri-ev" tabindex="0"><img src="__IMG:pf-14-sm__" alt="Long banquet table under purple light with pink flowers" loading="lazy"/><img class="ri-ev-2" src="__IMG:pf-16-sm__" alt="" loading="lazy"/></figure>
-      <figure class="ri-ev" tabindex="0"><img src="__IMG:pf-40-sm__" alt="Will you marry me sign with lanterns and a red carpet at a marina" loading="lazy"/><img class="ri-ev-2" src="__IMG:pf-63-sm__" alt="" loading="lazy"/></figure>
-      <figure class="ri-ev" tabindex="0"><img src="__IMG:pf-61-sm__" alt="Oh Baby balloon backdrop" loading="lazy"/><img class="ri-ev-2" src="__IMG:pf-53-sm__" alt="" loading="lazy"/></figure>
-      <figure class="ri-ev" tabindex="0"><img src="__IMG:pf-39-sm__" alt="Lounge cushions with white roses" loading="lazy"/><img class="ri-ev-2" src="__IMG:pf-56-sm__" alt="" loading="lazy"/></figure>
-      <figure class="ri-ev" tabindex="0"><img src="__IMG:pf-21-sm__" alt="Event styled with Rent It.BB rentals" loading="lazy"/><img class="ri-ev-2" src="__IMG:pf-13-sm__" alt="" loading="lazy"/></figure>
+      <figure class="ri-ev" tabindex="0"><img src="__IMG:ev-grweb-1__" alt="Long garden tables set under the palms" loading="lazy"/><img class="ri-ev-2" src="__IMG:ev-grweb-2__" alt="" loading="lazy"/></figure>
+      <figure class="ri-ev" tabindex="0"><img src="__IMG:ev-black-30-1__" alt="Black and red 30th birthday setup with balloons" loading="lazy"/><img class="ri-ev-2" src="__IMG:ev-black-30-2__" alt="" loading="lazy"/></figure>
+      <figure class="ri-ev" tabindex="0"><img src="__IMG:ev-teal-boho-1__" alt="Teal boho table with lanterns and greenery" loading="lazy"/><img class="ri-ev-2" src="__IMG:ev-teal-boho-2__" alt="" loading="lazy"/></figure>
+      <figure class="ri-ev" tabindex="0"><img src="__IMG:ev-blue-silver-1__" alt="Blue and silver head table with draped backdrop" loading="lazy"/><img class="ri-ev-2" src="__IMG:ev-blue-silver-2__" alt="" loading="lazy"/></figure>
+      <figure class="ri-ev" tabindex="0"><img src="__IMG:ev-green-gold-1__" alt="Green and gold wedding reception" loading="lazy"/><img class="ri-ev-2" src="__IMG:ev-green-gold-2__" alt="" loading="lazy"/></figure>
+      <figure class="ri-ev" tabindex="0"><img src="__IMG:ev-ashanti-1__" alt="Pink and orange birthday party setup" loading="lazy"/><img class="ri-ev-2" src="__IMG:ev-ashanti-2__" alt="" loading="lazy"/></figure>
+      <figure class="ri-ev" tabindex="0"><img src="__IMG:ev-sky-blue-1__" alt="Sky blue table setting with white chairs" loading="lazy"/><img class="ri-ev-2" src="__IMG:ev-sky-blue-2__" alt="" loading="lazy"/></figure>
+      <figure class="ri-ev" tabindex="0"><img src="__IMG:ev-corporate-tent-1__" alt="Long tables under a marquee at a corporate event" loading="lazy"/><img class="ri-ev-2" src="__IMG:ev-corporate-tent-2__" alt="" loading="lazy"/></figure>
     </div>
   </div>
 </section>
