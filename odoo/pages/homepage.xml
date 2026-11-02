@@ -1,4 +1,4 @@
-<section class="s_cover o_colored_level oe_img_bg o_bg_img_center ri-home-hero" data-snippet="s_cover" data-name="Hero" style="background-image: url('__IMG:pf-21__');">
+<section class="s_cover o_colored_level oe_img_bg o_bg_img_center ri-home-hero" data-snippet="s_cover" data-name="Hero" style="background-image: url('__IMG:hero__');">
   <div class="o_we_bg_filter ri-home-hero-filter"></div>
   <div class="container">
     <span class="ri-accent">Why buy, when you can rent.</span>
@@ -108,7 +108,7 @@
       <figure class="ri-ev" tabindex="0"><img src="__IMG:ev-green-gold-1__" alt="Green and gold wedding reception" loading="lazy"/><img class="ri-ev-2" src="__IMG:ev-green-gold-2__" alt="" loading="lazy"/></figure>
       <figure class="ri-ev" tabindex="0"><img src="__IMG:ev-ashanti-1__" alt="Pink and orange birthday party setup" loading="lazy"/><img class="ri-ev-2" src="__IMG:ev-ashanti-2__" alt="" loading="lazy"/></figure>
       <figure class="ri-ev" tabindex="0"><img src="__IMG:ev-sky-blue-1__" alt="Sky blue table setting with white chairs" loading="lazy"/><img class="ri-ev-2" src="__IMG:ev-sky-blue-2__" alt="" loading="lazy"/></figure>
-      <figure class="ri-ev" tabindex="0"><img src="__IMG:ev-corporate-tent-1__" alt="Long tables under a marquee at a corporate event" loading="lazy"/><img class="ri-ev-2" src="__IMG:ev-corporate-tent-2__" alt="" loading="lazy"/></figure>
+      <figure class="ri-ev" tabindex="0"><img src="__IMG:ev-all-white-1__" alt="All white wedding reception with a monogrammed dance floor" loading="lazy"/><img class="ri-ev-2" src="__IMG:ev-all-white-2__" alt="" loading="lazy"/></figure>
     </div>
   </div>
 </section>
@@ -121,7 +121,7 @@
     </div>
     <div class="row g-3">
       <div class="col-12 col-lg-4"><figure class="ri-quote"><blockquote>&#8220;The service and communication were way above anything that we had expected.&#8221;</blockquote><figcaption>Ana Marie</figcaption></figure></div>
-      <div class="col-12 col-lg-4"><figure class="ri-quote"><blockquote>&#8220;It was a bank holiday&#8230; but that was no problem. Dominic said that he would still come and set the tents up for our staff party.&#8221;</blockquote><figcaption>A client, staff party</figcaption></figure></div>
+      <div class="col-12 col-lg-4"><figure class="ri-quote"><blockquote>&#8220;It was a bank holiday&#8230; but that was no problem. [The team] said that [they] would still come and set the tents up for our staff party.&#8221;</blockquote><figcaption>A client, staff party</figcaption></figure></div>
       <div class="col-12 col-lg-4"><figure class="ri-quote"><blockquote>&#8220;I told my work mates about this page that I stumbled across&#8230; as I was strolling IG. Then that was where I met this wonderful team!&#8221;</blockquote><figcaption>Shaunice</figcaption></figure></div>
     </div>
   </div>

@@ -1138,11 +1138,12 @@
   // ------------------------------------------------------------------ gallery uploads, tokens, pages, menus, custom code
   const GALLERY = [12, 13, 14, 16, 21, 24, 34, 35, 39, 40, 53, 56, 61, 63, 73, 75];
   // Rent It's own Recent Events photos (two per event, cropped 4:5) and the home page video's poster frame.
-  const EVENTS = ['grweb', 'black-30', 'teal-boho', 'blue-silver', 'green-gold', 'ashanti', 'sky-blue', 'corporate-tent'];
+  const EVENTS = ['grweb', 'black-30', 'teal-boho', 'blue-silver', 'green-gold', 'ashanti', 'sky-blue', 'all-white'];
   const galleryFiles = () => GALLERY.flatMap((n) => [`pf-${n}`, `pf-${n}-sm`]).map((k) => ({ key: k, path: `gallery/${k}.jpg`, name: `rentit_${k}.jpg` }))
     .concat([{ key: 'logo-white', path: 'brand/logo-white.png', name: 'rentit_logo-white.png' }])
     .concat(EVENTS.flatMap((e) => [1, 2].map((n) => ({ key: `ev-${e}-${n}`, path: `gallery/ev-${e}-${n}.jpg`, name: `rentit_ev-${e}-${n}.jpg` }))))
-    .concat([{ key: 'video-poster', path: 'media/book-with-rentit-poster.jpg', name: 'rentit_book-with-rentit-poster.jpg' }]);
+    .concat([{ key: 'video-poster', path: 'media/book-with-rentit-poster.jpg', name: 'rentit_book-with-rentit-poster.jpg' }])
+    .concat([{ key: 'hero', path: 'gallery/hero.jpg', name: 'rentit_hero.jpg' }]);
 
   // The home page video, kept in Odoo like the photos: a public attachment that /web/content streams.
   const MEDIA = [{ key: 'video-book', path: 'media/book-with-rentit.mp4', name: 'rentit_book-with-rentit.mp4', mimetype: 'video/mp4' }];
