@@ -1151,12 +1151,20 @@
     const out = { uploaded: [], reused: [] };
     for (const m of MEDIA) {
       const ex = (await rpc('ir.attachment', 'search_read', [[['name', '=', m.name], ['res_model', '=', 'ir.ui.view']]], { fields: ['id'] }))[0];
-      if (ex && !force) { RIB.map.img[m.key] = `/web/content/${ex.id}/${m.name}`; out.reused.push(m.key); continue; }
-      const vals = { name: m.name, datas: await fetchB64(m.path), mimetype: m.mimetype, public: true, res_model: 'ir.ui.view', res_id: 0 };
       let id = ex && ex.id;
-      if (id) await rpc('ir.attachment', 'write', [[id], vals]); else id = idOf(await rpc('ir.attachment', 'create', [vals]));
+      if (!id || force) {
+        // Odoo 20 attachments take raw bytes, not base64 `datas` over RPC, so upload the file the way the chatter does.
+        const fd = new FormData();
+        fd.append('csrf_token', (W.odoo && W.odoo.csrf_token) || '');
+        fd.append('model', 'ir.ui.view'); fd.append('id', '0');
+        fd.append('ufile', new File([await (await kitFetch(m.path)).blob()], m.name, { type: m.mimetype }));
+        const r = await fetch('/web/binary/upload_attachment', { method: 'POST', body: fd, credentials: 'same-origin' });
+        const j = await r.json().catch(() => null);
+        if (!r.ok || !j || !j[0] || j[0].error) throw new Error(`upload ${m.name}: HTTP ${r.status} ${JSON.stringify(j).slice(0, 200)}`);
+        id = j[0].id; out.uploaded.push(m.key);
+      } else out.reused.push(m.key);
+      await rpc('ir.attachment', 'write', [[id], { public: true }]);
       RIB.map.img[m.key] = `/web/content/${id}/${m.name}`;
-      out.uploaded.push(m.key);
     }
     save();
     try { out.publicCheck = (await fetch(RIB.map.img['video-book'], { method: 'HEAD', credentials: 'omit' })).status; } catch (e) { out.publicCheck = short(e); }
