@@ -130,8 +130,10 @@ footer#bottom h1,footer#bottom h2,footer#bottom h3,footer#bottom h4,footer#botto
 /* home hero: light photo hero with search */
 /* the tiles overlap the hero's foot; while the search is in use its suggestions sit above them */
 .ri-home-hero:focus-within{z-index:4}
-.ri-home-hero{position:relative;z-index:1;background-color:#fff;background-size:cover;background-position:center 45%;padding:clamp(52px,7vw,104px) 0 clamp(92px,10vw,132px)!important;overflow:visible}
-.ri-home-hero>.o_we_bg_filter{position:absolute;top:0;right:0;bottom:0;left:0;background-image:linear-gradient(90deg,rgba(255,255,255,.97) 0%,rgba(255,255,255,.92) 38%,rgba(255,255,255,.45) 64%,rgba(255,255,255,0) 84%)}
+.ri-home-hero{position:relative;z-index:1;background-color:#fff;padding:clamp(52px,7vw,104px) 0 clamp(92px,10vw,132px)!important;overflow:visible}
+/* Rent It's hero photo is only 836px wide, so it fills the right side (at most 1100px) instead of the full width, and its left edge fades into the white */
+.ri-home-hero>.ri-hero-img{position:absolute;top:0;right:0;width:min(55%,1100px);height:100%!important;max-width:none;object-fit:cover;object-position:55% 45%;-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 40%);mask-image:linear-gradient(90deg,transparent 0,#000 40%)}
+.ri-home-hero>.o_we_bg_filter{position:absolute;top:0;right:0;bottom:0;left:0;background-image:linear-gradient(90deg,rgba(255,255,255,.95) 0%,rgba(255,255,255,.85) 42%,rgba(255,255,255,0) 62%)}
 .ri-home-hero>.container{position:relative;z-index:1}
 .ri-home-hero h1{font-size:clamp(2.2rem,5vw,3.7rem);font-weight:700;max-width:16ch;margin:0 0 1rem;line-height:1.08}
 .ri-home-hero .ri-lead{font-size:clamp(1rem,1.5vw,1.1rem);color:var(--ri-ink-2);max-width:34rem;margin-bottom:1.7rem;line-height:1.6}
@@ -286,6 +288,7 @@ a.ri-contact-i:hover{border-color:var(--ri-brand-100);color:var(--ri-ink);box-sh
 
 /* responsive */
 @media (max-width:991.98px){
+ .ri-home-hero>.ri-hero-img{width:100%;-webkit-mask-image:none;mask-image:none}
  .ri-home-hero>.o_we_bg_filter{background-image:linear-gradient(180deg,rgba(255,255,255,.94) 0%,rgba(255,255,255,.88) 100%)!important}
  .ri-quick-row{grid-template-columns:repeat(3,minmax(0,1fr));max-width:none}
  .ri-assure{grid-template-columns:1fr;gap:1rem}

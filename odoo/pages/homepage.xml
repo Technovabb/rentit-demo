@@ -1,4 +1,5 @@
-<section class="s_cover o_colored_level oe_img_bg o_bg_img_center ri-home-hero" data-snippet="s_cover" data-name="Hero" style="background-image: url('__IMG:hero__');">
+<section class="s_cover o_colored_level ri-home-hero" data-snippet="s_cover" data-name="Hero">
+  <img class="ri-hero-img" src="__IMG:hero__" alt="Long wooden tables set for a corporate dinner under a tent" fetchpriority="high"/>
   <div class="o_we_bg_filter ri-home-hero-filter"></div>
   <div class="container">
     <span class="ri-accent">Why buy, when you can rent.</span>
