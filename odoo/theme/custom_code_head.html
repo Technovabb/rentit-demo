@@ -70,6 +70,8 @@ header#top .dropdown-item:hover,header#top .dropdown-item:focus{background:var(-
 /* prices are per day, before VAT, as on rentit.bb */
 .oe_product .product_price:after,#product_details .product_price:after{content:'+ 17.5% VAT';display:block;color:var(--ri-muted);font-weight:500;font-size:.74rem;letter-spacing:.01em;margin-top:.1rem}
 #product_details .product_price:after{font-size:.85rem}
+/* Listings show the price without "/ Day" (rentals can run longer); the product page keeps it as a small label */
+.oe_product .product_price .h6{display:none!important}
 .o_wsale_product_btn,.o_wsale_product_btn .btn,.oe_product .o_wsale_product_btn{opacity:1!important;visibility:visible!important;transform:none!important}
 .o_wsale_product_btn .btn{min-height:40px;min-width:40px}
 .o_ribbon,.o_wsale_ribbon{border-radius:8px!important;font-weight:600}
@@ -272,6 +274,8 @@ a.ri-pack:hover{box-shadow:var(--ri-shadow);color:var(--ri-ink)}
 .ri-faq .accordion-body{color:var(--ri-ink-2);padding:1rem 1.25rem 1.2rem;line-height:1.6}
 .ri-faq .accordion-body p:last-child{margin-bottom:0}
 .ri-faq .accordion-button:focus-visible{box-shadow:inset 0 0 0 3px var(--ri-brand-2)}
+.ri-faq .ri-faq-group{color:var(--ri-brand-ink);font-weight:700;margin:0 0 .9rem}
+.ri-faq .accordion-header{margin:0}
 .ri-help{background:#fff;border:1px solid var(--ri-line);border-radius:var(--ri-r);padding:1.6rem}
 
 /* contact page: other ways to reach us */

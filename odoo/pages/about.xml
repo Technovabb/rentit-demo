@@ -1,9 +1,9 @@
-<section class="s_cover o_colored_level oe_img_bg o_bg_img_center ri-hero ri-page-head pt80 pb80" data-snippet="s_cover" data-name="Page header" style="background-image: url('__IMG:pf-13__');">
+<section class="s_cover o_colored_level oe_img_bg o_bg_img_center ri-hero ri-page-head pt80 pb80" data-snippet="s_cover" data-name="Page header" style="background-image: url('__IMG:about-hero__');">
   <div class="o_we_bg_filter" style="background-image: linear-gradient(100deg, rgba(39, 38, 70, 0.92) 0%, rgba(4, 76, 171, 0.7) 50%, rgba(39, 38, 70, 0.3) 100%);"></div>
   <div class="container s_allow_columns">
     <span class="ri-eyebrow">About us</span>
-    <h1>A family business, here for your event</h1>
-    <p class="ri-lead">Rent It.BB has been helping people in Barbados celebrate since 2019.</p>
+    <h1>A dedicated team behind every event</h1>
+    <p class="ri-lead">Since 2019, we&#8217;ve helped bring weddings, corporate events and celebrations across Barbados to life, with refined rentals delivered and set up by our team.</p>
   </div>
 </section>
 
@@ -13,14 +13,13 @@
       <div class="col-lg-6">
         <span class="ri-eyebrow">Our story</span>
         <h2>Founded in 2019</h2>
-        <p>Rent It.BB is a local event rental business, owned and run by a family.</p>
-        <p>Over the years our range has grown step by step. Today we offer a very wide range of rental items in Barbados, from tents, tables and chairs to linens, lounge furniture and d&#233;cor.</p>
-        <p>We&#8217;re committed to on-time, reliable service and good quality items at fair prices. Our aim is to be your one-stop shop, so you can get everything from one place and save on transport and running around.</p>
-        <p class="mb-0">Whatever you&#8217;re planning, we carry something for you:</p>
-        <div class="ri-chips"><span>Weddings</span><span>Parties</span><span>Dinners</span><span>Baby showers</span><span>Company functions</span><span>Graduations</span></div>
+        <p>Rent It.BB began in 2019 as a family business, and that care for people entrusted to us still shapes everything we do.</p>
+        <p>Today, we are a full team with a wide collection of rentals, from tents and furniture to linens, tableware and d&#233;cor. Every piece is held to a high standard of quality, and every order is delivered, set up and collected by our team, so your event is ready before your guests arrive.</p>
+        <p>Experience has taught us that the details make an event. We are dedicated to delivering excellent service from your first quote to the final pick-up, and we work alongside event planners and coordinators to bring each vision to life.</p>
+        <p class="mb-0">Whether it&#8217;s a wedding, a corporate event or an intimate celebration, our goal is simple: an event that meets your expectations and is remembered for all the right reasons.</p>
       </div>
       <div class="col-lg-6">
-        <div class="ri-photo"><img src="__IMG:pf-75__" alt="Farm table dinner set by Rent It.BB with heliconia flowers and orange napkins" loading="lazy"/></div>
+        <div class="ri-photo"><img src="__IMG:about-story__" alt="An event set up by the Rent It.BB team" loading="lazy"/></div>
       </div>
     </div>
   </div>
@@ -29,8 +28,8 @@
 <section class="s_numbers o_colored_level ri-section ri-bg-white" data-snippet="s_numbers" data-name="Numbers">
   <div class="container">
     <div class="row g-3 text-center">
-      <div class="col-6 col-lg-3"><div class="ri-big"><b>250</b><span>Events</span></div></div>
-      <div class="col-6 col-lg-3"><div class="ri-big"><b>163</b><span>Clients</span></div></div>
+      <div class="col-6 col-lg-3"><div class="ri-big"><b>3,000+</b><span>Events</span></div></div>
+      <div class="col-6 col-lg-3"><div class="ri-big"><b>2,000+</b><span>Clients</span></div></div>
       <div class="col-6 col-lg-3"><div class="ri-big"><b>330+</b><span>Items to rent</span></div></div>
       <div class="col-6 col-lg-3"><div class="ri-big"><b>5.0</b><span>Google rating (3 reviews)</span></div></div>
     </div>
@@ -50,17 +49,20 @@
   </div>
 </section>
 
-<section class="s_text_block o_colored_level ri-section ri-bg-sand" data-snippet="s_text_block" data-name="Gallery">
+<section class="s_text_block o_colored_level ri-section ri-tight" data-snippet="s_text_block" data-name="Recent events">
   <div class="container">
     <div class="ri-head">
-      <div><span class="ri-eyebrow">Our work</span><h2>Some of our set-ups</h2></div>
+      <h2>Recent Events</h2>
     </div>
-    <div class="ri-gallery">
-      <figure class="ri-wide"><img src="__IMG:pf-14__" alt="Long banquet table under purple light with pink flowers" loading="lazy"/></figure>
-      <figure><img src="__IMG:pf-12-sm__" alt="Red and gold birthday table with a candelabra" loading="lazy"/></figure>
-      <figure><img src="__IMG:pf-61-sm__" alt="Oh Baby balloon backdrop" loading="lazy"/></figure>
-      <figure><img src="__IMG:pf-35-sm__" alt="BABY balloon letters" loading="lazy"/></figure>
-      <figure><img src="__IMG:pf-39-sm__" alt="Lounge cushions with white roses" loading="lazy"/></figure>
+    <div class="ri-events">
+      <figure class="ri-ev" tabindex="0"><img src="__IMG:ev-grweb-1__" alt="Long garden tables set under the palms" loading="lazy"/><img class="ri-ev-2" src="__IMG:ev-grweb-2__" alt="" loading="lazy"/></figure>
+      <figure class="ri-ev" tabindex="0"><img src="__IMG:ev-black-30-1__" alt="Black and red 30th birthday setup with balloons" loading="lazy"/><img class="ri-ev-2" src="__IMG:ev-black-30-2__" alt="" loading="lazy"/></figure>
+      <figure class="ri-ev" tabindex="0"><img src="__IMG:ev-teal-boho-1__" alt="Teal boho table with lanterns and greenery" loading="lazy"/><img class="ri-ev-2" src="__IMG:ev-teal-boho-2__" alt="" loading="lazy"/></figure>
+      <figure class="ri-ev" tabindex="0"><img src="__IMG:ev-blue-silver-1__" alt="Blue and silver head table with draped backdrop" loading="lazy"/><img class="ri-ev-2" src="__IMG:ev-blue-silver-2__" alt="" loading="lazy"/></figure>
+      <figure class="ri-ev" tabindex="0"><img src="__IMG:ev-green-gold-1__" alt="Green and gold wedding reception" loading="lazy"/><img class="ri-ev-2" src="__IMG:ev-green-gold-2__" alt="" loading="lazy"/></figure>
+      <figure class="ri-ev" tabindex="0"><img src="__IMG:ev-ashanti-1__" alt="Pink and orange birthday party setup" loading="lazy"/><img class="ri-ev-2" src="__IMG:ev-ashanti-2__" alt="" loading="lazy"/></figure>
+      <figure class="ri-ev" tabindex="0"><img src="__IMG:ev-sky-blue-1__" alt="Sky blue table setting with white chairs" loading="lazy"/><img class="ri-ev-2" src="__IMG:ev-sky-blue-2__" alt="" loading="lazy"/></figure>
+      <figure class="ri-ev" tabindex="0"><img src="__IMG:ev-all-white-1__" alt="All white wedding reception with a monogrammed dance floor" loading="lazy"/><img class="ri-ev-2" src="__IMG:ev-all-white-2__" alt="" loading="lazy"/></figure>
     </div>
   </div>
 </section>
@@ -75,7 +77,7 @@
         </div>
         <div class="col-lg-5">
           <div class="ri-btns justify-content-lg-end">
-            <a class="btn btn-light btn-lg" href="__SHOP__">Shop rentals</a>
+            <a class="btn btn-light btn-lg" href="__SHOP__">Explore rentals</a>
             <a class="btn btn-outline-light btn-lg" href="__PAGE:contactus__">Contact us</a>
           </div>
         </div>

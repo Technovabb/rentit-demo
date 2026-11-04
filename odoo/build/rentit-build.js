@@ -60,6 +60,7 @@
     eventTitle: 'About your event',
     eventIntro: 'Your answers help us plan the delivery, setup and collection.',
     contactIntro: 'Questions about a rental or your quote? Send us a note and we will get back to you.',
+    contactReply: 'Please allow 2-3 business days for a response.',
   }, prev.text || {});
 
   // ------------------------------------------------------------------ helpers
@@ -509,7 +510,10 @@
       contact_us_link_url: BIZ.wa, prevent_sale: true, prevent_sale_for: 'zero_price',
       social_instagram: BIZ.insta, tz: 'America/Barbados',
     }, skipped);
-    if (sorts.includes('website_sequence asc')) vals.shop_default_sort = 'website_sequence asc';
+    // Rent It's shop review: products A to Z, as on their old site
+    if (sorts.includes('name asc')) vals.shop_default_sort = 'name asc';
+    // Prices are shown before 17.5% VAT, with "+ 17.5% VAT" under them (the FAQ says so too)
+    if (has('website', 'show_line_subtotals_tax_selection')) vals.show_line_subtotals_tax_selection = 'tax_excluded';
     if (vals.prevent_sale_for && !(cfg.sel['website.prevent_sale_for'] || ['zero_price']).includes('zero_price')) delete vals.prevent_sale_for;
     const errors = await writeSafe('website', [wid()], vals, wctx());
     return { written: Object.keys(vals), skipped, errors };
@@ -589,8 +593,9 @@
   RIB.shopLayout = async () => {
     need();
     const out = { options: [], hiddenFilters: [], dateFormat: null, productFacts: null };
-    for (const key of ['website_sale.filmstrip_categories_pills', 'website_sale_renting.shop_rental_datepicker_opt']) {
-      try { await post('/website/theme_customize_data', { is_view_data: true, enable: [key], disable: [] }); out.options.push(key + ' ' + await viewState(key)); }
+    // Category pills on; the rental date picker off on /shop and the category pages (Rent It's shop review: dates are set at the quote)
+    for (const [key, on] of [['website_sale.filmstrip_categories_pills', true], ['website_sale_renting.shop_rental_datepicker_opt', false]]) {
+      try { await post('/website/theme_customize_data', { is_view_data: true, enable: on ? [key] : [], disable: on ? [] : [key] }); out.options.push(key + ' ' + await viewState(key)); }
       catch (e) { out.options.push(key + ' skipped: ' + short(e)); }
     }
     // The "Specifications" table only repeats the upgrade choices shown above it.
@@ -1143,7 +1148,9 @@
     .concat([{ key: 'logo-white', path: 'brand/logo-white.png', name: 'rentit_logo-white.png' }])
     .concat(EVENTS.flatMap((e) => [1, 2].map((n) => ({ key: `ev-${e}-${n}`, path: `gallery/ev-${e}-${n}.jpg`, name: `rentit_ev-${e}-${n}.jpg` }))))
     .concat([{ key: 'video-poster', path: 'media/book-with-rentit-poster.jpg', name: 'rentit_book-with-rentit-poster.jpg' }])
-    .concat([{ key: 'hero', path: 'gallery/hero.jpg', name: 'rentit_hero.jpg' }]);
+    .concat([{ key: 'hero', path: 'gallery/hero.jpg', name: 'rentit_hero.jpg' }])
+    // About banner, Our Story side photo and the contact form photo (Rent It's page reviews, 3 Nov)
+    .concat(['about-hero', 'about-story', 'contact'].map((k) => ({ key: k, path: `gallery/${k}.jpg`, name: `rentit_${k}.jpg` })));
 
   // The home page video, kept in Odoo like the photos: a public attachment that /web/content streams.
   const MEDIA = [{ key: 'video-book', path: 'media/book-with-rentit.mp4', name: 'rentit_book-with-rentit.mp4', mimetype: 'video/mp4' }];
@@ -1398,11 +1405,15 @@
     const xp = filler.map((c) => `<xpath expr="//section[hasclass('${c}')]" position="replace"/>`);
     const intro = base.arch_db.includes('anything related to our company or services');
     if (intro) xp.push(`<xpath expr="//p[contains(., 'anything related to our company or services')]" position="replace"><p>${esc(RIB.text.contactIntro)}</p></xpath>`);
-    // The form's side photo is Odoo's stock building; use one of Rent It's own event photos.
-    if (base.arch_db.includes('s_form_aside_default_image') && RIB.map.img['pf-75']) {
-      xp.push(`<xpath expr="//img[contains(@src, 's_form_aside_default_image')]" position="attributes"><attribute name="src">${esc(RIB.map.img['pf-75'])}</attribute>`
-        + '<attribute name="alt">Farm table dinner set by Rent It.BB with heliconia flowers and orange napkins</attribute></xpath>');
+    // The form's side photo is Odoo's stock building; use Rent It's own contact photo.
+    const photo = RIB.map.img.contact || RIB.map.img['pf-75'];
+    if (base.arch_db.includes('s_form_aside_default_image') && photo) {
+      xp.push(`<xpath expr="//img[contains(@src, 's_form_aside_default_image')]" position="attributes"><attribute name="src">${esc(photo)}</attribute>`
+        + '<attribute name="alt">An event set up by Rent It.BB</attribute></xpath>');
     }
+    // Rent It's contact review: "Please allow 2-3 business days for a response."
+    const reply = base.arch_db.includes('respond within');
+    if (reply) xp.push(`<xpath expr="//span[contains(., 'respond within')]" position="replace"><span class="s_website_form_field_description small form-text text-muted">${esc(RIB.text.contactReply)}</span></xpath>`);
     xp.push(hasSection('s_form_aside') ? `<xpath expr="//section[hasclass('s_form_aside')]" position="after">${extra.s}</xpath>`
       : `<xpath expr="//div[@id='wrap']" position="inside">${extra.s}</xpath>`);
     const arch = `<data name="Rent It contact page">${xp.join('')}</data>`;

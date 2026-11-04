@@ -1,8 +1,8 @@
 <section class="s_title o_colored_level ri-bg-white pt64 pb40" data-snippet="s_title" data-name="Title">
   <div class="container s_allow_columns">
     <span class="ri-eyebrow">FAQs</span>
-    <h1>Questions people often ask</h1>
-    <p class="ri-muted mb-0" style="max-width: 44rem;">How quotes, payment, rental times and delivery work at Rent It.BB.</p>
+    <h1>What to know before you book</h1>
+    <p class="ri-muted mb-0" style="max-width: 44rem;">What to expect, from your first quote request to the collection of your rentals.</p>
   </div>
 </section>
 
@@ -10,52 +10,109 @@
   <div class="container">
     <div class="row g-4">
       <div class="col-lg-8">
-        <div class="accordion" id="ri-faq">
+        <h2 class="h4 ri-faq-group">Quotes &amp; Booking</h2>
+        <div class="accordion mb-5" id="ri-faq-a">
           <div class="accordion-item" data-name="Accordion Item">
-            <h2 class="accordion-header" id="ri-faq-h1"><button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#ri-faq-1" aria-expanded="true" aria-controls="ri-faq-1">How do I place a booking?</button></h2>
-            <div id="ri-faq-1" class="accordion-collapse collapse show" aria-labelledby="ri-faq-h1" data-bs-parent="#ri-faq" role="region">
+            <h3 class="accordion-header" id="ri-faq-h1"><button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#ri-faq-1" aria-expanded="true" aria-controls="ri-faq-1">How do I request a quote?</button></h3>
+            <div id="ri-faq-1" class="accordion-collapse collapse show" aria-labelledby="ri-faq-h1" data-bs-parent="#ri-faq-a" role="region">
               <div class="accordion-body">
-                <p>Browse the collection and add what you need to your quote. Then continue to your quote and complete a short form with your event details. We&#8217;ll check that everything is available and email your official quote to look over and approve.</p>
+                <p>Browse the collection, add the items you need to your quote, and complete a short form with your event details. We will check availability and send your official quote to your inbox within 48 hours. If you would like to ask us something first, you are welcome to message us on WhatsApp at <a href="https://wa.me/12462348230" target="_blank" rel="noopener">+1 (246) 234-8230</a>.</p>
               </div>
             </div>
           </div>
           <div class="accordion-item" data-name="Accordion Item">
-            <h2 class="accordion-header" id="ri-faq-h2"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#ri-faq-2" aria-expanded="false" aria-controls="ri-faq-2">When do I pay for my order?</button></h2>
-            <div id="ri-faq-2" class="accordion-collapse collapse" aria-labelledby="ri-faq-h2" data-bs-parent="#ri-faq" role="region">
+            <h3 class="accordion-header" id="ri-faq-h2"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#ri-faq-2" aria-expanded="false" aria-controls="ri-faq-2">How far in advance should I book?</button></h3>
+            <div id="ri-faq-2" class="accordion-collapse collapse" aria-labelledby="ri-faq-h2" data-bs-parent="#ri-faq-a" role="region">
               <div class="accordion-body">
-                <p>A 50% deposit holds your items. It&#8217;s due once you approve your quote, and it is non-refundable. The rest of your order is due 5 days before your event date.</p>
+                <p>As early as possible. We recommend submitting your request as soon as you have your date and event details, particularly for busy periods, so we can confirm availability.</p>
               </div>
             </div>
           </div>
           <div class="accordion-item" data-name="Accordion Item">
-            <h2 class="accordion-header" id="ri-faq-h3"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#ri-faq-3" aria-expanded="false" aria-controls="ri-faq-3">How long do I keep the items?</button></h2>
-            <div id="ri-faq-3" class="accordion-collapse collapse" aria-labelledby="ri-faq-h3" data-bs-parent="#ri-faq" role="region">
+            <h3 class="accordion-header" id="ri-faq-h3"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#ri-faq-3" aria-expanded="false" aria-controls="ri-faq-3">Do you work with event planners and coordinators?</button></h3>
+            <div id="ri-faq-3" class="accordion-collapse collapse" aria-labelledby="ri-faq-h3" data-bs-parent="#ri-faq-a" role="region">
               <div class="accordion-body">
-                <p>All our prices are for up to 24 hours, from delivery to pick-up. Need something for longer? Just ask, and we&#8217;ll do our best to work something out.</p>
+                <p>Yes. We regularly collaborate with planners and coordinators. Please mention your planner in your quote request so we can coordinate the details with them.</p>
               </div>
             </div>
           </div>
           <div class="accordion-item" data-name="Accordion Item">
-            <h2 class="accordion-header" id="ri-faq-h4"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#ri-faq-4" aria-expanded="false" aria-controls="ri-faq-4">Do you deliver?</button></h2>
-            <div id="ri-faq-4" class="accordion-collapse collapse" aria-labelledby="ri-faq-h4" data-bs-parent="#ri-faq" role="region">
+            <h3 class="accordion-header" id="ri-faq-h4"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#ri-faq-4" aria-expanded="false" aria-controls="ri-faq-4">Can I make changes after submitting my quote request?</button></h3>
+            <div id="ri-faq-4" class="accordion-collapse collapse" aria-labelledby="ri-faq-h4" data-bs-parent="#ri-faq-a" role="region">
               <div class="accordion-body">
-                <p>Yes. Our team delivers, sets up and collects every order, island-wide. Items can&#8217;t be collected from us at this time. The delivery fee is added to your quote.</p>
+                <p>Yes. Changes can be accommodated subject to availability, provided they are requested in good time. Please contact us as soon as you know what you would like to adjust.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <h2 class="h4 ri-faq-group">Delivery &amp; Setup</h2>
+        <div class="accordion mb-5" id="ri-faq-b">
+          <div class="accordion-item" data-name="Accordion Item">
+            <h3 class="accordion-header" id="ri-faq-h5"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#ri-faq-5" aria-expanded="false" aria-controls="ri-faq-5">Do you deliver and set up?</button></h3>
+            <div id="ri-faq-5" class="accordion-collapse collapse" aria-labelledby="ri-faq-h5" data-bs-parent="#ri-faq-b" role="region">
+              <div class="accordion-body">
+                <p>Yes, we deliver island-wide. Our team handles the delivery, setup and collection of your rentals. The delivery fee is calculated based on the details of your event and is added to your quote.</p>
               </div>
             </div>
           </div>
           <div class="accordion-item" data-name="Accordion Item">
-            <h2 class="accordion-header" id="ri-faq-h5"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#ri-faq-5" aria-expanded="false" aria-controls="ri-faq-5">What if my event is cancelled or moved because of weather?</button></h2>
-            <div id="ri-faq-5" class="accordion-collapse collapse" aria-labelledby="ri-faq-h5" data-bs-parent="#ri-faq" role="region">
+            <h3 class="accordion-header" id="ri-faq-h6"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#ri-faq-6" aria-expanded="false" aria-controls="ri-faq-6">Can I collect the items myself?</button></h3>
+            <div id="ri-faq-6" class="accordion-collapse collapse" aria-labelledby="ri-faq-h6" data-bs-parent="#ri-faq-b" role="region">
               <div class="accordion-body">
-                <p>If bad weather or something unexpected gets in the way, talk to us and we&#8217;ll work with you. Please note that all deposits are non-refundable, whatever the reason.</p>
+                <p>Pickup is not currently available. All orders are delivered and collected by our team, which allows us to look after the condition of every piece.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <h2 class="h4 ri-faq-group">Payments &amp; Policies</h2>
+        <div class="accordion" id="ri-faq-c">
+          <div class="accordion-item" data-name="Accordion Item">
+            <h3 class="accordion-header" id="ri-faq-h7"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#ri-faq-7" aria-expanded="false" aria-controls="ri-faq-7">How does payment work?</button></h3>
+            <div id="ri-faq-7" class="accordion-collapse collapse" aria-labelledby="ri-faq-h7" data-bs-parent="#ri-faq-c" role="region">
+              <div class="accordion-body">
+                <p>Once you approve your quote, a 50% deposit secures your date and items. The balance is due five days before your event. The deposit is non-refundable.</p>
               </div>
             </div>
           </div>
           <div class="accordion-item" data-name="Accordion Item">
-            <h2 class="accordion-header" id="ri-faq-h6"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#ri-faq-6" aria-expanded="false" aria-controls="ri-faq-6">How far ahead should I book?</button></h2>
-            <div id="ri-faq-6" class="accordion-collapse collapse" aria-labelledby="ri-faq-h6" data-bs-parent="#ri-faq" role="region">
+            <h3 class="accordion-header" id="ri-faq-h8"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#ri-faq-8" aria-expanded="false" aria-controls="ri-faq-8">How can I pay?</button></h3>
+            <div id="ri-faq-8" class="accordion-collapse collapse" aria-labelledby="ri-faq-h8" data-bs-parent="#ri-faq-c" role="region">
               <div class="accordion-body">
-                <p>Send us your request as soon as you have your event details. That way we can check stock and make sure what you need is free on your date.</p>
+                <p>Payments can be made by online banking transfer for local clients and by wire transfer for international clients.</p>
+              </div>
+            </div>
+          </div>
+          <div class="accordion-item" data-name="Accordion Item">
+            <h3 class="accordion-header" id="ri-faq-h9"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#ri-faq-9" aria-expanded="false" aria-controls="ri-faq-9">What do the rental prices include?</button></h3>
+            <div id="ri-faq-9" class="accordion-collapse collapse" aria-labelledby="ri-faq-h9" data-bs-parent="#ri-faq-c" role="region">
+              <div class="accordion-body">
+                <p>Prices are per item for a 24-hour rental period, from delivery to collection, and are shown before 17.5% VAT. Delivery is calculated separately.</p>
+              </div>
+            </div>
+          </div>
+          <div class="accordion-item" data-name="Accordion Item">
+            <h3 class="accordion-header" id="ri-faq-h10"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#ri-faq-10" aria-expanded="false" aria-controls="ri-faq-10">How long can I keep the items?</button></h3>
+            <div id="ri-faq-10" class="accordion-collapse collapse" aria-labelledby="ri-faq-h10" data-bs-parent="#ri-faq-c" role="region">
+              <div class="accordion-body">
+                <p>Rental rates cover up to 24 hours, from delivery to collection. Longer rental periods may be possible by arrangement, so please mention this in your quote request.</p>
+              </div>
+            </div>
+          </div>
+          <div class="accordion-item" data-name="Accordion Item">
+            <h3 class="accordion-header" id="ri-faq-h11"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#ri-faq-11" aria-expanded="false" aria-controls="ri-faq-11">What if my event is cancelled or rescheduled?</button></h3>
+            <div id="ri-faq-11" class="accordion-collapse collapse" aria-labelledby="ri-faq-h11" data-bs-parent="#ri-faq-c" role="region">
+              <div class="accordion-body">
+                <p>We understand that plans can change. If you need to cancel or reschedule because of unforeseen circumstances or severe weather, please contact us as soon as possible and we will work with you where we can. Please note that the deposit is non-refundable.</p>
+              </div>
+            </div>
+          </div>
+          <div class="accordion-item" data-name="Accordion Item">
+            <h3 class="accordion-header" id="ri-faq-h12"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#ri-faq-12" aria-expanded="false" aria-controls="ri-faq-12">Is there a damage fee?</button></h3>
+            <div id="ri-faq-12" class="accordion-collapse collapse" aria-labelledby="ri-faq-h12" data-bs-parent="#ri-faq-c" role="region">
+              <div class="accordion-body">
+                <p>Your quote may include a refundable damage fee for rentals that are more susceptible to damage or loss. Once your items are returned in good condition, the fee is refunded to your original payment method. If any items are damaged or lost, the replacement cost is deducted from the fee. Should the cost exceed the fee, we will send a quote for the additional amount.</p>
               </div>
             </div>
           </div>
@@ -70,7 +127,25 @@
           </div>
           <p class="ri-muted small mt-3 mb-0">You can also email <a href="mailto:contact@rentit.bb">contact@rentit.bb</a> or WhatsApp <a href="https://wa.me/12462348230" target="_blank" rel="noopener">+1 (246) 234-8230</a>.</p>
         </div>
-        <div class="ri-note mt-3">Ready to start? <a href="__SHOP__">Browse the collection</a> and request your quote online.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="s_call_to_action o_colored_level ri-section" data-snippet="s_call_to_action" data-name="Call to action">
+  <div class="container">
+    <div class="ri-cta">
+      <div class="row g-4 align-items-center">
+        <div class="col-lg-7">
+          <h2>Let&#8217;s plan your event</h2>
+          <p>Browse the collection and request your quote online, or tell us what you have in mind.</p>
+        </div>
+        <div class="col-lg-5">
+          <div class="ri-btns justify-content-lg-end">
+            <a class="btn btn-light btn-lg" href="__SHOP__">Explore rentals</a>
+            <a class="btn btn-outline-light btn-lg" href="__PAGE:contactus__">Contact us</a>
+          </div>
+        </div>
       </div>
     </div>
   </div>
