@@ -14,7 +14,9 @@ body:has(.offcanvas.show) #ri-wa-fab,body:has(.modal.show) #ri-wa-fab{display:no
   var WA_URL = 'https://wa.me/12462348230';
   // Tracking IDs from Rent It go here. Until they are filled in nothing is loaded or sent;
   // events still go to window.dataLayer so they can be checked in the browser.
-  var TRACK = { ga4: '', adsSendTo: '', pixel: '' };
+  // ga4 and the Ads ID are the ones rentit.bb's WordPress site loads. adsSendTo takes 'AW-.../<label>'
+  // once Rent It has a quote request conversion; until then it's the bare ID (remarketing only).
+  var TRACK = { ga4: 'GT-WF8BNWT2', adsSendTo: 'AW-17184266942', pixel: '' };
 
   function editing() {
     var b = document.body;
@@ -68,7 +70,7 @@ body:has(.offcanvas.show) #ri-wa-fab,body:has(.modal.show) #ri-wa-fab{display:no
     var ev = EVENTS[name];
     if (typeof window.gtag === 'function') {
       window.gtag('event', ev[0], params);
-      if (name === 'quote_request' && TRACK.adsSendTo) window.gtag('event', 'conversion', { send_to: TRACK.adsSendTo });
+      if (name === 'quote_request' && TRACK.adsSendTo.indexOf('/') > 0) window.gtag('event', 'conversion', { send_to: TRACK.adsSendTo });
     }
     if (typeof window.fbq === 'function') window.fbq('track', ev[1], params.search_term ? { search_string: params.search_term } : {});
   }
