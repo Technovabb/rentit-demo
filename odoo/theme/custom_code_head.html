@@ -82,6 +82,8 @@ header#top .dropdown-item:hover,header#top .dropdown-item:focus{background:var(-
 #product_details .product_price .oe_price,#product_details .oe_price{font-size:1.6rem}
 #add_to_cart_wrap,#add_to_cart,button[name="add_to_cart"]{visibility:visible!important;opacity:1!important}
 .o_website_sale_rental input,.o_website_sale_daterange_picker input{border-radius:10px}
+/* Checkout address: no VAT number box; the VAT field stays on the customer in the back end */
+.o_website_sale_address #div_vat{display:none!important}
 .ri-pfacts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.6rem;margin:1.2rem 0 .4rem;padding:0;list-style:none}
 .ri-pfacts li{display:flex;flex-direction:column;align-items:flex-start;gap:.35rem;padding:.75rem;border:1px solid var(--ri-line);border-radius:10px;background:#fff;font-size:.8rem;line-height:1.35;color:var(--ri-ink-2)}
 .ri-pfacts svg{width:22px;height:22px;stroke:var(--ri-brand);fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
